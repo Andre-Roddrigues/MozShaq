@@ -11,9 +11,7 @@ interface NavLinksProps {
 const menuItems = [
   { name: "Início", href: "/" },
   { name: "Sobre", href: "/#sobre" },
-  { name: "Áreas de Formação", href: "/cursos" },
-  { name: "Como Funciona", href: "/#funcionamento" },
-  { name: "Benefícios", href: "/#beneficios" },
+  { name: "Áreas de Actuação", href: "#areas" },
   { name: "Contacto", href: "/#contacto" },
 ];
 
@@ -27,7 +25,7 @@ export default function NavLinks({ activeLink, onLinkClick }: NavLinksProps) {
           <Link
             key={item.name}
             href={item.href}
-            className={`flex items-center space-x-1 text-gray-600 hover:text-brand-main dark:hover:text-brand-lime transition ${
+            className={`flex items-center space-x-1 text-white hover:text-brand-main dark:hover:text-brand-lime transition ${
               isActive ? "text-brand-main dark:text-brand-lime" : ""
             }`}
             onClick={() => onLinkClick(item.name)}

@@ -81,14 +81,17 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-transparent dark:bg-gray-900/80 backdrop-blur-md ">
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link
           href="/"
           className="text-2xl font-bold text-brand-main dark:text-brand-lime flex items-center"
         >
-          <Image src={logo} alt="PROMET" width={50} height={50} />
+          {/* <Image src={logo} alt="PROMET" width={50} height={50} /> */}
+          <span className="ml-3 text-xl font-bold text-brand-main">
+                    Moz<span className="text-brand-blue">Shaq</span>
+                  </span>
         </Link>
 
         {/* Links desktop */}
@@ -150,11 +153,11 @@ const Navbar = () => {
             >
               <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800">
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-lg bg-brand-lime flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-lg bg-brand-main flex items-center justify-center">
                     <Briefcase className="w-5 h-5 text-white" />
                   </div>
                   <span className="ml-3 text-xl font-bold text-brand-main dark:text-white">
-                    PROMET
+                    Moz<span className="text-brand-blue">Shaq</span>
                   </span>
                 </div>
                 <button

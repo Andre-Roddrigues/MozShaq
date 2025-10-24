@@ -45,7 +45,7 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                <span className="text-brand-main dark:text-brand-main">Sustentabilidade</span>
+                <span className="text-brand-main dark:text-brand-main">Sustentabilidade </span>
               </motion.h1>
               
               <motion.h2 
@@ -63,7 +63,7 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
               >
-                For Immediate Services Dial
+                Para Assuntos Urgentes
               </motion.p>
               
               <motion.p 
@@ -82,20 +82,20 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
               >
-                <motion.button 
+                {/* <motion.button 
                   className="px-8 py-3 border-2 border-white dark:border-white text-white dark:text-white hover:bg-white dark:hover:bg-white hover:text-slate-800 dark:hover:text-slate-800 transition-all duration-300 font-medium"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   VIEW MORE DETAILS
-                </motion.button>
+                </motion.button> */}
                 
                 <motion.button 
                   className="px-8 py-3 bg-brand-blue dark:bg-brand-blue text-white dark:text-white hover:bg-brand-blue/70 dark:hover:bg-brand-blue/70 transition-all duration-300 font-medium flex items-center gap-2"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  VIEW PORTFOLIO
+                  Entrar em Contacto
                   <motion.div
                     animate={{ x: [0, 5, 0] }}
                     transition={{
@@ -114,7 +114,7 @@ export default function HeroSection() {
 
         {/* Feature Cards - Ultra Compact */}
         <motion.div 
-          className="relative z-10 -mt-20 pb-12"
+          className="relative z-10 -mt-11 pb-12"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ 
@@ -125,7 +125,7 @@ export default function HeroSection() {
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
             {/* Card 1 */}
             <motion.div 
-              className="bg-white dark:bg-gray-800 p-5 text-center shadow-md dark:shadow-gray-700/20 rounded-lg"
+              className="bg-white dark:border-brand-blue dark:bg-gray-800 p-5 text-center shadow-md dark:shadow-gray-700/20 rounded-lg"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ y: -10, scale: 1.02 }}
@@ -150,7 +150,7 @@ export default function HeroSection() {
 
             {/* Card 2 */}
             <motion.div 
-              className="bg-white dark:bg-gray-800 p-5 text-center shadow-md dark:shadow-gray-700/20 rounded-lg"
+              className="bg-white dark:border-brand-blue dark:bg-gray-800 p-5 text-center shadow-md dark:shadow-gray-700/20 rounded-lg"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ y: -10, scale: 1.02 }}
@@ -175,7 +175,7 @@ export default function HeroSection() {
 
             {/* Card 3 */}
             <motion.div 
-              className="bg-white dark:bg-gray-800 p-5 text-center shadow-md dark:shadow-gray-700/20 rounded-lg"
+              className="bg-white dark:border-brand-blue dark:bg-gray-800  p-5 text-center shadow-md dark:shadow-gray-700/20 rounded-lg"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ y: -10, scale: 1.02 }}

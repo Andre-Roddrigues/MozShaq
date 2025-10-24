@@ -56,7 +56,7 @@ export default function ServicosIndustrias() {
   });
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900/20 overflow-hidden">
+    <section id="areas" className="relative py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900/20 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-blue-200 dark:bg-blue-800 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-30 animate-pulse"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-brand-main/20 dark:bg-brand-main/10 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-30"></div>
@@ -84,7 +84,7 @@ export default function ServicosIndustrias() {
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="w-2 h-2 bg-brand-main rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-brand-main dark:text-brand-main/80">
+                <span className="text-sm font-medium text-brand-main dark:text-white">
                   Especialistas Multissetoriais
                 </span>
               </motion.div>
@@ -149,7 +149,7 @@ export default function ServicosIndustrias() {
                           whileHover={{ x: 5 }}
                         >
                           <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <IconComponent className="w-4 h-4 text-gray-600 dark:text-gray-300" />
+                            <IconComponent className="w-4 h-4 text-gray-600 dark:text-brand-blue" />
                           </div>
                           <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">
                             {item.nome}
@@ -284,9 +284,9 @@ export default function ServicosIndustrias() {
               whileHover={{ scale: 1.1, rotate: 5 }}
             >
               <div className="text-center">
-                <div className="text-2xl font-bold bg-gradient-to-r from-brand-main to-orange-500 bg-clip-text text-transparent mb-1">
+                {/* <div className="text-2xl font-bold bg-gradient-to-r from-brand-main to-orange-500 bg-clip-text text-transparent mb-1">
                   60%
-                </div>
+                </div> */}
                 <div className="text-xs text-gray-600 dark:text-gray-400 font-medium leading-tight">
                   Equipa Jovem<br />e Dinâmica
                 </div>

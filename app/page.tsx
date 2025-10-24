@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Hero2 from "../components/Landing/Hero2/HeroSection";
 import ServicosIndustrias from "../components/Landing/ServicosEmpresas/Servicos";
+import AboutSection from "../components/Landing/About/AboutSection";
 
 export const metadata: Metadata = {
   title: "Promet",
@@ -16,6 +17,9 @@ export default function Home() {
       </div>
       <div>
         <ServicosIndustrias />
+      </div>
+      <div>
+        <AboutSection />
       </div>
     </div>
   );
