@@ -202,12 +202,12 @@ export default function AboutSection() {
               </h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
                 Com cerca de <strong>60% de uma equipa jovem e dinâmica</strong>, a MOZSHAQ possui uma 
-                equipa multidisciplinar, motivada pelo denominador comum: o desenvolvimento sustentável.
+                equipa multidisciplinar, motivada pelo denominador comum: <span className="text-brand-blue">o desenvolvimento sustentável.</span>
               </p>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                 Priorizamos a transferência de conhecimento e estamos comprometidos em criar capacidade interna. 
                 Em todos os projectos, encontramos um consultor externo para acrescentar valor aos nossos 
-                consultores locais através da ferramenta de "transferência de conhecimento".
+                consultores locais através da ferramenta de transferência de conhecimento.
               </p>
             </div>
             
