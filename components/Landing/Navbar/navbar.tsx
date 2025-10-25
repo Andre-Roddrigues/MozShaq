@@ -105,7 +105,7 @@ const Navbar = () => {
           className="text-2xl font-bold text-brand-main dark:text-brand-lime flex items-center"
         >
           {/* <Image src={logo} alt="PROMET" width={50} height={50} /> */}
-          <span className={`ml-3 text-4xl font-bold transition-colors duration-300 ${
+          <span className={`ml-3 text-xl font-bold transition-colors duration-300 ${
             isScrolled ? "text-brand-main text-xl" : "text-brand-main"
           }`}>
             Moz<span className={isScrolled ? "text-brand-blue" : "text-brand-blue"}>Shaq</span>
