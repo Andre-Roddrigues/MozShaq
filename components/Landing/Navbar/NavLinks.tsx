@@ -6,6 +6,7 @@ import { Briefcase, GraduationCap, Info } from "lucide-react";
 interface NavLinksProps {
   activeLink: string;
   onLinkClick: (name: string) => void;
+  isScrolled?: boolean;
 }
 
 const menuItems = [
@@ -15,22 +16,30 @@ const menuItems = [
   { name: "Contacto", href: "/#contacto" },
 ];
 
-export default function NavLinks({ activeLink, onLinkClick }: NavLinksProps) {
+export default function NavLinks({ activeLink, onLinkClick, isScrolled = false }: NavLinksProps) {
   return (
     <div className="hidden md:flex space-x-8 font-medium">
       {menuItems.map((item) => {
-        // const Icon = item.icon;
         const isActive = activeLink === item.name;
+        
+        // Lógica para cores baseadas no scroll
+        const getTextColor = () => {
+          if (isActive) {
+            return "text-brand-main dark:text-brand-lime";
+          }
+          if (isScrolled) {
+            return "text-brand-blue dark:text-gray-200 hover:text-brand-main dark:hover:text-brand-lime";
+          }
+          return "text-white hover:text-brand-main dark:hover:text-brand-lime";
+        };
+
         return (
           <Link
             key={item.name}
             href={item.href}
-            className={`flex items-center space-x-1 text-white hover:text-brand-main dark:hover:text-brand-lime transition ${
-              isActive ? "text-brand-main dark:text-brand-lime" : ""
-            }`}
+            className={`flex items-center space-x-1 transition-colors duration-300 ${getTextColor()}`}
             onClick={() => onLinkClick(item.name)}
           >
-            {/* <Icon className="w-4 h-4" /> */}
             <span>{item.name}</span>
           </Link>
         );

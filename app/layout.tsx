@@ -11,7 +11,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Promet",
+  title: "MozShaq",
 };
 export default function RootLayout({
   children,

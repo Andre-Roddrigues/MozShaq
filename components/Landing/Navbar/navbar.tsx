@@ -19,8 +19,26 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("Início");
+  const [isScrolled, setIsScrolled] = useState(false);
 //   const [language, setLanguage] = useState("PT");
 // const { language, setLanguage } = useLanguage();
+
+  // Effect para detectar scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      // Muda o background quando scroll for maior que 50px
+      setIsScrolled(scrollTop > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const mobileSidebarVariants = {
     open: { x: 0 },
     closed: { x: "-100%" },
@@ -52,12 +70,6 @@ const Navbar = () => {
     return () => clearInterval(authCheckInterval);
   }, []);
 
-  // useEffect(() => {
-  //   const handleStorageChange = () => setIsLoggedIn(checkAuthToken());
-  //   window.addEventListener("storage", handleStorageChange);
-  //   return () => window.removeEventListener("storage", handleStorageChange);
-  // }, []);
-
   const toggleDarkMode = () => {
     if (darkMode) {
       document.documentElement.classList.remove("dark");
@@ -81,7 +93,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-transparent dark:bg-gray-900/80 backdrop-blur-md ">
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      isScrolled 
+        ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm" 
+        : "bg-transparent dark:bg-transparent"
+    }`}>
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link
@@ -89,13 +105,19 @@ const Navbar = () => {
           className="text-2xl font-bold text-brand-main dark:text-brand-lime flex items-center"
         >
           {/* <Image src={logo} alt="PROMET" width={50} height={50} /> */}
-          <span className="ml-3 text-xl font-bold text-brand-main">
-                    Moz<span className="text-brand-blue">Shaq</span>
-                  </span>
+          <span className={`ml-3 text-4xl font-bold transition-colors duration-300 ${
+            isScrolled ? "text-brand-main text-xl" : "text-brand-main"
+          }`}>
+            Moz<span className={isScrolled ? "text-brand-blue" : "text-brand-blue"}>Shaq</span>
+          </span>
         </Link>
 
         {/* Links desktop */}
-        <NavLinks activeLink={activeLink} onLinkClick={handleNavigation} />
+       <NavLinks 
+          activeLink={activeLink} 
+          onLinkClick={handleNavigation}
+          isScrolled={isScrolled}
+        />
 
         {/* Ações */}
         <div className="flex items-center space-x-3">
@@ -106,13 +128,21 @@ const Navbar = () => {
             <>
               <Link
                 href="/login"
-                className="px-4 py-2 rounded-lg border dark:border-brand-lime dark:text-white border-brand-main text-brand-main font-medium hover:bg-brand-main hover:text-white transition"
+                className={`px-4 py-2 rounded-lg border font-medium hover:bg-brand-main hover:text-white transition ${
+                  isScrolled 
+                    ? "border-brand-main text-brand-main hover:bg-brand-main hover:text-white" 
+                    : "border-white text-white hover:bg-white hover:text-slate-800"
+                }`}
               >
                 Entrar
               </Link>
               <Link
                 href="/registro"
-                className="px-4 py-2 rounded-lg bg-brand-main text-white font-medium hover:bg-brand-main/90 transition"
+                className={`px-4 py-2 rounded-lg font-medium transition ${
+                  isScrolled 
+                    ? "bg-brand-main text-white hover:bg-brand-main/90" 
+                    : "bg-white text-slate-800 hover:bg-white/90"
+                }`}
               >
                 Registro
               </Link>
@@ -124,9 +154,17 @@ const Navbar = () => {
           {/* Botão menu mobile */}
           <button
             onClick={() => setIsMobileOpen(true)}
-            className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800"
+            className={`md:hidden p-2 rounded-lg transition-colors duration-300 ${
+              isScrolled 
+                ? "bg-gray-100 dark:bg-gray-800" 
+                : "bg-white/20 dark:bg-gray-800/50"
+            }`}
           >
-            <Menu className="w-6 h-6 text-gray-700 dark:text-gray-200" />
+            <Menu className={`w-6 h-6 transition-colors duration-300 ${
+              isScrolled 
+                ? "text-gray-700 dark:text-gray-200" 
+                : "text-white dark:text-gray-200"
+            }`} />
           </button>
         </div>
       </div>
@@ -153,9 +191,9 @@ const Navbar = () => {
             >
               <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800">
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-lg bg-brand-main flex items-center justify-center">
+                  {/* <div className="w-8 h-8 rounded-lg bg-brand-main flex items-center justify-center">
                     <Briefcase className="w-5 h-5 text-white" />
-                  </div>
+                  </div> */}
                   <span className="ml-3 text-xl font-bold text-brand-main dark:text-white">
                     Moz<span className="text-brand-blue">Shaq</span>
                   </span>
