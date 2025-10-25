@@ -34,7 +34,7 @@ const teamMembers = [
     name: "Miguel Santos",
     role: "Gestor de Segurança",
     description: "Responsável pela implementação de sistemas de segurança e prevenção de riscos.",
-    image: "/images/meet.jpg",
+    image: "/images/herosherq4.jpg",
     social: {
       linkedin: "#",
       twitter: "#",
@@ -129,12 +129,15 @@ const TeamSection = () => {
               whileHover={{ y: -8 }}
             >
               {/* Member Image */}
-              <div className="relative h-80 overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-600 dark:to-gray-700 flex items-center justify-center">
-                  <span className="text-gray-500 dark:text-gray-400 text-sm">
-                    Imagem de {member.name}
-                  </span>
-                </div>
+              {/* <div className="relative h-80 overflow-hidden"> */}
+                <div className="relative h-64 sm:h-72 lg:h-80 overflow-hidden">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                />
                 
                 {/* Social Links Overlay */}
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center space-x-4">
