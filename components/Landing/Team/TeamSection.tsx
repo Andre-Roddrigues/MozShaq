@@ -7,26 +7,26 @@ import Image from 'next/image';
 const teamMembers = [
   {
     id: 1,
-    name: "Carlos Silva",
+    name: "Carla Silva",
     role: "CEO & Fundador",
     description: "Mais de 15 anos de experiência em consultoria ambiental e gestão sustentável.",
-    image: "/images/team/carlos-silva.jpg",
+    image: "/images/empresa.jpg",
     social: {
       linkedin: "#",
       twitter: "#",
-      email: "carlos@empresa.com"
+      email: "carla@empresa.com"
     }
   },
   {
     id: 2,
-    name: "Ana Rodrigues",
-    role: "Directora de Sustentabilidade",
+    name: "Andre Rodrigues",
+    role: "Director de Sustentabilidade",
     description: "Especialista em certificações ambientais e gestão de recursos naturais.",
-    image: "/images/team/ana-rodrigues.jpg",
+    image: "/images/mentorhero.jpg",
     social: {
       linkedin: "#",
       twitter: "#",
-      email: "ana@empresa.com"
+      email: "andre@empresa.com"
     }
   },
   {
@@ -34,7 +34,7 @@ const teamMembers = [
     name: "Miguel Santos",
     role: "Gestor de Segurança",
     description: "Responsável pela implementação de sistemas de segurança e prevenção de riscos.",
-    image: "/images/team/miguel-santos.jpg",
+    image: "/images/meet.jpg",
     social: {
       linkedin: "#",
       twitter: "#",
@@ -46,7 +46,7 @@ const teamMembers = [
     name: "Sofia Costa",
     role: "Consultora Ambiental",
     description: "Focada em estudos de impacto ambiental e desenvolvimento sustentável.",
-    image: "/images/team/sofia-costa.jpg",
+    image: "/images/empresas.jpg",
     social: {
       linkedin: "#",
       twitter: "#",
@@ -186,7 +186,7 @@ const TeamSection = () => {
         </motion.div>
 
         {/* CTA Section */}
-        <motion.div
+        {/* <motion.div
           className="text-center mt-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -209,7 +209,7 @@ const TeamSection = () => {
           >
             Ver Oportunidades
           </motion.button>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
