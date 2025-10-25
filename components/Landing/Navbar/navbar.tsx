@@ -98,11 +98,11 @@ const Navbar = () => {
         ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm" 
         : "bg-transparent dark:bg-transparent"
     }`}>
-      <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+      <div className=" flex max-w-7xl mx-auto px-6 py-3  items-center justify-end md:justify-between">
         {/* Logo */}
         <Link
           href="/"
-          className="text-2xl font-bold text-brand-main dark:text-brand-lime flex items-center"
+          className="hidden text-2xl font-bold text-brand-main dark:text-brand-lime md:flex items-center"
         >
           {/* <Image src={logo} alt="PROMET" width={50} height={50} /> */}
           <span className={`ml-3 text-xl font-bold transition-colors duration-300 ${

@@ -97,7 +97,7 @@ export default function HeroSection() {
 
         {/* Feature Cards - Responsive Positioning */}
         <motion.div
-          className="relative lg:absolute bottom-0 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-5xl px-4 lg:px-6 pb-8 lg:pb-0"
+          className="relative lg:absolute bottom-0 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-5xl mb-2 py-4 px-4 lg:px-6 pb-8 lg:pb-0"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
