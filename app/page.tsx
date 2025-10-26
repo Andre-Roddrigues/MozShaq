@@ -3,6 +3,10 @@ import HeroSlider from "../components/Landing/Hero2/HeroSlide";
 import ServicosIndustrias from "../components/Landing/ServicosEmpresas/Servicos";
 import AboutSection from "../components/Landing/About/AboutSection";
 import TeamSection from "../components/Landing/Team/TeamSection";
+import { CardsSharq } from "../components/Landing/Hero2/CardsSharq";
+import CardSectionSliders from "../components/Landing/Hero2/CardSectionSliders ";
+import HowWeActSection from "../components/Landing/HowWeAct/HowWeActSection";
+import ServicesOverviewSection from "../components/Landing/ServicesSurvey/ServicesOverviewSection";
 
 export const metadata: Metadata = {
   title: "MozShaq",
@@ -15,6 +19,7 @@ export default function Home() {
     <div>
       <div>
         <HeroSlider />
+        <CardSectionSliders />
       </div>
       <div>
         <ServicosIndustrias />
@@ -24,6 +29,12 @@ export default function Home() {
       </div>
       <div>
         <TeamSection />
+      </div>
+      <div>
+        <HowWeActSection />
+      </div>
+      <div>
+        <ServicesOverviewSection />
       </div>
     </div>
   );

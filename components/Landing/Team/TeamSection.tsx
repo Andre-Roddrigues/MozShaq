@@ -31,14 +31,14 @@ const teamMembers = [
   },
   {
     id: 3,
-    name: "Miguel Santos",
+    name: "William Cossa",
     role: "Gestor de Segurança",
     description: "Responsável pela implementação de sistemas de segurança e prevenção de riscos.",
     image: "/images/herosherq4.jpg",
     social: {
       linkedin: "#",
       twitter: "#",
-      email: "miguel@empresa.com"
+      email: "william@empresa.com"
     }
   },
   {

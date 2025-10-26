@@ -13,6 +13,7 @@ const menuItems = [
   { name: "Início", href: "/" },
   { name: "Sobre", href: "/#sobre" },
   { name: "Áreas de Actuação", href: "#areas" },
+  { name: "serviços", href: "/services" },
   { name: "Contacto", href: "/#contacto" },
 ];
 
