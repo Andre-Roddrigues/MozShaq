@@ -9,10 +9,10 @@ export function middleware(req: NextRequest) {
   const publicRoutes = [
     "/",
     "/duvidas",
+    "/servicesS",
     "/recuperar-senha",
     "/formulario/parceiro",
     "/cursos",
-    "/testes",
     "/nossos-termos",
      "/nova-senha",         // adicionado
     "/nova-senha/[otp]",
