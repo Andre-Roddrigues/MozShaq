@@ -74,7 +74,7 @@ const ServicesPage = () => {
     color: "from-green-500 to-emerald-600",
     duration: "3-6 meses",
     clients: ["Indústrias", "Energia", "Imobiliário", "Agronegócio"],
-    image: "/images/services/consultoria-ambiental.jpg",
+    image: "/images/services/consultoria.jpg",
     stats: [
       { number: "50+", label: "Projetos Concluídos" },
       { number: "98%", label: "Aprovação EIA" }
