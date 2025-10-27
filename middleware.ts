@@ -9,7 +9,7 @@ export function middleware(req: NextRequest) {
   const publicRoutes = [
     "/",
     "/duvidas",
-    "/servicesS",
+    "/services",
     "/recuperar-senha",
     "/formulario/parceiro",
     "/cursos",
