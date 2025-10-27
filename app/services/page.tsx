@@ -70,6 +70,7 @@ const ServicesPage = () => {
       "Desenvolvimento de plano de ação",
       "Implementação faseada"
     ],
+    
     color: "from-green-500 to-emerald-600",
     duration: "3-6 meses",
     clients: ["Indústrias", "Energia", "Imobiliário", "Agronegócio"],
