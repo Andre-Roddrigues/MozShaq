@@ -6,7 +6,7 @@ import { ArrowLeft } from 'lucide-react';
 
 const ServicesHeader = () => {
   return (
-    <div className="bg-gradient-to-b from-gray-300 to-blue-50 dark:from-gray-900 dark:to-blue-900/20 ">
+    <div className="bg-gradient-to-b py-10 from-gray-300 to-blue-50 dark:from-gray-900 dark:to-blue-900/20 ">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         
         <motion.div
@@ -19,7 +19,7 @@ const ServicesHeader = () => {
             Nossos <span className="text-brand-main">Serviços</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Survey & Expert Advice for Sustainable Development - Oferecemos soluções completas 
+            Oferecemos soluções completas 
             e especializadas para impulsionar a sustentabilidade e excelência operacional da sua organização.
           </p>
         </motion.div>

@@ -4,14 +4,14 @@ export async function POST(req: NextRequest) {
     const { text, targetLang } = await req.json();
 
     // converte para minúsculas
-    const res = await fetch("https://libretranslate.de/", {
+    const res = await fetch("https://libretranslate.de/translate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         q: text,
-        source: "auto",
-        target: targetLang.toLowerCase(), // <- isso resolve
-        format: "text",
+        source: "pt",
+		target: "en",
+		format: "text",
       }),
     });
 
