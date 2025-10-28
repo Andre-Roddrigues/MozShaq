@@ -63,7 +63,7 @@ export default function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
               >
-                Para Assuntos Urgentes
+                Especialistas para Soluções Personalizadas
               </motion.p>
 
               {/* CTA Buttons */}

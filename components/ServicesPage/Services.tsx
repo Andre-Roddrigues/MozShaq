@@ -15,6 +15,7 @@ import {
   ArrowRight,
   Award,
   Clock,
+  GraduationCap,
   TrendingUp,
   Leaf
 } from 'lucide-react';
@@ -80,7 +81,47 @@ const ServicesPage = () => {
       { number: "98%", label: "Aprovação EIA" }
     ]
   },
-  
+  {
+  id: "services#courses",
+  icon: GraduationCap,
+  title: "Cursos e Treinamentos",
+  description: "Oferecemos cursos presenciais e online para capacitação em diversas áreas, com certificação ao concluir.",
+  fullDescription: "Disponibilizamos formações práticas e teóricas voltadas para o desenvolvimento profissional em diversas áreas, atendendo tanto empresas (treinamentos in company) quanto pessoas físicas. Os cursos podem ser realizados presencialmente ou online, com materiais de apoio e certificação após a conclusão.",
+  features: [
+    "Cursos presenciais e online",
+    "Treinamentos para empresas",
+    "Instrutores qualificados",
+    "Conteúdo atualizado ao mercado",
+    "Certificação ao concluir"
+  ],
+  deliverables: [
+    "Certificado de participação",
+    "Material didático digital",
+    "Aulas gravadas (para modalidade online)",
+    "Suporte ao aluno durante o curso"
+  ],
+  benefits: [
+    "Aumento da empregabilidade",
+    "Capacitação prática e direta",
+    "Flexibilidade de horários",
+    "Reconhecimento profissional para empresas e indivíduos"
+  ],
+  methodology: [
+    "Aulas expositivas e práticas",
+    "Estudos de caso reais",
+    "Exercícios e avaliações",
+    "Acompanhamento de instrutor"
+  ],
+  color: "from-blue-500 to-cyan-600",
+  duration: "Variável conforme o curso",
+  clients: ["Empresas", "Profissionais", "Estudantes", "Instituições"],
+  image: "/images/services/cursos.jpg",
+  stats: [
+    { number: "500+", label: "Alunos formados" },
+    { number: "30+", label: "Cursos disponíveis" }
+  ]
+},
+
   {
     id: "health-safety",
     icon: Shield,

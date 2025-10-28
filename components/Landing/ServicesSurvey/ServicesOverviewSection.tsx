@@ -1,7 +1,7 @@
 "use client"
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Globe, Shield, Users, Target, BarChart3, Factory, Recycle } from 'lucide-react';
+import { ArrowRight,GraduationCap, Globe, Shield, Users, Target, BarChart3, Factory, Recycle } from 'lucide-react';
 import Link from 'next/link';
 
 const ServicesOverviewSection = () => {
@@ -54,7 +54,15 @@ const ServicesOverviewSection = () => {
       description: "Gestão de resíduos e implementação de economia circular.",
       color: "from-blue-500 to-cyan-600",
       href: "/services#circular-economy"
-    }
+    },
+    {
+  icon: GraduationCap,
+  title: "Treinamentos",
+  description: "Capacitação em diversas áreas, com certificação ao concluir.",
+  color: "from-blue-500 to-cyan-600",
+  href: "/services#courses"
+}
+
   ];
 
   const containerVariants = {

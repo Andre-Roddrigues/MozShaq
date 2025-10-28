@@ -88,7 +88,7 @@ export default function CoursesHeroSection() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Ver Cursos Disponíveis
+                  Sobre SHERQ ACADEMY
                   <motion.div
                     animate={{ x: [0, 5, 0] }}
                     transition={{
