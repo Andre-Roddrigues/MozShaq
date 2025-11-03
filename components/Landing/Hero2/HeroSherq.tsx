@@ -2,7 +2,7 @@
 import React from 'react';
 import { BookOpen, Users, Award, ArrowRight, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
-
+import Link from "next/link";
 export default function CoursesHeroSection() {
   const courses = [
     "Gestão Ambiental",
@@ -83,6 +83,7 @@ export default function CoursesHeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
               >
+                <Link href="/sherq-academy/inicio">
                 <motion.button 
                   className="px-6 py-3 md:px-8 md:py-3 bg-brand-blue dark:bg-brand-blue text-white dark:text-white hover:bg-brand-blue/70 dark:hover:bg-brand-blue/70 transition-all duration-300 font-medium flex items-center gap-2 text-sm md:text-base"
                   whileHover={{ scale: 1.05 }}
@@ -100,6 +101,7 @@ export default function CoursesHeroSection() {
                     <ArrowRight size={18} />
                   </motion.div>
                 </motion.button>
+                </Link>
               </motion.div>
             </div>
 

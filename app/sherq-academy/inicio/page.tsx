@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import AboutSection from "../../../components/SherqAcademy/About/AboutUs";
+import CoursesHeroSection from "../../../components/Landing/Hero2/HeroSherq";
 
 export const metadata: Metadata = {
   title: "Sherq Academy",
@@ -10,7 +11,8 @@ export const metadata: Metadata = {
 function page() {
   return (
     <div>
-    <AboutSection />
+      <CoursesHeroSection />
+      <AboutSection />
     </div>
   );
 }

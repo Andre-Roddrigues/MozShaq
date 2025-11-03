@@ -31,7 +31,7 @@ export default function NavLinks({ activeLink, onLinkClick, isScrolled = false }
           if (isScrolled) {
             return "text-brand-blue dark:text-gray-200 hover:text-brand-main dark:hover:text-brand-lime";
           }
-          return "text-white hover:text-brand-main dark:hover:text-brand-lime";
+          return "text-brand-blue hover:text-brand-main dark:hover:text-brand-lime";
         };
 
         return (
