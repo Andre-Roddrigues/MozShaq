@@ -16,7 +16,7 @@ export default function CoursesHeroSection() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-slate-800 dark:bg-slate-900">
+    <div className="relative h-full md:min-h-screen bg-slate-800 dark:bg-slate-900">
       {/* Background Image with Overlay */}
       <motion.div 
         className="absolute inset-0 bg-cover bg-center"
@@ -155,9 +155,6 @@ export default function CoursesHeroSection() {
         {/* Feature Cards - Responsive */}
         
       </div>
-
-      {/* Mobile Spacer */}
-      <div className="block lg:hidden h-24"></div>
     </div>
   );
 }

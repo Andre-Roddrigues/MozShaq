@@ -237,7 +237,7 @@ export default function AboutSection() {
               whileHover={{ y: -5 }}
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-brand-blue rounded-xl flex items-center justify-center flex-shrink-0">
                   <Heart className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -253,7 +253,7 @@ export default function AboutSection() {
                           className="flex items-center gap-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg"
                           whileHover={{ scale: 1.02 }}
                         >
-                          <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <div className="w-8 h-8 bg-brand-main rounded-lg flex items-center justify-center flex-shrink-0">
                             <ValorIcon className="w-4 h-4 text-white" />
                           </div>
                           <div>
@@ -297,7 +297,7 @@ export default function AboutSection() {
                   whileHover={{ y: -8, scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-brand-blue rounded-2xl flex items-center justify-center mx-auto mb-4">
                     <AreaIcon className="w-8 h-8 text-white" />
                   </div>
                   <h4 className="text-lg font-bold text-gray-800 dark:text-white mb-2">

@@ -156,14 +156,14 @@ const Navbar = () => {
             onClick={() => setIsMobileOpen(true)}
             className={`md:hidden p-2 rounded-lg transition-colors duration-300 ${
               isScrolled 
-                ? "bg-gray-100 dark:bg-gray-800" 
-                : "bg-white/20 dark:bg-gray-800/50"
+                ? "bg-gray-700 dark:bg-gray-800" 
+                : "bg-gray-700 dark:bg-gray-800/50"
             }`}
           >
             <Menu className={`w-6 h-6 transition-colors duration-300 ${
               isScrolled 
                 ? "text-gray-700 dark:text-gray-200" 
-                : "text-white dark:text-gray-200"
+                : "text-gray-700 dark:text-gray-200"
             }`} />
           </button>
         </div>

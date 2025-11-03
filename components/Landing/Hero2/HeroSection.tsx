@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function HeroSection() {
   return (
-    <div className="relative min-h-screen lg:h-screen bg-slate-800 dark:bg-slate-900">
+    <div className="relative h-full md:min-h-screen bg-slate-800 dark:bg-slate-900">
       {/* Background Image with Overlay */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
