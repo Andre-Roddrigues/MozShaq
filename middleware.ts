@@ -11,6 +11,7 @@ export function middleware(req: NextRequest) {
     "/duvidas",
     "/services",
     "/recuperar-senha",
+    "/sherq-academy/inicio",
     "/formulario/parceiro",
     "/cursos",
     "/nossos-termos",
