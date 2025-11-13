@@ -14,6 +14,7 @@ export function middleware(req: NextRequest) {
     "/sherq-academy/inicio",
     "/formulario/parceiro",
     "/cursos",
+    "/cursos/[id]",
     "/nossos-termos",
      "/nova-senha",         // adicionado
     "/nova-senha/[otp]",
