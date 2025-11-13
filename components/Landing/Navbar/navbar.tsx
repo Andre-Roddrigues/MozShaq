@@ -131,7 +131,7 @@ const Navbar = () => {
                 className={`px-4 py-2 rounded-lg border font-medium hover:bg-brand-main hover:text-white transition ${
                   isScrolled 
                     ? "border-brand-main text-brand-main hover:bg-brand-main hover:text-white" 
-                    : "border-white text-white hover:bg-white hover:text-slate-800"
+                    : "border-brand-main text-brand-main hover:bg-brand-main hover:text-slate-800"
                 }`}
               >
                 Entrar
@@ -141,7 +141,7 @@ const Navbar = () => {
                 className={`px-4 py-2 rounded-lg font-medium transition ${
                   isScrolled 
                     ? "bg-brand-main text-white hover:bg-brand-main/90" 
-                    : "bg-white text-slate-800 hover:bg-white/90"
+                    : "bg-brand-main text-white hover:bg-brand-main/90"
                 }`}
               >
                 Registro
@@ -156,8 +156,8 @@ const Navbar = () => {
             onClick={() => setIsMobileOpen(true)}
             className={`md:hidden p-2 rounded-lg transition-colors duration-300 ${
               isScrolled 
-                ? "bg-gray-700 dark:bg-gray-800" 
-                : "bg-gray-700 dark:bg-gray-800/50"
+                ? "bg-gray-300 dark:bg-gray-800" 
+                : "bg-gray-300 dark:bg-gray-800/50"
             }`}
           >
             <Menu className={`w-6 h-6 transition-colors duration-300 ${
