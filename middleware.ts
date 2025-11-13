@@ -15,6 +15,9 @@ export function middleware(req: NextRequest) {
     "/formulario/parceiro",
     "/cursos",
     "/cursos/[id]",
+    "/cursos/:id",
+    "/cursos/*",
+    "/cursos/*/",
     "/nossos-termos",
      "/nova-senha",         // adicionado
     "/nova-senha/[otp]",
