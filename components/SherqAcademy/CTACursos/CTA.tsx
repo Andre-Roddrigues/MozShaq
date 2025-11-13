@@ -43,12 +43,12 @@ export default function MarketingBanner() {
 
             {/* CTA e Contato */}
             <div className="flex flex-wrap items-center gap-4">
-              <a 
+              <Link
                 href="/cursos"
                 className="bg-brand-main hover:bg-brand-blue text-white font-semibold px-6 py-3 rounded-full text-sm transition-colors"
               >
                 VER CURSOS
-              </a>
+              </Link>
               
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2 text-gray-700">
