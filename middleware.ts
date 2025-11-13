@@ -46,7 +46,9 @@ export function middleware(req: NextRequest) {
   }
 
   // Se rota pública → libera
-  if (publicRoutes.includes(pathname) || authRoutes.includes(pathname)) {
+  if (publicRoutes.includes(pathname) ||
+  pathname.startsWith("/cursos") ||
+   authRoutes.includes(pathname)) {
     return NextResponse.next();
   }
 
