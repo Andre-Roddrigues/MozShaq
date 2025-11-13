@@ -3,6 +3,7 @@ import './globals.css';
 import { ThemeProvider } from '../context/ThemeContext';
 import { SidebarProvider } from '../context/SidebarContext';
 import Navbar from '../components/Landing/Navbar/navbar';
+import MinimalFooter from '../components/Landing/Footer/footer';
 import { Metadata } from 'next';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { LanguageProvider } from '../context/LanguageContext';
@@ -44,6 +45,7 @@ export default function RootLayout({
           {children}
         </LanguageProvider>
         {/* </ThemeProvider> */}
+      <MinimalFooter />
       </body>
       </GoogleOAuthProvider>
     </html>

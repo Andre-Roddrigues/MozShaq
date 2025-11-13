@@ -272,7 +272,7 @@ export default function AboutSection() {
         </motion.div>
 
         {/* Areas de Formação */}
-        <motion.div
+        <motion.div id="/#areasdeformacao"
           className="bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800 dark:to-blue-900/20 rounded-3xl p-8 md:p-12 border border-gray-200 dark:border-gray-700 mb-16"
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}

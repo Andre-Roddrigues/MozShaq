@@ -1,5 +1,6 @@
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+// const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+const API_BASE_URL = "http://192.168.1.113:3000";
 const LOCAL_SERVER = "http://192.168.43.177:5000";
 
 export const routes = {

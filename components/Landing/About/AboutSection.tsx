@@ -60,9 +60,9 @@ export default function AboutSection() {
         {/* Header Section */}
         <motion.div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          // initial={{ opacity: 0, y: 30 }}
+          // animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          // transition={{ duration: 0.6 }}
         >
           <motion.div
             className="inline-flex items-center gap-2 bg-brand-main/10 dark:bg-brand-main/20 px-4 py-2 rounded-full mb-6"
@@ -76,18 +76,18 @@ export default function AboutSection() {
           
           <motion.h2 
             className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            // initial={{ opacity: 0, y: 30 }}
+            // animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            // transition={{ duration: 0.6, delay: 0.2 }}
           >
             Quem <span className="text-brand-main dark:text-brand-main">Somos</span>
           </motion.h2>
           
           <motion.p 
             className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            // initial={{ opacity: 0, y: 30 }}
+            // animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            // transition={{ duration: 0.6, delay: 0.3 }}
           >
             Somos a <strong>Mozshaq Consultoria e Serviços</strong>, uma empresa genuinamente moçambicana 
             que oferece soluções integradas em estudos e consultoria especializada para o desenvolvimento 
@@ -98,16 +98,16 @@ export default function AboutSection() {
         <motion.div
           ref={ref}
           className="grid lg:grid-cols-2 gap-12 items-start mb-20"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8 }}
+          // initial={{ opacity: 0 }}
+          // animate={inView ? { opacity: 1 } : { opacity: 0 }}
+          // transition={{ duration: 0.8 }}
         >
           {/* Company Description */}
           <motion.div
             className="space-y-6"
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            // initial={{ opacity: 0, x: -50 }}
+            // animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            // transition={{ duration: 0.6, delay: 0.4 }}
           >
             <h3 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">
               Desde 2013 a Serviço de Moçambique
@@ -191,9 +191,9 @@ export default function AboutSection() {
         {/* Team Highlight */}
         <motion.div
           className="bg-brand-blue/10 dark:from-brand-main/5 dark:to-brand-blue/5 rounded-3xl p-8 md:p-12 border border-brand-main/20"
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
+          // initial={{ opacity: 0, y: 50 }}
+          // animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          // transition={{ duration: 0.6, delay: 0.8 }}
         >
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
