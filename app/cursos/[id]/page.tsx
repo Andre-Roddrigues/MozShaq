@@ -115,40 +115,37 @@ const cursoDetalhes = {
     'Suporte pós-curso por 3 meses'
   ]
 };
+
+// Interface para as props com Promise
 interface CursoDetalhesPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-export default function CursoDetalhesPage({ params }: CursoDetalhesPageProps) {
-  const [activeTab, setActiveTab] = useState('sobre');
+// Componente assíncrono para o Server Component
+export default async function CursoDetalhesPage({ params }: CursoDetalhesPageProps) {
+  // Aguardar o params (Promise)
+  const { id } = await params;
+  
+  // Em um projeto real, você buscaria os dados do curso baseado no ID
+  // const curso = await getCursoById(id);
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link 
-              href="/cursos" 
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span>Voltar aos Cursos</span>
-            </Link>
-            <div className="flex items-center gap-4">
-              <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
-                <Bookmark className="w-5 h-5" />
-              </button>
-              <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
-                <Share2 className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <HeaderComponent />
+      <CursoContent cursoDetalhes={cursoDetalhes} cursoId={id} />
+    </div>
+  );
+}
 
+// Componente separado para o conteúdo (Client Component)
+function CursoContent({ cursoDetalhes, cursoId }: { cursoDetalhes: any, cursoId: string }) {
+  const [activeTab, setActiveTab] = useState('sobre');
+
+  return (
+    <>
       <div className="container mx-auto px-6 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
@@ -249,7 +246,7 @@ export default function CursoDetalhesPage({ params }: CursoDetalhesPageProps) {
                     <div>
                       <h3 className="text-xl font-semibold text-gray-900 mb-4">Competências a Desenvolver</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {cursoDetalhes.competencias.map((competencia, index) => (
+                        {cursoDetalhes.competencias.map((competencia: string, index: number) => (
                           <div key={index} className="flex items-center gap-3">
                             <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
                             <span className="text-gray-700">{competencia}</span>
@@ -276,7 +273,7 @@ export default function CursoDetalhesPage({ params }: CursoDetalhesPageProps) {
 
                 {activeTab === 'modulos' && (
                   <div className="space-y-6">
-                    {cursoDetalhes.modulos.map((modulo, index) => (
+                    {cursoDetalhes.modulos.map((modulo: any, index: number) => (
                       <div key={index} className="border border-gray-200 rounded-lg p-6">
                         <div className="flex justify-between items-start mb-4">
                           <div>
@@ -289,7 +286,7 @@ export default function CursoDetalhesPage({ params }: CursoDetalhesPageProps) {
                           </div>
                         </div>
                         <div className="space-y-2">
-                          {modulo.temas.map((tema, temaIndex) => (
+                          {modulo.temas.map((tema: string, temaIndex: number) => (
                             <div key={temaIndex} className="flex items-center gap-3">
                               <div className="w-2 h-2 bg-brand-main rounded-full flex-shrink-0"></div>
                               <span className="text-gray-700">{tema}</span>
@@ -347,7 +344,7 @@ export default function CursoDetalhesPage({ params }: CursoDetalhesPageProps) {
                     <div>
                       <h3 className="text-xl font-semibold text-gray-900 mb-4">O que está incluído</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {cursoDetalhes.incluido.map((item, index) => (
+                        {cursoDetalhes.incluido.map((item: string, index: number) => (
                           <div key={index} className="flex items-center gap-3">
                             <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
                             <span className="text-gray-700">{item}</span>
@@ -423,6 +420,33 @@ export default function CursoDetalhesPage({ params }: CursoDetalhesPageProps) {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+// Componente separado para o Header
+function HeaderComponent() {
+  return (
+    <div className="bg-white shadow-sm border-b">
+      <div className="container mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          <Link 
+            href="/cursos" 
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span>Voltar aos Cursos</span>
+          </Link>
+          <div className="flex items-center gap-4">
+            <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
+              <Bookmark className="w-5 h-5" />
+            </button>
+            <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
+              <Share2 className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </div>
