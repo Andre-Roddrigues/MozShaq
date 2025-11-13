@@ -15,6 +15,7 @@ export function middleware(req: NextRequest) {
     "/formulario/parceiro",
     "/cursos",
     "/cursos/[id]",
+    /^\/cursos\/[^\/]+$/,
     "/cursos/:id",
     "/cursos/*",
     "/cursos/*/",
