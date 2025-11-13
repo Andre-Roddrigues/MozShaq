@@ -5,7 +5,7 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get("auth_token")?.value;
   const { pathname } = req.nextUrl;
 
-  // Rotas públicas (sempre acessíveis sem login)
+  // Rotas públicas (acessíveis sem login)
   const publicRoutes = [
     "/",
     "/duvidas",
@@ -13,23 +13,14 @@ export function middleware(req: NextRequest) {
     "/recuperar-senha",
     "/sherq-academy/inicio",
     "/formulario/parceiro",
-    "/cursos",
-    "/cursos/[id]",
-    /^\/cursos\/[^\/]+$/,
-    "/cursos/:id",
-    "/cursos/*",
-    "/cursos/*/",
     "/nossos-termos",
-     "/nova-senha",         // adicionado
+    "/nova-senha",
     "/nova-senha/[otp]",
   ];
 
   // Rotas especiais que não podem ser acessadas após login
-  const authRoutes = ["/login", "/registro", "/nova-senha",         // adicionado
-    "/nova-senha/[otp]"];
-  if (pathname.startsWith("/nova-senha")) {
-    return NextResponse.next();
-  }
+  const authRoutes = ["/login", "/registro", "/nova-senha", "/nova-senha/[otp]"];
+
   // Ignorar assets e APIs
   if (
     pathname.startsWith("/_next") ||
@@ -40,15 +31,22 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Se usuário já logado tentar ir para login/registro → manda para perfil
+  // Se o usuário tentar acessar /nova-senha → sempre permitir
+  if (pathname.startsWith("/nova-senha")) {
+    return NextResponse.next();
+  }
+
+  // Se o usuário estiver logado e tentar ir para login/registro → redirecionar para perfil
   if (token && authRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL("/user/perfil", req.url));
   }
 
-  // Se rota pública → libera
-  if (publicRoutes.includes(pathname) ||
-  pathname.startsWith("/cursos") ||
-   authRoutes.includes(pathname)) {
+  // Se rota pública ou cursos → liberar
+  if (
+    publicRoutes.includes(pathname) ||
+    pathname.startsWith("/cursos") || // ✅ libera /cursos e /cursos/[id]
+    authRoutes.includes(pathname)
+  ) {
     return NextResponse.next();
   }
 

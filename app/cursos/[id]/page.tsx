@@ -416,7 +416,7 @@ function CursoContent({ cursoDetalhes, cursoId }: { cursoDetalhes: any, cursoId:
 
               <div className="mt-6 p-4 bg-blue-50 rounded-lg">
                 <p className="text-sm text-blue-800 text-center">
-                  🎯 <strong>Garanta sua vaga!</strong> Restam apenas {cursoDetalhes.vagasDisponiveis} vagas disponíveis.
+                  <strong>Garanta sua vaga!</strong> Restam apenas {cursoDetalhes.vagasDisponiveis} vagas disponíveis.
                 </p>
               </div>
             </div>
