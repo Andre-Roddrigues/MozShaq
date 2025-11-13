@@ -115,10 +115,14 @@ const cursoDetalhes = {
     'Suporte pós-curso por 3 meses'
   ]
 };
+interface CursoDetalhesPageProps {
+  params: {
+    id: string;
+  };
+}
 
-export default function CursoDetalhesPage({ params }: { params: { id: string } }) {
+export default function CursoDetalhesPage({ params }: CursoDetalhesPageProps) {
   const [activeTab, setActiveTab] = useState('sobre');
-  const { id } = params; // 👈 espera o Promise resolver
 
   return (
     <div className="min-h-screen bg-gray-50">

@@ -111,11 +111,11 @@ export default function CursosPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 mt-4 py-12">
       <div className="container mx-auto px-6">
         
         {/* Cabeçalho */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 mt-4">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             Nossos Cursos
           </h1>
