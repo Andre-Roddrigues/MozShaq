@@ -116,9 +116,9 @@ const cursoDetalhes = {
   ]
 };
 
-export default async function CursoDetalhesPage({ params }: { params: { id: string } }) {
+export default function CursoDetalhesPage({ params }: { params: { id: string } }) {
   const [activeTab, setActiveTab] = useState('sobre');
-  const { id } = await params; // 👈 espera o Promise resolver
+  const { id } = params; // 👈 espera o Promise resolver
 
   return (
     <div className="min-h-screen bg-gray-50">
