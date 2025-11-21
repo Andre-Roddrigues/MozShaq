@@ -7,6 +7,7 @@ import { CardsSharq } from "../components/Landing/Hero2/CardsSharq";
 import CardSectionSliders from "../components/Landing/Hero2/CardSectionSliders ";
 import HowWeActSection from "../components/Landing/HowWeAct/HowWeActSection";
 import ServicesOverviewSection from "../components/Landing/ServicesSurvey/ServicesOverviewSection";
+import PartnerSlider from "../components/Landing/Partners/Partnes";
 
 export const metadata: Metadata = {
   title: "MozShaq",
@@ -29,6 +30,9 @@ export default function Home() {
       </div>
       <div>
         <TeamSection />
+      </div>
+      <div>
+        <PartnerSlider />
       </div>
       <div>
         <HowWeActSection />
