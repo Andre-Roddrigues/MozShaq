@@ -73,7 +73,9 @@ export default function HeroSection() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
+                <Link href="/contacte-nos">
                 Entrar em Contacto
+                </Link>
                 <motion.div
                   animate={{ x: [0, 5, 0] }}
                   transition={{

@@ -15,7 +15,7 @@ const menuItems = [
   { name: "Áreas de Actuação", href: "/#areas" },
   { name: "Cursos", href: "/cursos" },
   { name: "Serviços", href: "/services" },
-  { name: "Contacto", href: "/#contacto" },
+  { name: "Contacto", href: "/contacto" },
 ];
 
 export default function NavLinks({ activeLink, onLinkClick, isScrolled = false }: NavLinksProps) {

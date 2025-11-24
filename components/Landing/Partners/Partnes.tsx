@@ -64,9 +64,9 @@ const PartnerSlider = () => {
   return (
     <section className="py-12 bg-gradient-to-tr from-brand-main-light/5 via-white to-brand-main-light/10 dark:from-gray-900 dark:via-gray-800 dark:to-brand-main/10">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl font-bold text-center text-brand-blue dark:text-white mb-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 dark:text-white mb-8">
           Nossos{" "}
-          <span className="text-brand-main dark:text-brand-blue">Parceiros</span>
+          <span className="text-gray-800 dark:text-white">Parceiros</span>
         </h2>
 
         <div 

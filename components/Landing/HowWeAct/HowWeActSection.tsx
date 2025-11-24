@@ -86,7 +86,7 @@ const HowWeActSection = () => {
             transition={{ delay: 0.2, duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Como <span className="text-brand-main">Actuamos</span>
+            Como <span className="text-gray-800 dark:text-white">Actuamos</span>
           </motion.h2>
           <motion.p
             className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"

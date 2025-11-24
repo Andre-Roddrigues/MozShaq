@@ -120,7 +120,7 @@ const ServicesOverviewSection = () => {
             viewport={{ once: true }}
           >
             Consultoria e Assessoria para{' '}
-            <span className="text-brand-main">Desenvolvimento Sustentável</span>
+            <span className="text-gray-900 dark:text-white">Desenvolvimento Sustentável</span>
           </motion.h2>
           
           <motion.p

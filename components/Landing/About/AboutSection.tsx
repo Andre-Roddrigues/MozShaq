@@ -60,9 +60,9 @@ export default function AboutSection() {
         {/* Header Section */}
         <motion.div
           className="text-center mb-16"
-          // initial={{ opacity: 0, y: 30 }}
-          // animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          // transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6 }}
         >
           <motion.div
             className="inline-flex items-center gap-2 bg-brand-main/10 dark:bg-brand-main/20 px-4 py-2 rounded-full mb-6"
@@ -76,44 +76,38 @@ export default function AboutSection() {
           
           <motion.h2 
             className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6"
-            // initial={{ opacity: 0, y: 30 }}
-            // animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            // transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Quem <span className="text-brand-main dark:text-brand-main">Somos</span>
+            Quem <span className="text-gray-800 dark:text-white">Somos</span>
           </motion.h2>
           
-          <motion.p 
-            className="text-xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed"
-            // initial={{ opacity: 0, y: 30 }}
-            // animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            // transition={{ duration: 0.6, delay: 0.3 }}
+          
+        </motion.div>
+
+        {/* Main Grid Layout */}
+        <motion.div
+          ref={ref}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Left Side - Quem Somos Text */}
+          <motion.div
+            className="space-y-6 bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg"
+            initial={{ opacity: 0, x: -50 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
+            
+            <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p>
             Somos a <strong>Mozshaq Consultoria e Serviços</strong>, uma empresa genuinamente moçambicana 
             que oferece soluções integradas em estudos e consultoria especializada para o desenvolvimento 
             sustentável de Moçambique.
-          </motion.p>
-        </motion.div>
-
-        <motion.div
-          ref={ref}
-          className="grid lg:grid-cols-2 gap-12 items-start mb-20"
-          // initial={{ opacity: 0 }}
-          // animate={inView ? { opacity: 1 } : { opacity: 0 }}
-          // transition={{ duration: 0.8 }}
-        >
-          {/* Company Description */}
-          <motion.div
-            className="space-y-6"
-            // initial={{ opacity: 0, x: -50 }}
-            // animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            // transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">
-              Desde 2013 a Serviço de Moçambique
-            </h3>
-            
-            <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+          </p>
               <p>
                 Estabelecida em 2013, a <strong>MOZSHAQ</strong> conta com uma equipa técnica especializada 
                 nas áreas das suas operações, focada em assistência técnica e serviços, proporcionando aos 
@@ -133,14 +127,14 @@ export default function AboutSection() {
             </div>
           </motion.div>
 
-          {/* Mission, Vision & Values */}
+          {/* Right Side - Missão, Visão e Valores */}
           <motion.div
-            className="space-y-8"
+            className="space-y-6"
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            {/* Mission */}
+            {/* Missão */}
             <motion.div
               className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl p-6 border border-blue-100 dark:border-blue-800"
               whileHover={{ y: -5 }}
@@ -162,7 +156,7 @@ export default function AboutSection() {
               </div>
             </motion.div>
 
-            {/* Vision */}
+            {/* Visão */}
             <motion.div
               className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-6 border border-green-100 dark:border-green-800"
               whileHover={{ y: -5 }}
@@ -183,47 +177,20 @@ export default function AboutSection() {
               </div>
             </motion.div>
 
-            {/* Values */}
-           
-          </motion.div>
-        </motion.div>
-
-        {/* Team Highlight */}
-        <motion.div
-          className="bg-brand-blue/10 dark:from-brand-main/5 dark:to-brand-blue/5 rounded-3xl p-8 md:p-12 border border-brand-main/20"
-          // initial={{ opacity: 0, y: 50 }}
-          // animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          // transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white mb-4">
-                O Nosso Maior Património:<span className="text-brand-blue"> A Nossa Equipa</span>
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                Com cerca de <strong>60% de uma equipa jovem e dinâmica</strong>, a MOZSHAQ possui uma 
-                equipa multidisciplinar, motivada pelo denominador comum: <span className="text-brand-blue">o desenvolvimento sustentável.</span>
-              </p>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Priorizamos a transferência de conhecimento e estamos comprometidos em criar capacidade interna. 
-                Em todos os projectos, encontramos um consultor externo para acrescentar valor aos nossos 
-                consultores locais através da ferramenta de transferência de conhecimento.
-              </p>
-            </div>
-            
-             <motion.div
-              className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl p-6 border border-purple-100 dark:border-purple-800"
+            {/* Valores */}
+            <motion.div
+              className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl p-6 border border-blue-100 dark:border-blue-800"
               whileHover={{ y: -5 }}
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-red-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-brand-blue rounded-xl flex items-center justify-center flex-shrink-0">
                   <Heart className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">
                     Valores
                   </h3>
-                  <div className="grid sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-3">
                     {valores.map((valor, index) => {
                       const ValorIcon = valor.icon;
                       return (
@@ -247,6 +214,54 @@ export default function AboutSection() {
                 </div>
               </div>
             </motion.div>
+          </motion.div>
+        </motion.div>
+
+        {/* Bottom Section - Col-span-2 */}
+        <motion.div
+          className="bg-brand-blue/10  dark:from-brand-blue/5 dark:to-brand-main/5 rounded-3xl p-8 md:p-12 col-span-2"
+          initial={{ opacity: 0, y: 50 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <div className="grid lg:grid-cols-1 gap-8 items-center">
+            <div>
+              <h3 className="text-2xl text-center md:text-3xl font-bold text-gray-800 dark:text-white mb-4">
+                O Nosso Maior Património: <span className="text-gray-800 dark:text-white">A Nossa Equipa</span>
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
+                Com cerca de <strong>60% de uma equipa jovem e dinâmica</strong>, a MOZSHAQ possui uma 
+                equipa multidisciplinar, motivada pelo denominador comum: <span className="text-brand-main">o desenvolvimento sustentável.</span>
+              </p>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                Priorizamos a transferência de conhecimento e estamos comprometidos em criar capacidade interna. 
+                Em todos os projectos, encontramos um consultor externo para acrescentar valor aos nossos 
+                consultores locais através da ferramenta de transferência de conhecimento.
+              </p>
+            </div>
+            
+            {/* <div className="flex justify-center">
+              <div className="grid grid-cols-2 gap-4">
+                {stats.map((stat, index) => {
+                  const StatIcon = stat.icon;
+                  return (
+                    <motion.div
+                      key={index}
+                      className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center shadow-lg"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <StatIcon className="w-8 h-8 text-brand-main mx-auto mb-2" />
+                      <div className="text-2xl font-bold text-gray-800 dark:text-white">
+                        {stat.number}
+                      </div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300">
+                        {stat.label}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div> */}
           </div>
         </motion.div>
       </div>

@@ -99,7 +99,7 @@ const TeamSection = () => {
             transition={{ delay: 0.2, duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Conheça a Nossa <span className="text-brand-main">Equipa</span>
+             Nossa <span className="text-gray-800 dark:text-white">Equipa</span>
           </motion.h2>
           <motion.p
             className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"

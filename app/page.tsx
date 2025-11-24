@@ -20,13 +20,13 @@ export default function Home() {
     <div>
       <div>
         <HeroSlider />
-        <CardSectionSliders />
-      </div>
-      <div>
-        <ServicosIndustrias />
+        {/* <CardSectionSliders /> */}
       </div>
       <div>
         <AboutSection />
+      </div>
+      <div>
+        <ServicosIndustrias />
       </div>
       <div>
         <TeamSection />
