@@ -178,7 +178,7 @@ const Navbar = () => {
   }}
 >
   <Image
-    src="/images/logo.png"
+    src="/images/logo.PNG"
     alt="UniMentor logo"
     fill
     className="object-cover"
