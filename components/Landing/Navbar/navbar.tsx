@@ -171,21 +171,20 @@ const Navbar = () => {
         {/* Logo */}
        <Link
   href="/"
-  className="relative hidden md:flex w-32 h-16 cursor-pointer" // container precisa de tamanho
+  className="relative hidden md:flex w-32 h-16 cursor-pointer"
   onClick={(e) => {
     e.preventDefault();
     handleNavigation("Início");
   }}
 >
   <Image
-    src="/images/logo.PNG" // caminho relativo em public/
+    src="/images/logo.png"
     alt="UniMentor logo"
     fill
-    className="object-contain" // evita cortar a imagem
+    className="object-cover"
     sizes="128px"
   />
 </Link>
-
 
 
 
