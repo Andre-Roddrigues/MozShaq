@@ -167,7 +167,7 @@ const Navbar = () => {
           : "bg-white dark:bg-transparent"
       }`}
     >
-      <div className="flex max-w-7xl mx-auto px-6 py-3 items-center justify-end md:justify-between">
+      <div className="flex max-w-7xl mx-auto px-3 py-3 items-center justify-end md:justify-between">
         {/* Logo */}
        <Link
   href="/"
