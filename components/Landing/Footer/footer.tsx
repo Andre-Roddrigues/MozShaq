@@ -4,7 +4,7 @@ import { MapPin, Phone, Mail, Linkedin, BookOpen, GraduationCap, Users, Shield, 
 
 export default function MinimalFooter() {
   return (
-    <footer className="bg-gray-800 text-white">
+    <footer id="contacto" className="bg-gray-800 text-white">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           

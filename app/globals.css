@@ -812,3 +812,16 @@ span.flatpickr-weekday,
   width: max-content;
   animation: scroll 20s linear infinite;
 }
+/* Adicione ao seu globals.css */
+html {
+  scroll-behavior: smooth;
+}
+/* 
+section[id], div[id] {
+  scroll-margin-top: 80px; 
+} */
+
+/* Garante que todas as seções sejam selecionáveis */
+/* section:not([id]):not(:first-of-type) {
+  position: relative;
+} */

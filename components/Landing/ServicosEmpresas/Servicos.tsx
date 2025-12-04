@@ -212,7 +212,7 @@ export default function ServicosIndustrias() {
                 {/* Imagem de background */}
                 <div 
                   className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: "url('/images/servicos-bg.jpg')" }}
+                  style={{ backgroundImage: "url('/images/homeserv.jpg')" }}
                 />
 
                 {/* Overlay gradiente */}
