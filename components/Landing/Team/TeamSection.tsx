@@ -78,7 +78,7 @@ const TeamSection = () => {
   };
 
   return (
-    <section id="team" className="relative py-20 bg-gray-50 dark:bg-gray-900 overflow-hidden">
+    <section id="teams" className="relative py-20 bg-gray-50 dark:bg-gray-900 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-brand-main/5 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-brand-blue/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>

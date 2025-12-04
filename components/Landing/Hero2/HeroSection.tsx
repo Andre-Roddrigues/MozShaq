@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function HeroSection() {
   return (
-    <div className="relative h-full md:min-h-screen bg-slate-800 dark:bg-slate-900">
+    <div id="inicio" className="relative h-full md:min-h-screen bg-slate-800 dark:bg-slate-900">
       {/* Background Image with Overlay */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center"

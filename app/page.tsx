@@ -17,29 +17,29 @@ export const metadata: Metadata = {
 export default function Home() {
 
   return (
-    <div>
-      <div>
+    <main>
+      <section id="inicio">
         <HeroSlider />
         {/* <CardSectionSliders /> */}
-      </div>
-      <div>
+      </section>
+      <section id="sobre">
         <AboutSection />
-      </div>
-      <div>
+      </section>
+      <section id="areas">
         <ServicosIndustrias />
-      </div>
-      <div>
+      </section>
+      <section id="Teams">
         <TeamSection />
-      </div>
-      <div>
+      </section>
+      <section id="partners">
         <PartnerSlider />
-      </div>
-      <div>
+      </section>
+      <section id="howweact" >
         <HowWeActSection />
-      </div>
-      <div>
+      </section>
+      <section>
         <ServicesOverviewSection />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

@@ -195,21 +195,7 @@ export default function ContactPage() {
               </motion.div>
 
               {/* Quick Action */}
-              <motion.div
-                className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700"
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="flex items-center gap-4">
-                  <MessageCircle className="w-6 h-6 text-gray-600 dark:text-gray-400" />
-                  <div>
-                    <h3 className="font-semibold text-gray-800 dark:text-white mb-1">Resposta Rápida</h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      Respondemos a todas as consultas em até 24 horas
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+              
             </motion.div>
 
             {/* Contact Form */}
@@ -353,6 +339,21 @@ export default function ContactPage() {
                   )}
                 </motion.button>
               </form>
+            <motion.div
+                className="bg-gray-50 mt-20 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700"
+                whileHover={{ scale: 1.01 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="flex items-center gap-4">
+                  <MessageCircle className="w-6 h-6 text-gray-600 dark:text-gray-400" />
+                  <div>
+                    <h3 className="font-semibold text-gray-800 dark:text-white mb-1">Resposta Rápida</h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">
+                      Respondemos a todas as consultas em até 24 horas
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
