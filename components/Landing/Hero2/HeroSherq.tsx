@@ -16,6 +16,7 @@ export default function HeroSectionSherq() {
     "Certificação ISO"
   ];
 
+  
   return (
     <section id="inicio" className="relative h-full md:min-h-screen bg-slate-800 dark:bg-slate-900">
       {/* Background Image with Overlay */}
