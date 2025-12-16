@@ -1,10 +1,10 @@
 "use client"
 import React from 'react';
-import { BookOpen, Users, Award, ArrowRight, Star } from 'lucide-react';
+import { BookOpen, Users, Award, ArrowRight, Star, Wrench, ThumbsUp } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from "next/link";
 
-export default function CoursesHeroSection() {
+export default function HeroSectionSherq() {
   const courses = [
     "Gestão Ambiental",
     "Segurança no Trabalho",
@@ -46,7 +46,7 @@ export default function CoursesHeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
-              <span className="text-brand-main dark:text-brand-main">Formação </span>
+              <span className="text-brand-main dark:text-brand-main">Formação & Consultoria</span>
               <br />
               Especializada
             </motion.h1>
@@ -58,32 +58,35 @@ export default function CoursesHeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
             >
-              Cursos Certificados e Adaptados às Suas Necessidades
+              Desenvolvimento profissional e soluções empresariais integradas
             </motion.p>
             
-            {/* Inscrições Abertas */}
+            {/* Descrição */}
             <motion.p 
-              className="text-brand-main dark:text-brand-main text-xl md:text-2xl font-semibold mb-6 md:mb-10"
+              className="text-lg text-gray-300 dark:text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
             >
-              Inscrições Abertas
+              Combinamos formação certificada com consultoria especializada em desenvolvimento sustentável, 
+              segurança ocupacional e sistemas de gestão para empresas em Moçambique.
             </motion.p>
 
-            {/* CTA Button - CENTRALIZADO */}
+            {/* CTA Buttons - CENTRALIZADO */}
             <motion.div 
               className="flex flex-col sm:flex-row gap-4 items-center justify-center"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
             >
+              {/* Botão SherqAcademy */}
               <Link href="/sherq-academy/inicio">
                 <motion.button 
                   className="px-6 py-3 md:px-8 md:py-3 bg-brand-blue dark:bg-brand-blue text-white dark:text-white hover:bg-brand-blue/70 dark:hover:bg-brand-blue/70 transition-all duration-300 font-medium flex items-center gap-2 text-sm md:text-base"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
+                  <BookOpen size={18} />
                   SHERQ ACADEMY
                   <motion.div
                     animate={{ x: [0, 5, 0] }}
@@ -97,25 +100,63 @@ export default function CoursesHeroSection() {
                   </motion.div>
                 </motion.button>
               </Link>
-              <motion.button
-                              className="px-6 py-3 md:px-8 md:py-3 bg-brand-main dark:bg-brand-main text-white dark:text-white hover:bg-brand-main/70 dark:hover:bg-brand-main/70 transition-all duration-300 font-medium flex items-center gap-2 text-sm md:text-base"
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.95 }}
-                            >
-                              <Link href="/cursos">
-                              Cursos
-                              </Link>
-                            </motion.button>
+
+              {/* Botão Consultoria */}
+              <Link href="/contacte-nos">
+                <motion.button 
+                  className="px-6 py-3 md:px-8 md:py-3 bg-brand-main dark:bg-brand-main text-white dark:text-white hover:bg-brand-main/70 dark:hover:bg-brand-main/70 transition-all duration-300 font-medium flex items-center gap-2 text-sm md:text-base"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Wrench size={18} />
+                  CONSULTORIA
+                  <motion.div
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      repeatType: "reverse"
+                    }}
+                  >
+                    <ArrowRight size={18} />
+                  </motion.div>
+                </motion.button>
+              </Link>
             </motion.div>
+
+            {/* Destaques */}
+            {/* <motion.div 
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-12 md:mt-16"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0, duration: 0.6 }}
+            >
+              <div className="flex flex-col items-center">
+                <Award className="text-brand-main mb-2" size={24} />
+                <span className="text-white text-sm md:text-base">Cursos Certificados</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <Users className="text-brand-main mb-2" size={24} />
+                <span className="text-white text-sm md:text-base">Formação Personalizada</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <Wrench className="text-brand-main mb-2" size={24} />
+                <span className="text-white text-sm md:text-base">Consultoria Especializada</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <ThumbsUp className="text-brand-main mb-2" size={24} />
+                <span className="text-white text-sm md:text-base">Soluções Empresariais</span>
+              </div>
+            </motion.div> */}
           </motion.div>
         </div>
 
-        {/* Infinite Courses Carousel - MANTIDO ORIGINAL */}
+        {/* Infinite Courses Carousel */}
         <motion.div 
           className="relative z-10 mt-4 md:-mt-28 pb-8 md:pb-16"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.0, duration: 0.6 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
         >
           <div className="overflow-hidden py-3 md:py-4">
             <motion.div 
