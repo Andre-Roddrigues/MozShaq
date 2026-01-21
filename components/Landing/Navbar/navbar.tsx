@@ -22,7 +22,7 @@ const Navbar = () => {
   const navLinksConfig = [
     { name: "Início", sectionId: "inicio" },
     { name: "Sobre", sectionId: "sobre" },
-    { name: "Áreas de Actuação", sectionId: "areas" },
+    { name: "Consultoria", sectionId: "areas" },
     { name: "Teams", sectionId: "teams" },
     { name: "Serviços", sectionId: "services-overview" },
     { name: "Cursos", pagePath: "/cursos" },

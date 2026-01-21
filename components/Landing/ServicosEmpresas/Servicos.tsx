@@ -13,40 +13,124 @@ import {
   Mountain,
   Waves,
   GraduationCap,
-  Wifi
+  Wifi,
+  Users,
+  TrendingUp,
+  FileText,
+  Shield,
+  Target,
+  HeartPulse,
+  Leaf,
+  BookOpen,
+  Cpu
 } from 'lucide-react';
+import Link from 'next/link';
 
-export default function ServicosIndustrias() {
-  const industrias = [
+export default function AreasConsultoria() {
+  const areasConsultoria = [
     {
-      categoria: "Energia & Recursos",
-      itens: [
-        { nome: "Energia Renovável", icon: Zap },
-        { nome: "Petróleo & Gás", icon: Factory },
-        { nome: "Mineração", icon: Mountain },
-        { nome: "Hidrologia", icon: Waves }
-      ],
-      color: "from-brand-main to-brand-main"
+      id: "sistemas-gestao",
+      nome: "Sistemas de Gestão",
+      descricao: "Certificação e implementação de normas ISO",
+      icon: Target,
+      color: "from-brand-blue to-brand-blue",
+      subareas: [
+        "ISO 9001 - Qualidade",
+        "ISO 14001 - Ambiental",
+        "ISO 45001 - Segurança",
+        "ISO 27001 - Segurança da Informação"
+      ]
     },
     {
-      categoria: "Infraestruturas & Desenvolvimento",
-      itens: [
-        { nome: "Construção Civil", icon: Building2 },
-        { nome: "Portos & Logística", icon: Ship },
-        { nome: "Transportes", icon: Truck },
-        { nome: "Urbanismo", icon: LandPlot }
-      ],
-      color: "from-brand-main to-brand-main"
+      id: "ambiental",
+      nome: "Estudos Ambientais",
+      descricao: "Avaliação de impacto e gestão ambiental",
+      icon: Leaf,
+      color: "from-green-500 to-emerald-500",
+      subareas: [
+        "AIA - Avaliação de Impacto Ambiental",
+        "Planos de Gestão Ambiental",
+        "Auditorias Ambientais",
+        "Monitorização Ambiental"
+      ]
     },
     {
-      categoria: "Sectores Diversificados",
-      itens: [
-        { nome: "Agricultura", icon: Sprout },
-        { nome: "Turismo", icon: Globe },
-        { nome: "Educação", icon: GraduationCap },
-        { nome: "Telecomunicações", icon: Wifi }
-      ],
-      color: "from-brand-main to-brand-main"
+      id: "seguranca-saude",
+      nome: "Segurança e Saúde Ocupacional",
+      descricao: "Proteção do capital humano",
+      icon: Shield,
+      color: "from-brand-main to-brand-main",
+      subareas: [
+        "Planos de Segurança",
+        "Avaliação de Riscos",
+        "Equipamentos de Proteção",
+        "Investigação de Acidentes"
+      ]
+    },
+    {
+      id: "formacao",
+      nome: "Formação e Capacitação",
+      descricao: "Desenvolvimento de competências",
+      icon: GraduationCap,
+      color: "from-brand-blue to-brand-blue",
+      subareas: [
+        "Treino de Operadores",
+        "Segurança no Trabalho",
+        "Gestão de Projetos",
+        "Habilidades Técnicas"
+      ]
+    },
+    {
+      id: "projetos-engenharia",
+      nome: "Engenharia e Projetos",
+      descricao: "Design, supervisão e gestão de projetos",
+      icon: Building2,
+      color: "from-brand-main to-brand-main",
+      subareas: [
+        "Estudos de Viabilidade",
+        "Design de Infraestruturas",
+        "Gestão de Projetos",
+        "Supervisão de Obras"
+      ]
+    },
+    {
+      id: "energia-sustentavel",
+      nome: "Energia Sustentável",
+      descricao: "Soluções energéticas renováveis",
+      icon: Zap,
+      color: "from-brand-blue to-brand-blue",
+      subareas: [
+        "Estudos de Viabilidade",
+        "Auditorias Energéticas",
+        "Projectos Renováveis",
+        "Eficiência Energética"
+      ]
+    },
+    {
+      id: "topografia-geotecnia",
+      nome: "Topografia e Geotecnia",
+      descricao: "Estudos de solo e mapeamento",
+      icon: Mountain,
+      color: "from-brand-main to-brand-main",
+      subareas: [
+        "Levantamentos Topográficos",
+        "Estudos Geotécnicos",
+        "Cartografia e Mapeamento",
+        "Perfis de Solo"
+      ]
+    },
+    {
+      id: "conteudo-local",
+      nome: "Conteúdo Local e RSC",
+      descricao: "Desenvolvimento comunitário e sustentável",
+      icon: Users,
+      color: "from-teal-500 to-green-500",
+      subareas: [
+        "Plano de Conteúdo Local",
+        "Desenvolvimento de Fornecedores",
+        "Responsabilidade Social",
+        "Capacitação Comunitária"
+      ]
     }
   ];
 
@@ -64,236 +148,160 @@ export default function ServicosIndustrias() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           ref={ref}
-          className="grid lg:grid-cols-2 gap-12 items-center"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8 }}
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6 }}
         >
-          
-          {/* Left Side - Content */}
-          <div className="space-y-8">
-            {/* Header */}
-            <motion.div 
-              className="space-y-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <motion.div 
-                className="inline-flex items-center gap-2 bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow-lg border border-gray-100 dark:border-gray-700"
-                whileHover={{ scale: 1.05 }}
-              >
-                <div className="w-2 h-2 bg-brand-main rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-brand-main dark:text-white">
-                  Especialistas Multissetoriais
-                </span>
-              </motion.div>
-              
-              <motion.h2 
-                className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight"
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            Nossas <span className="bg-brand-blue bg-clip-text text-transparent">Áreas de Consultoria</span>
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Especialistas em soluções integradas para o desenvolvimento sustentável de Moçambique. 
+            Cada área de consultoria é tratada com excelência e padrões internacionais.
+          </p>
+        </motion.div>
+
+        {/* Grid de Áreas de Consultoria */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {areasConsultoria.map((area, index) => {
+            const Icon = area.icon;
+            return (
+              <motion.div
+                key={area.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                Oferecemos Estudos e Consultoria Especializada para{' '}
-                <span className="bg-brand-blue bg-clip-text text-transparent">
-                  Diversas Indústrias
-                </span>
-              </motion.h2>
-              
-              <motion.p 
-                className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
-                initial={{ opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                A Mozshaq actua em múltiplos sectores, fornecendo soluções integradas 
-                em sustentabilidade, segurança e gestão para o desenvolvimento sustentável de Moçambique.
-              </motion.p>
-            </motion.div>
-
-            {/* Industries Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {industrias.map((grupo, index) => (
-                <motion.div 
-                  key={index}
-                  className="group bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 backdrop-blur-sm"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                >
-                  {/* Icon Header */}
-                  <div className={`w-12 h-12 bg-gradient-to-r ${grupo.color} rounded-xl flex items-center justify-center mb-4 shadow-lg`}>
-                    <motion.div
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {grupo.categoria === "Energia & Recursos" && <Zap className="w-6 h-6 text-white" />}
-                      {grupo.categoria === "Infraestruturas & Desenvolvimento" && <Building2 className="w-6 h-6 text-white" />}
-                      {grupo.categoria === "Sectores Diversificados" && <Globe className="w-6 h-6 text-white" />}
-                    </motion.div>
-                  </div>
-                  
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-4 text-base leading-tight">
-                    {grupo.categoria}
-                  </h3>
-                  
-                  <ul className="space-y-2">
-                    {grupo.itens.map((item, itemIndex) => {
-                      const IconComponent = item.icon;
-                      return (
-                        <motion.li 
-                          key={itemIndex} 
-                          className="flex items-center gap-3 group-hover:translate-x-1 transition-transform duration-200"
-                          whileHover={{ x: 5 }}
-                        >
-                          <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <IconComponent className="w-4 h-4 text-gray-600 dark:text-brand-blue" />
-                          </div>
-                          <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">
-                            {item.nome}
-                          </span>
-                        </motion.li>
-                      );
-                    })}
-                  </ul>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 pt-6">
-              {[
-                { number: "12+", label: "Anos de Experiência", icon: Zap },
-                { number: "60+", label: "Projectos Concluídos", icon: Building2 },
-                { number: "15+", label: "Sectores de Actuação", icon: Globe }
-              ].map((stat, index) => (
-                <motion.div 
-                  key={index}
-                  className="text-center p-4 bg-white/50 dark:bg-gray-800/50 rounded-xl backdrop-blur-sm border border-white/20 dark:border-gray-700/50"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="flex justify-center mb-2">
-                    <div className="w-8 h-8 bg-brand-main rounded-lg flex items-center justify-center">
-                      {stat.icon === Zap && <Zap className="w-4 h-4 text-white" />}
-                      {stat.icon === Building2 && <Building2 className="w-4 h-4 text-white" />}
-                      {stat.icon === Globe && <Globe className="w-4 h-4 text-white" />}
-                    </div>
-                  </div>
-                  <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-brand-main to-brand-blue bg-clip-text text-transparent mb-1">
-                    {stat.number}
-                  </div>
-                  <div className="text-xs text-gray-600 dark:text-gray-400 font-medium">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Side - Image */}
-          <motion.div 
-            className="relative"
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            {/* Main Image Container */}
-            <motion.div 
-              className="relative rounded-3xl overflow-hidden shadow-2xl"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="aspect-[4/5] bg-gradient-to-br from-blue-600 to-blue-800 relative">
-                {/* Imagem de background */}
-                <div 
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: "url('/images/homeserv.jpg')" }}
-                />
-
-                {/* Overlay gradiente */}
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-blue-600/20 to-transparent" />
-                
-                {/* Content Overlay */}
-                <div className="absolute inset-0 flex items-end p-8">
+                <Link href={`/consultoria/${area.id}`}>
                   <motion.div 
-                    className="text-white"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ delay: 0.8 }}
+                    className="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full flex flex-col cursor-pointer"
+                    whileHover={{ y: -8, scale: 1.02 }}
                   >
-                    <h3 className="text-2xl font-bold mb-3 leading-tight">
-                      Especialistas em Desenvolvimento Sustentável
-                    </h3>
-                    <p className="text-blue-100 text-sm mb-6 leading-relaxed">
-                      Soluções técnicas locais com padrões internacionais para um futuro mais verde e seguro.
-                    </p>
+                    {/* Ícone da Área */}
                     <motion.div 
-                      className="flex items-center gap-3"
-                      whileHover={{ gap: 4 }}
+                      className={`w-14 h-14 bg-gradient-to-r ${area.color} rounded-xl flex items-center justify-center mb-4 shadow-lg group-hover:shadow-xl`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
                     >
-                      <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/30">
-                        <Zap className="w-5 h-5" />
-                      </div>
-                      <span className="text-sm font-medium bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
-                        Desde 2013
+                      <Icon className="w-7 h-7 text-white" />
+                    </motion.div>
+                    
+                    {/* Nome e Descrição */}
+                    <h3 className="font-bold text-gray-900 dark:text-white mb-2 text-lg">
+                      {area.nome}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 flex-grow">
+                      {area.descricao}
+                    </p>
+                    
+                    {/* Subáreas */}
+                    <div className="space-y-2 mb-4">
+                      {area.subareas.slice(0, 3).map((subarea, subIndex) => (
+                        <div key={subIndex} className="flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+                          <span className="text-xs text-gray-500 dark:text-gray-400">
+                            {subarea}
+                          </span>
+                        </div>
+                      ))}
+                      {area.subareas.length > 3 && (
+                        <div className="text-xs text-brand-main dark:text-brand-blue font-medium">
+                          +{area.subareas.length - 3} mais...
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Botão de Ação */}
+                    <motion.div 
+                      className="flex items-center justify-between mt-auto pt-4 border-t border-gray-100 dark:border-gray-700"
+                      whileHover={{ x: 5 }}
+                    >
+                      <span className="text-sm font-medium text-brand-main dark:text-brand-blue">
+                        Saiba mais
                       </span>
+                      <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center group-hover:bg-brand-main/10">
+                        <svg className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-brand-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </div>
                     </motion.div>
                   </motion.div>
-                </div>
-              </div>
-            </motion.div>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </div>
 
-            {/* Floating Elements */}
-            <motion.div 
-              className="absolute -top-6 -right-6 w-24 h-24 bg-brand-main/20 rounded-full blur-xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.5, 0.3]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                repeatType: "reverse" as const
-              }}
-            />
-            <motion.div 
-              className="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-400/20 rounded-full blur-xl"
-              animate={{
-                scale: [1.2, 1, 1.2],
-                opacity: [0.5, 0.3, 0.5]
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                repeatType: "reverse" as const,
-                delay: 1
-              }}
-            />
-            
-            {/* Badge */}
-            <motion.div 
-              className="absolute top-6 left-6 bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-2xl border border-gray-100 dark:border-gray-700"
-              initial={{ scale: 0, rotate: -10 }}
-              animate={inView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -10 }}
-              transition={{ delay: 1.0, type: "spring", stiffness: 200 }}
-              whileHover={{ scale: 1.1, rotate: 5 }}
-            >
-              <div className="text-center">
-                {/* <div className="text-2xl font-bold bg-gradient-to-r from-brand-main to-orange-500 bg-clip-text text-transparent mb-1">
-                  60%
-                </div> */}
-                <div className="text-xs text-gray-600 dark:text-gray-400 font-medium leading-tight">
-                  Equipa Jovem<br />e Dinâmica
-                </div>
+        {/* Estatísticas */}
+        {/* <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
+                <Users className="w-6 h-6 text-blue-600 dark:text-blue-400" />
               </div>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+              <div>
+                <div className="text-3xl font-bold text-gray-900 dark:text-white">60%</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Equipa Jovem e Dinâmica</div>
+              </div>
+            </div>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">
+              Nossa equipa é composta por jovens profissionais altamente motivados e especializados.
+            </p>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center">
+                <FileText className="w-6 h-6 text-green-600 dark:text-green-400" />
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-gray-900 dark:text-white">12+</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Anos de Experiência</div>
+              </div>
+            </div>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">
+              Mais de uma década oferecendo soluções de consultoria de excelência em Moçambique.
+            </p>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center">
+                <Target className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-gray-900 dark:text-white">8</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Áreas de Especialização</div>
+              </div>
+            </div>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">
+              Cobertura completa em consultoria para desenvolvimento sustentável.
+            </p>
+          </div>
+        </motion.div> */}
+
+        {/* CTA */}
+        {/* <motion.div 
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 1 }}
+        >
+          <Link href="contacte-nos">
+            <motion.button
+              className="bg-gradient-to-r from-brand-main to-brand-blue text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Solicitar Consultoria Especializada
+            </motion.button>
+          </Link>
+        </motion.div> */}
       </div>
     </section>
   );

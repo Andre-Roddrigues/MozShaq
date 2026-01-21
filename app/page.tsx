@@ -9,6 +9,7 @@ import HowWeActSection from "../components/Landing/HowWeAct/HowWeActSection";
 import ServicesOverviewSection from "../components/Landing/ServicesSurvey/ServicesOverviewSection";
 import PartnerSlider from "../components/Landing/Partners/Partnes";
 import HeroSectionSherq from "../components/Landing/Hero2/HeroSherq";
+import AreasConsultoria from "../components/Landing/ServicosEmpresas/Servicos";
 
 export const metadata: Metadata = {
   title: "MozShaq",
@@ -27,7 +28,7 @@ export default function Home() {
         <AboutSection />
       </section>
       <section id="areas">
-        <ServicosIndustrias />
+        <AreasConsultoria />
       </section>
       <section id="Teams">
         <TeamSection />
@@ -38,7 +39,7 @@ export default function Home() {
       <section id="howweact" >
         <HowWeActSection />
       </section>
-      <section>
+      <section id="services-overview">
         <ServicesOverviewSection />
       </section>
     </main>

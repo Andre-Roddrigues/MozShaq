@@ -101,7 +101,7 @@ const ServicesOverviewSection = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <motion.div
+          {/* <motion.div
             className="inline-flex items-center gap-2 bg-brand-main/10 text-brand-main px-4 py-2 rounded-full mb-6"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -110,7 +110,7 @@ const ServicesOverviewSection = () => {
           >
             <div className="w-2 h-2 bg-brand-main rounded-full"></div>
             <span className="text-sm font-medium">Serviços Especializados</span>
-          </motion.div>
+          </motion.div> */}
 
           <motion.h2
             className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
@@ -119,8 +119,7 @@ const ServicesOverviewSection = () => {
             transition={{ delay: 0.3, duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Consultoria e Assessoria para{' '}
-            <span className="text-gray-900 dark:text-white">Desenvolvimento Sustentável</span>
+            Serviços Especializados
           </motion.h2>
           
           <motion.p

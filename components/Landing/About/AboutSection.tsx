@@ -1,12 +1,12 @@
 "use client"
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { 
-  Target, 
-  Eye, 
-  Heart, 
-  Users, 
-  Award, 
+import {
+  Target,
+  Eye,
+  Heart,
+  Users,
+  Award,
   TrendingUp,
   Shield,
   Leaf,
@@ -55,7 +55,7 @@ export default function AboutSection() {
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-50 dark:bg-blue-900/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-main/10 dark:bg-brand-main/5 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
-      
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header Section */}
         <motion.div
@@ -64,7 +64,7 @@ export default function AboutSection() {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
-          <motion.div
+          {/* <motion.div
             className="inline-flex items-center gap-2 bg-brand-main/10 dark:bg-brand-main/20 px-4 py-2 rounded-full mb-6"
             whileHover={{ scale: 1.05 }}
           >
@@ -72,9 +72,9 @@ export default function AboutSection() {
             <span className="text-sm font-medium text-brand-main dark:text-brand-main/80">
               Sobre a Mozshaq
             </span>
-          </motion.div>
-          
-          <motion.h2 
+          </motion.div> */}
+
+          <motion.h2
             className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -82,8 +82,8 @@ export default function AboutSection() {
           >
             Quem <span className="text-gray-800 dark:text-white">Somos</span>
           </motion.h2>
-          
-          
+
+
         </motion.div>
 
         {/* Main Grid Layout */}
@@ -101,27 +101,28 @@ export default function AboutSection() {
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            
-            <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
-            <p>
-            Somos a <strong>Mozshaq Consultoria e Serviços</strong>, uma empresa genuinamente moçambicana 
-            que oferece soluções integradas em estudos e consultoria especializada para o desenvolvimento 
-            sustentável de Moçambique.
-          </p>
-              <p>
-                Estabelecida em 2013, a <strong>MOZSHAQ</strong> conta com uma equipa técnica especializada 
-                nas áreas das suas operações, focada em assistência técnica e serviços, proporcionando aos 
+
+            <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed text-justify">
+              <p className="text-justify">
+                Somos a <strong>Mozshaq Consultoria e Serviços</strong>, uma empresa genuinamente moçambicana
+                que oferece soluções integradas em estudos e consultoria especializada para o desenvolvimento
+                sustentável de Moçambique.
+              </p>
+
+              <p className="text-justify">
+                Estabelecida em 2013, a <strong>MOZSHAQ</strong> conta com uma equipa técnica especializada
+                nas áreas das suas operações, focada em assistência técnica e serviços, proporcionando aos
                 seus clientes respostas locais com padrões internacionais.
               </p>
-              
-              <p>
-                A experiência adquirida ao longo dos mais de 12 anos de existência e o conhecimento acumulado 
-                pelos colaboradores constituem uma vantagem competitiva para a empresa e contribuem para 
+
+              <p className="text-justify">
+                A experiência adquirida ao longo dos mais de 12 anos de existência e o conhecimento acumulado
+                pelos colaboradores constituem uma vantagem competitiva para a empresa e contribuem para
                 resolver os desafios colocados pelas necessidades de satisfazer plenamente os nossos clientes.
               </p>
-              
-              <p>
-                Esforçamo-nos todos os dias para entregar soluções de valor acrescentado aos nossos clientes 
+
+              <p className="text-justify">
+                Esforçamo-nos todos os dias para entregar soluções de valor acrescentado aos nossos clientes
                 em qualquer sector de actividade, permitindo que se diferenciem neste mercado cada vez mais competitivo.
               </p>
             </div>
@@ -148,8 +149,8 @@ export default function AboutSection() {
                     Missão
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    Optimizar organizações através de normas nacionais e internacionais para reduzir custos, 
-                    aumentar a produtividade e mitigar impactos ambientais e riscos de saúde, garantindo um 
+                    Optimizar organizações através de normas nacionais e internacionais para reduzir custos,
+                    aumentar a produtividade e mitigar impactos ambientais e riscos de saúde, garantindo um
                     desenvolvimento sustentável contínuo.
                   </p>
                 </div>
@@ -170,7 +171,7 @@ export default function AboutSection() {
                     Visão
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    Tornar-nos a melhor e preferida empresa moçambicana de assistência técnica em Estudos 
+                    Tornar-nos a melhor e preferida empresa moçambicana de assistência técnica em Estudos
                     e Consultoria Especializada, Gestão de Projectos, Formação e soluções de Outsourcing.
                   </p>
                 </div>
@@ -229,17 +230,17 @@ export default function AboutSection() {
               <h3 className="text-2xl text-center md:text-3xl font-bold text-gray-800 dark:text-white mb-4">
                 O Nosso Maior Património: <span className="text-gray-800 dark:text-white">A Nossa Equipa</span>
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                Com cerca de <strong>60% de uma equipa jovem e dinâmica</strong>, a MOZSHAQ possui uma 
+              <p className="text-gray-600 text-center dark:text-gray-300 leading-relaxed mb-6">
+                Com cerca de <strong>60% de uma equipa jovem e dinâmica</strong>, a MOZSHAQ possui uma
                 equipa multidisciplinar, motivada pelo denominador comum: <span className="text-brand-main">o desenvolvimento sustentável.</span>
               </p>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Priorizamos a transferência de conhecimento e estamos comprometidos em criar capacidade interna. 
-                Em todos os projectos, encontramos um consultor externo para acrescentar valor aos nossos 
+              <p className="text-gray-600 text-center dark:text-gray-300 leading-relaxed">
+                Priorizamos a transferência de conhecimento e estamos comprometidos em criar capacidade interna.
+                Em todos os projectos, encontramos um consultor externo para acrescentar valor aos nossos
                 consultores locais através da ferramenta de transferência de conhecimento.
               </p>
             </div>
-            
+
             {/* <div className="flex justify-center">
               <div className="grid grid-cols-2 gap-4">
                 {stats.map((stat, index) => {

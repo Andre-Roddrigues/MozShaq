@@ -150,7 +150,7 @@ export default function MinimalFooter() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-center md:text-left">
               <span className="text-sm text-gray-400">
-                © 2024 SHERQ ACADEMY - MOZSHAQ Consultoria & Serviços. Todos os direitos reservados.
+                © 2026 MOZSHAQ - SHERQ ACADEMY Consultoria & Serviços. Todos os direitos reservados.
               </span>
             </div>
             <div className="flex items-center gap-3">
