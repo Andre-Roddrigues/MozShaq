@@ -224,15 +224,8 @@ export default function RegisterPage() {
       toast.dismiss(loadingToast);
       toast.success(`Conta criada com sucesso, ${userData.fullName}!`, {
         duration: 4000,
-        icon: '🎉',
+        icon: '',
         position: 'top-center'
-      });
-
-      // Toast informativo
-      toast('Redirecionando para login...', {
-        icon: '🔄',
-        duration: 2000,
-        position: 'bottom-center'
       });
 
       console.log('Usuário registrado:', userData);
@@ -263,7 +256,7 @@ export default function RegisterPage() {
     const hasSeenWelcome = localStorage.getItem('hasSeenRegisterWelcome');
     if (!hasSeenWelcome) {
       setTimeout(() => {
-        toast('👋 Bem-vindo à página de registro!', {
+        toast('Bem-vindo à página de registro!', {
           duration: 3000,
           position: 'top-center'
         });
@@ -625,27 +618,8 @@ export default function RegisterPage() {
               )}
             </div>
 
-            {/* Password Match Indicator */}
-            {formData.password && formData.confirmPassword && (
-              <div className={`p-3 rounded-lg ${formData.password === formData.confirmPassword ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800' : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'}`}>
-                <div className="flex items-center gap-2">
-                  {formData.password === formData.confirmPassword ? (
-                    <>
-                      <Check className="text-green-600 dark:text-green-400" size={16} />
-                      <span className="text-sm text-green-700 dark:text-green-300">As senhas coincidem</span>
-                    </>
-                  ) : (
-                    <>
-                      <X className="text-red-600 dark:text-red-400" size={16} />
-                      <span className="text-sm text-red-700 dark:text-red-300">As senhas não coincidem</span>
-                    </>
-                  )}
-                </div>
-              </div>
-            )}
-
             {/* Terms Checkbox */}
-            <div className="flex items-start pt-2">
+            {/* <div className="flex items-start pt-2">
               <input
                 id="terms"
                 name="terms"
@@ -677,7 +651,7 @@ export default function RegisterPage() {
                   Política de Privacidade
                 </Link>
               </label>
-            </div>
+            </div> */}
 
             {/* Submit Button */}
             <motion.button
@@ -711,9 +685,8 @@ export default function RegisterPage() {
               <Link 
                 href="/login" 
                 className="font-medium text-brand-main hover:text-brand-main/80 transition-colors"
-                onClick={() => toast('Redirecionando para login...', { icon: '🔐', duration: 1500 })}
               >
-                Fazer Login
+                Entrar
               </Link>
             </p>
           </div>

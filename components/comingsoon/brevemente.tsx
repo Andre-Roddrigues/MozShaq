@@ -49,7 +49,7 @@ export default function ComingSoon({
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-          className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-brand-main to-brand-lime flex items-center justify-center"
+          className="w-32 h-32 mx-auto mb-8 rounded-full bg-brand-main flex items-center justify-center"
         >
           <Clock className="w-16 h-16 text-white" />
         </motion.div>

@@ -82,11 +82,11 @@ export default function DesktopSidebar({ collapsed = false, onToggleCollapse }: 
               animate={{ opacity: 1, scale: 1 }}
               className="flex items-center gap-3"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-main to-brand-lime flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-brand-lime flex items-center justify-center">
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="font-bold text-gray-900 dark:text-white text-lg">POLITEC</h1>
+                <h1 className="font-bold text-gray-900 dark:text-white text-lg">SherqAcademy</h1>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Portal do Estudante</p>
               </div>
             </motion.div>

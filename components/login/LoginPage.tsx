@@ -209,15 +209,8 @@ export default function LoginPage() {
       toast.dismiss(loadingToast);
       toast.success(`Bem-vindo de volta, ${user.fullName}!`, {
         duration: 3000,
-        icon: '👋',
+        icon: '',
         position: 'top-center'
-      });
-
-      // Toast informativo sobre o token
-      toast('Token de autenticação gerado e salvo nos cookies', {
-        icon: '🔐',
-        duration: 2000,
-        position: 'bottom-center'
       });
 
       console.log('Usuário logado:', user);
@@ -247,25 +240,6 @@ export default function LoginPage() {
       const currentUser = localStorage.getItem('currentUser');
       const userSession = sessionStorage.getItem('userSession');
       
-      if (currentUser && userSession) {
-        try {
-          const user = JSON.parse(currentUser);
-          const session = JSON.parse(userSession);
-          
-          if (user.loggedIn && session.loggedIn) {
-            toast('Você já está logado! Redirecionando...', {
-              icon: 'ℹ️',
-              duration: 2000,
-              position: 'top-center'
-            });
-            setTimeout(() => {
-              router.push('/user/perfil');
-            }, 1500);
-          }
-        } catch (error) {
-          console.error('Erro ao verificar login:', error);
-        }
-      }
     };
 
     checkLoggedIn();
@@ -276,7 +250,7 @@ export default function LoginPage() {
     const hasSeenWelcome = localStorage.getItem('hasSeenLoginWelcome');
     if (!hasSeenWelcome) {
       setTimeout(() => {
-        toast('👋 Bem-vindo à página de login!', {
+        toast('Bem-vindo à página de login!', {
           duration: 3000,
           position: 'top-center'
         });
