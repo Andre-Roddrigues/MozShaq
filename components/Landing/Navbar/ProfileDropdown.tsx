@@ -33,15 +33,15 @@ export default function ProfileDropdown() {
               onClick={() => setOpen(false)}
             >
               <User className="w-4 h-4 mr-2" />
-              <span>Perfil</span>
+              <span>Meu Perfil</span>
             </Link>
             <Link
-              href="/user/candidaturas"
+              href="/user/cursos"
               className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
               onClick={() => setOpen(false)}
             >
               <FileText className="w-4 h-4 mr-2" />
-              <span>Candidaturas</span>
+              <span>Meus Cursos</span>
             </Link>
           </motion.div>
         )}

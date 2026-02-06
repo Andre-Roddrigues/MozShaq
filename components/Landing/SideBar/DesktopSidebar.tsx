@@ -13,9 +13,6 @@ import {
   LogOut,
   ChevronLeft,
   ChevronRight,
-  Home,
-  Settings,
-  Bell,
 } from "lucide-react";
 
 interface DesktopSidebarProps {
@@ -60,7 +57,6 @@ export default function DesktopSidebar({ collapsed = false, onToggleCollapse }: 
   ];
 
   const handleLogout = () => {
-    // Aqui você implementaria a lógica de logout
     document.cookie = "auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     router.push("/login");
   };
@@ -69,12 +65,12 @@ export default function DesktopSidebar({ collapsed = false, onToggleCollapse }: 
     <motion.aside
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
-      className={`h-screen mt-[60px] fixed left-0 top-0 z-40 flex flex-col bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-r border-gray-200 dark:border-gray-800 transition-all duration-300 ${
-        collapsed ? "w-20" : "w-64"
+      className={`h-full w-full flex flex-col bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-r border-gray-200 dark:border-gray-800 transition-all duration-300 ${
+        collapsed ? "lg:w-20" : "lg:w-64"
       }`}
     >
-      {/* Header */}
-      <div className="p-6 border-b border-gray-200 dark:border-gray-800">
+      {/* Header - fixo no topo do sidebar */}
+      <div className="p-6 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
         <div className={`flex items-center ${collapsed ? "justify-center" : "justify-between"}`}>
           {!collapsed && (
             <motion.div
@@ -107,7 +103,7 @@ export default function DesktopSidebar({ collapsed = false, onToggleCollapse }: 
         </div>
       </div>
 
-      {/* Navigation */}
+      {/* Navegação com scroll interno se necessário */}
       <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
         {menuItems.map((item) => {
           const isActive = pathname === item.path;
@@ -126,7 +122,6 @@ export default function DesktopSidebar({ collapsed = false, onToggleCollapse }: 
                     : "hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
                 }`}
               >
-                {/* Indicator de hover */}
                 <AnimatePresence>
                   {hoveredItem === item.path && !isActive && (
                     <motion.div
@@ -171,10 +166,8 @@ export default function DesktopSidebar({ collapsed = false, onToggleCollapse }: 
         })}
       </nav>
 
-      
-
-      {/* Logout Button */}
-      <div className="p-4 border-t border-gray-200 dark:border-gray-800">
+      {/* Botão de logout - fixo na parte inferior do sidebar */}
+      <div className="p-4 border-t border-gray-200 dark:border-gray-800 flex-shrink-0">
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}

@@ -180,41 +180,44 @@ export default function AboutSection() {
 
             {/* Valores */}
             <motion.div
-              className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl p-6 border border-blue-100 dark:border-blue-800"
-              whileHover={{ y: -5 }}
+  className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl p-4 md:p-6 border border-blue-100 dark:border-blue-800"
+  whileHover={{ y: -5 }}
+>
+  <div className="flex flex-col sm:flex-row items-start gap-4">
+    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-brand-blue rounded-xl flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0">
+      <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+    </div>
+    
+    <div className="flex-1 w-full">
+      <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-3 text-center sm:text-left">
+        Valores
+      </h3>
+      
+      <div className="grid grid-cols-1 xs:grid-cols-2 gap-3">
+        {valores.map((valor, index) => {
+          const ValorIcon = valor.icon;
+          return (
+            <motion.div
+              key={index}
+              className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg"
+              whileHover={{ scale: 1.02 }}
             >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-brand-blue rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Heart className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">
-                    Valores
-                  </h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    {valores.map((valor, index) => {
-                      const ValorIcon = valor.icon;
-                      return (
-                        <motion.div
-                          key={index}
-                          className="flex items-center gap-3 p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg"
-                          whileHover={{ scale: 1.02 }}
-                        >
-                          <div className="w-8 h-8 bg-brand-main rounded-lg flex items-center justify-center flex-shrink-0">
-                            <ValorIcon className="w-4 h-4 text-white" />
-                          </div>
-                          <div>
-                            <h4 className="text-sm font-semibold text-gray-900 dark:text-white">
-                              {valor.title}
-                            </h4>
-                          </div>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-                </div>
+              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-brand-main rounded-lg flex items-center justify-center flex-shrink-0">
+                <ValorIcon className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+              </div>
+              
+              <div className="flex-1 min-w-0">
+                <h4 className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white truncate">
+                  {valor.title}
+                </h4>
               </div>
             </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</motion.div>
           </motion.div>
         </motion.div>
 
