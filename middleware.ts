@@ -10,8 +10,6 @@ export function middleware(req: NextRequest) {
     "/",
     "/duvidas",
     "/services",
-    "/consultoria",
-    "/consultoria/",
     "/contacte-nos",
     "/recuperar-senha",
     "/sherq-academy/inicio",
@@ -43,7 +41,9 @@ export function middleware(req: NextRequest) {
   if (token && authRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL("/user/perfil", req.url));
   }
-
+ if (pathname.startsWith("/consultoria")) {
+    return NextResponse.next();
+  }
   // Se rota pública ou cursos → liberar
   if (
     publicRoutes.includes(pathname) ||

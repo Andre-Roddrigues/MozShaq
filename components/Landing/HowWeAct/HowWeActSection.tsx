@@ -153,38 +153,6 @@ const HowWeActSection = () => {
             </motion.div>
           ))}
         </motion.div>
-
-        {/* CTA Section */}
-        <motion.div
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <motion.div
-            className="bg-gradient-to-r from-brand-main to-brand-blue rounded-2xl p-8 md:p-12 text-white shadow-2xl"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Pronto para Transformar a Sua Organização?
-            </h3>
-            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              Contacte-nos hoje mesmo e descubra como a nossa metodologia pode elevar 
-              os seus padrões de sustentabilidade e segurança.
-            </p>
-            <motion.button
-              className="px-8 py-3 bg-white text-brand-main rounded-lg hover:bg-gray-100 transition-colors duration-300 font-semibold"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Iniciar Projecto
-            </motion.button>
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );

@@ -197,11 +197,14 @@ const Navbar = () => {
 
           {/* Ações */}
           <div className="flex items-center space-x-3">
+            <span className="md:flex hidden">
+            <DarkModeToggle darkMode={darkMode} onToggle={toggleDarkMode} />
+            </span>
             {!isLoggedIn ? (
               <>
                 <Link
                   href="/login"
-                  className="hidden sm:inline-block px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                  className="hidden dark:text-white sm:inline-block px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                 >
                   Entrar
                 </Link>

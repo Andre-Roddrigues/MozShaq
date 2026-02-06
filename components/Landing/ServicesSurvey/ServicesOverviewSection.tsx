@@ -202,6 +202,7 @@ const ServicesOverviewSection = () => {
               para as necessidades específicas da sua organização.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
+              <Link href="/contacte-nos">
               <motion.button
                 className="px-8 py-3 bg-brand-main text-white rounded-xl hover:bg-brand-main/90 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl"
                 whileHover={{ scale: 1.05, y: -2 }}
@@ -209,6 +210,7 @@ const ServicesOverviewSection = () => {
               >
                 Agendar Consulta
               </motion.button>
+              </Link>
               <Link href="/services">
                 <motion.button
                   className="px-8 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-white dark:hover:bg-gray-700 transition-all duration-300 font-semibold hover:border-brand-main/30"
