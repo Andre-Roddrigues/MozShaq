@@ -199,7 +199,7 @@ export default function ConteudoLocalPage() {
               <p className="text-gray-600 dark:text-gray-300 mb-6">
                 Desenvolvemos estratégias de conteúdo local personalizadas
               </p>
-              <Link href="contacte-nos">
+              <Link href="/contacte-nos">
                 <motion.button
                   className="w-full bg-gradient-to-r from-teal-600 to-emerald-700 text-white py-3 rounded-lg font-semibold"
                   whileHover={{ scale: 1.02 }}

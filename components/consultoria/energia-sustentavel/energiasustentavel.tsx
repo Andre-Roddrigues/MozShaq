@@ -196,7 +196,7 @@ export default function EnergiaSustentavelPage() {
               <p className="text-gray-600 dark:text-gray-300 mb-6">
                 Avaliamos sua viabilidade energética
               </p>
-              <Link href="contacte-nos">
+              <Link href="/contacte-nos">
                 <motion.button
                   className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white py-3 rounded-lg font-semibold"
                   whileHover={{ scale: 1.02 }}

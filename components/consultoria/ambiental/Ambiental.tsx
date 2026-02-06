@@ -199,7 +199,7 @@ export default function EstudosAmbientaisPage() {
               <p className="text-gray-600 dark:text-gray-300 mb-6">
                 Entre em contacto para avaliarmos seu projecto
               </p>
-              <Link href="contacte-nos">
+              <Link href="/contacte-nos">
                 <motion.button
                   className="w-full bg-gradient-to-r from-green-600 to-emerald-700 text-white py-3 rounded-lg font-semibold"
                   whileHover={{ scale: 1.02 }}

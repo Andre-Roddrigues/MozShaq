@@ -202,7 +202,7 @@ export default function FormacaoPage() {
               <p className="text-gray-600 dark:text-gray-300 mb-6">
                 Desenhamos programas sob medida
               </p>
-              <Link href="contacte-nos">
+              <Link href="/contacte-nos">
                 <motion.button
                   className="w-full bg-brand-blue text-white py-3 rounded-lg font-semibold"
                   whileHover={{ scale: 1.02 }}

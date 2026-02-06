@@ -1,35 +1,55 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, Lock, Mail, User, ChevronLeft, Shield, Check, X } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, User, Phone, ChevronLeft, Shield, Check, X } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
+interface UserData {
+  fullName: string;
+  email: string;
+  phone: string;
+  password: string;
+}
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
+    phone: '',
     password: '',
     confirmPassword: ''
   });
   const [errors, setErrors] = useState({
     fullName: '',
     email: '',
+    phone: '',
     password: '',
     confirmPassword: ''
   });
   const [touched, setTouched] = useState({
     fullName: false,
     email: false,
+    phone: false,
     password: false,
     confirmPassword: false
   });
 
+  // Carregar usuários existentes do localStorage
+  const getExistingUsers = (): UserData[] => {
+    if (typeof window === 'undefined') return [];
+    const users = localStorage.getItem('registeredUsers');
+    return users ? JSON.parse(users) : [];
+  };
+
   // Validação em tempo real
   useEffect(() => {
     const newErrors = { ...errors };
+    const existingUsers = getExistingUsers();
 
     // Validação do nome
     if (touched.fullName) {
@@ -49,8 +69,22 @@ export default function RegisterPage() {
         newErrors.email = 'Email é obrigatório';
       } else if (!emailRegex.test(formData.email)) {
         newErrors.email = 'Email inválido';
+      } else if (existingUsers.some(user => user.email === formData.email)) {
+        newErrors.email = 'Este email já está registrado';
       } else {
         newErrors.email = '';
+      }
+    }
+
+    // Validação do telefone
+    if (touched.phone) {
+      const phoneRegex = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
+      if (!formData.phone.trim()) {
+        newErrors.phone = 'Telefone é obrigatório';
+      } else if (!phoneRegex.test(formData.phone.replace(/\s/g, ''))) {
+        newErrors.phone = 'Telefone inválido';
+      } else {
+        newErrors.phone = '';
       }
     }
 
@@ -112,6 +146,7 @@ export default function RegisterPage() {
     setTouched({
       fullName: true,
       email: true,
+      phone: true,
       password: true,
       confirmPassword: true
     });
@@ -139,14 +174,58 @@ export default function RegisterPage() {
     setIsLoading(true);
     
     // Simulação de registro
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsLoading(false);
+    await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // Aqui você faria a requisição para o backend
-    console.log('Dados do formulário:', formData);
-    
-    // Redirecionamento simulado
-    alert('Registro realizado com sucesso! Verifique seu email para confirmar a conta.');
+    try {
+      // Salvar usuário no localStorage
+      const userData: UserData = {
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        password: formData.password // ATENÇÃO: Em produção, NUNCA armazene senhas em localStorage sem hash
+      };
+
+      // Obter usuários existentes
+      const existingUsers = getExistingUsers();
+      
+      // Verificar se email já existe
+      if (existingUsers.some(user => user.email === userData.email)) {
+        alert('Este email já está registrado!');
+        setIsLoading(false);
+        return;
+      }
+
+      // Adicionar novo usuário
+      const updatedUsers = [...existingUsers, userData];
+      localStorage.setItem('registeredUsers', JSON.stringify(updatedUsers));
+      
+      // Também podemos salvar como "currentUser" para login automático
+      localStorage.setItem('currentUser', JSON.stringify({
+        email: userData.email,
+        name: userData.fullName
+      }));
+      
+      // Salvar em sessionStorage para login mais rápido
+      sessionStorage.setItem('userSession', JSON.stringify({
+        email: userData.email,
+        name: userData.fullName,
+        loggedIn: true
+      }));
+
+      console.log('Usuário registrado:', userData);
+      console.log('Todos os usuários:', updatedUsers);
+      
+      setIsLoading(false);
+      
+      // Redirecionar para página de sucesso ou login
+      alert('Registro realizado com sucesso! Agora você pode fazer login.');
+      router.push('/login');
+      
+    } catch (error) {
+      console.error('Erro ao salvar usuário:', error);
+      alert('Erro ao registrar. Tente novamente.');
+      setIsLoading(false);
+    }
   };
 
   const isFormValid = () => {
@@ -173,23 +252,25 @@ export default function RegisterPage() {
 
         {/* Content Overlay */}
         <div className="relative z-10 h-full flex flex-col justify-center px-12 lg:px-16 xl:px-20 py-12">
-          {/* Welcome Message */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
             className="max-w-xl"
           >
+            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-2xl px-5 py-3 mb-6">
+              <Shield className="text-white" size={22} />
+              <span className="text-white font-medium">Registro Seguro</span>
+            </div>
             
             <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-              Junte-se à nossa <span className="text-brand-main">comunidade</span>
+              Crie sua conta
             </h2>
             <p className="text-xl text-gray-300 mb-10">
-              Acesso exclusivo a cursos, materiais e recursos de formação profissional.
+              Registre-se para acessar todos os cursos e recursos exclusivos.
             </p>
           </motion.div>
 
-          {/* Benefits List */}
           <motion.div 
             className="space-y-4 mt-8"
             initial={{ opacity: 0 }}
@@ -197,12 +278,12 @@ export default function RegisterPage() {
             transition={{ delay: 0.4, duration: 0.6 }}
           >
             {[
-              "Acesso a todos os cursos disponíveis",
-              "Material didático exclusivo",
-              "Certificados reconhecidos",
-              "Suporte técnico especializado",
-              "Comunidade de profissionais",
-              "Atualizações constantes de conteúdo"
+              "Acesso imediato após registro",
+              "Dados armazenados localmente",
+              "Login rápido e seguro",
+              "Progresso salvo automaticamente",
+              "Certificados disponíveis",
+              "Suporte 24/7"
             ].map((benefit, index) => (
               <motion.div
                 key={index}
@@ -221,16 +302,22 @@ export default function RegisterPage() {
             ))}
           </motion.div>
 
-          {/* Security Badge */}
+          {/* Security Notice */}
           <motion.div 
             className="absolute bottom-8 left-8 right-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.6 }}
           >
-            <div className="flex items-center justify-center gap-3 text-sm text-gray-400">
-              <Shield size={14} />
-              <span>Seus dados estão protegidos • Criptografia SSL • Privacidade garantida</span>
+            <div className="bg-black/30 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+              <div className="flex items-center gap-3 mb-2">
+                <Shield size={16} className="text-brand-main" />
+                <span className="text-sm font-medium text-white">Armazenamento Local</span>
+              </div>
+              <p className="text-xs text-gray-400">
+                Seus dados são armazenados apenas no seu navegador para demonstração. 
+                Em produção, os dados seriam criptografados no servidor.
+              </p>
             </div>
           </motion.div>
         </div>
@@ -246,19 +333,26 @@ export default function RegisterPage() {
         <div className="max-w-md mx-auto w-full">
           {/* Header */}
           <div className="mb-8 text-center">
+            <Link 
+              href="/"
+              className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-brand-main transition-colors mb-6"
+            >
+              <ChevronLeft size={16} />
+              <span className="ml-1">Voltar ao início</span>
+            </Link>
             
-            <h2 className="text-3xl text-center font-bold text-gray-900 dark:text-white mb-3">
-              Criar sua conta
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+              Registrar Nova Conta
             </h2>
             <p className="text-gray-600 dark:text-gray-300">
-              Preencha os dados abaixo para criar sua conta na plataforma
+              Preencha todos os campos para criar sua conta
             </p>
           </div>
 
           {/* Registration Form */}
           <motion.form 
             onSubmit={handleSubmit}
-            className="space-y-6"
+            className="space-y-5"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.5 }}
@@ -266,7 +360,7 @@ export default function RegisterPage() {
             {/* Full Name Field */}
             <div>
               <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Nome Completo
+                Nome Completo *
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -302,7 +396,7 @@ export default function RegisterPage() {
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Email
+                Email *
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -335,10 +429,46 @@ export default function RegisterPage() {
               )}
             </div>
 
+            {/* Phone Field */}
+            <div>
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Telefone *
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Phone size={18} className={errors.phone && touched.phone ? "text-red-500" : "text-gray-400"} />
+                </div>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  required
+                  value={formData.phone}
+                  onChange={handleChange}
+                  onBlur={() => handleBlur('phone')}
+                  placeholder="+258 84 123 4567"
+                  className={getInputClassName('phone')}
+                />
+                {touched.phone && (
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                    {errors.phone ? (
+                      <X size={18} className="text-red-500" />
+                    ) : formData.phone && (
+                      <Check size={18} className="text-green-500" />
+                    )}
+                  </div>
+                )}
+              </div>
+              {errors.phone && touched.phone && (
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.phone}</p>
+              )}
+            </div>
+
             {/* Password Field */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Senha
+                Senha *
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -392,7 +522,7 @@ export default function RegisterPage() {
             {/* Confirm Password Field */}
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Confirmar Senha
+                Confirmar Senha *
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -443,8 +573,27 @@ export default function RegisterPage() {
               )}
             </div>
 
+            {/* Password Match Indicator */}
+            {formData.password && formData.confirmPassword && (
+              <div className={`p-3 rounded-lg ${formData.password === formData.confirmPassword ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800' : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'}`}>
+                <div className="flex items-center gap-2">
+                  {formData.password === formData.confirmPassword ? (
+                    <>
+                      <Check className="text-green-600 dark:text-green-400" size={16} />
+                      <span className="text-sm text-green-700 dark:text-green-300">As senhas coincidem</span>
+                    </>
+                  ) : (
+                    <>
+                      <X className="text-red-600 dark:text-red-400" size={16} />
+                      <span className="text-sm text-red-700 dark:text-red-300">As senhas não coincidem</span>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+
             {/* Terms Checkbox */}
-            <div className="flex items-start">
+            <div className="flex items-start pt-2">
               <input
                 id="terms"
                 name="terms"
@@ -469,7 +618,7 @@ export default function RegisterPage() {
               type="submit"
               disabled={isLoading || !isFormValid()}
               whileTap={{ scale: 0.98 }}
-              className={`w-full py-3.5 px-4 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center justify-center ${
+              className={`w-full py-3.5 px-4 text-white font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center justify-center mt-4 ${
                 isLoading || !isFormValid()
                   ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed'
                   : 'bg-brand-main hover:bg-brand-main/90 focus:ring-brand-main'
@@ -481,10 +630,10 @@ export default function RegisterPage() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  Criando conta...
+                  Registrando...
                 </>
               ) : (
-                'Criar Conta'
+                'Registrar Conta'
               )}
             </motion.button>
           </motion.form>
@@ -497,14 +646,25 @@ export default function RegisterPage() {
                 href="/login" 
                 className="font-medium text-brand-main hover:text-brand-main/80 transition-colors"
               >
-                Entrar
+                Fazer Login
               </Link>
             </p>
           </div>
+
+          {/* Debug Info (apenas para desenvolvimento) */}
+          {process.env.NODE_ENV === 'development' && (
+            <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+              <p className="text-xs text-gray-600 dark:text-gray-400">
+                <strong>Modo Desenvolvimento:</strong> Dados salvos no localStorage.
+                <br />
+                Total de usuários registrados: {getExistingUsers().length}
+              </p>
+            </div>
+          )}
         </div>
       </motion.div>
 
-      {/* Mobile Image Alternative - Simple */}
+      {/* Mobile Image Alternative */}
       <div className="md:hidden relative h-48 bg-gray-900">
         <div 
           className="absolute inset-0 bg-cover bg-center"
@@ -515,10 +675,10 @@ export default function RegisterPage() {
         <div className="relative z-10 h-full flex items-center justify-center">
           <div className="text-center px-6">
             <h3 className="text-2xl font-bold text-white mb-2">
-              Crie sua conta
+              Registrar Nova Conta
             </h3>
             <p className="text-gray-300">
-              E comece sua jornada de aprendizado
+              Crie sua conta em poucos passos
             </p>
           </div>
         </div>
