@@ -37,6 +37,49 @@ export default function LoginPage() {
     return users ? JSON.parse(users) : [];
   };
 
+  // Gerar token JWT-like
+  const generateToken = (userId: string): string => {
+    // Header - informações do algoritmo
+    const header = {
+      alg: 'HS256',
+      typ: 'JWT'
+    };
+    
+    // Payload - dados do usuário
+    const payload = {
+      sub: userId, // subject (ID do usuário)
+      email: formData.email,
+      iat: Math.floor(Date.now() / 1000), // issued at
+      exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60), // expira em 24 horas
+      jti: Math.random().toString(36).substring(2) + Date.now().toString(36) // ID único do token
+    };
+    
+    // Em produção, seria gerada uma assinatura real
+    // Aqui estamos apenas simulando um token JWT
+    const encodedHeader = btoa(JSON.stringify(header));
+    const encodedPayload = btoa(JSON.stringify(payload));
+    const signature = btoa(Math.random().toString(36).substring(2) + Date.now().toString(36));
+    
+    return `${encodedHeader}.${encodedPayload}.${signature}`;
+  };
+
+  // Salvar token nos cookies
+  const setAuthTokenCookie = (token: string) => {
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + (24 * 60 * 60 * 1000)); // 24 horas
+    
+    const cookie = `auth_token=${token}; expires=${expirationDate.toUTCString()}; path=/; SameSite=Strict;`;
+    
+    if (process.env.NODE_ENV === 'production') {
+      document.cookie = cookie + ' Secure;'; // Secure apenas em produção
+    } else {
+      document.cookie = cookie;
+    }
+    
+    // Também salvar no localStorage para fácil acesso (opcional)
+    localStorage.setItem('auth_token', token);
+  };
+
   // Validação em tempo real
   useEffect(() => {
     const newErrors = { ...errors };
@@ -117,9 +160,10 @@ export default function LoginPage() {
     }
 
     setIsLoading(true);
+    const loadingToast = toast.loading('Autenticando...');
     
     // Simulação de delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1500));
     
     try {
       // Obter usuários do localStorage
@@ -131,10 +175,17 @@ export default function LoginPage() {
       );
 
       if (!user) {
+        toast.dismiss(loadingToast);
         toast.error('Email ou senha incorretos!');
         setIsLoading(false);
         return;
       }
+
+      // Gerar token JWT-like
+      const authToken = generateToken(user.email);
+      
+      // Salvar token nos cookies
+      setAuthTokenCookie(authToken);
 
       // Salvar sessão do usuário
       localStorage.setItem('currentUser', JSON.stringify({
@@ -142,31 +193,44 @@ export default function LoginPage() {
         name: user.fullName,
         phone: user.phone,
         loggedIn: true,
-        loginTime: new Date().toISOString()
+        loginTime: new Date().toISOString(),
+        authToken: authToken
       }));
 
       sessionStorage.setItem('userSession', JSON.stringify({
         email: user.email,
         name: user.fullName,
         loggedIn: true,
-        sessionId: Date.now().toString()
+        sessionId: Date.now().toString(),
+        token: authToken
       }));
 
       // Mostrar toast de sucesso
+      toast.dismiss(loadingToast);
       toast.success(`Bem-vindo de volta, ${user.fullName}!`, {
         duration: 3000,
-        icon: '👋'
+        icon: '👋',
+        position: 'top-center'
+      });
+
+      // Toast informativo sobre o token
+      toast('Token de autenticação gerado e salvo nos cookies', {
+        icon: '🔐',
+        duration: 2000,
+        position: 'bottom-center'
       });
 
       console.log('Usuário logado:', user);
+      console.log('Token gerado:', authToken);
       
       // Redirecionar para perfil após delay
       setTimeout(() => {
         router.push('/user/perfil');
-      }, 1500);
+      }, 2000);
       
     } catch (error) {
       console.error('Erro ao fazer login:', error);
+      toast.dismiss(loadingToast);
       toast.error('Erro ao fazer login. Tente novamente.');
       setIsLoading(false);
     }
@@ -191,7 +255,8 @@ export default function LoginPage() {
           if (user.loggedIn && session.loggedIn) {
             toast('Você já está logado! Redirecionando...', {
               icon: 'ℹ️',
-              duration: 2000
+              duration: 2000,
+              position: 'top-center'
             });
             setTimeout(() => {
               router.push('/user/perfil');
@@ -206,6 +271,20 @@ export default function LoginPage() {
     checkLoggedIn();
   }, [router]);
 
+  // Mostrar toast de boas-vindas na primeira visita
+  useEffect(() => {
+    const hasSeenWelcome = localStorage.getItem('hasSeenLoginWelcome');
+    if (!hasSeenWelcome) {
+      setTimeout(() => {
+        toast('👋 Bem-vindo à página de login!', {
+          duration: 3000,
+          position: 'top-center'
+        });
+        localStorage.setItem('hasSeenLoginWelcome', 'true');
+      }, 1000);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen mt-8 bg-gray-50 dark:bg-slate-900 flex flex-col md:flex-row">
       {/* Toaster para notificações */}
@@ -216,19 +295,36 @@ export default function LoginPage() {
           style: {
             background: '#363636',
             color: '#fff',
+            borderRadius: '10px',
+            border: '1px solid #4f46e5',
           },
           success: {
-            duration: 3000,
+            duration: 4000,
             iconTheme: {
               primary: '#10B981',
               secondary: '#fff',
             },
+            style: {
+              background: '#064e3b',
+              border: '1px solid #10B981',
+            },
           },
           error: {
-            duration: 4000,
+            duration: 5000,
             iconTheme: {
               primary: '#EF4444',
               secondary: '#fff',
+            },
+            style: {
+              background: '#7f1d1d',
+              border: '1px solid #EF4444',
+            },
+          },
+          loading: {
+            duration: Infinity,
+            style: {
+              background: '#1e293b',
+              border: '1px solid #4f46e5',
             },
           },
         }}
@@ -246,6 +342,7 @@ export default function LoginPage() {
           <Link 
             href="/"
             className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-brand-main transition-colors mb-6"
+            onClick={() => toast('Voltando ao início...', { icon: '↩️', duration: 1500 })}
           >
             <ChevronLeft size={16} />
             <span className="ml-1">Voltar ao início</span>
@@ -312,6 +409,10 @@ export default function LoginPage() {
               <Link 
                 href="/recuperar-senha"
                 className="text-sm text-brand-main hover:text-brand-main/80 transition-colors"
+                onClick={(e) => {
+                  e.preventDefault();
+                  toast('Redirecionando para recuperação de senha...', { icon: '🔑', duration: 2000 });
+                }}
               >
                 Esqueceu a senha?
               </Link>
@@ -413,6 +514,25 @@ export default function LoginPage() {
               Use um email/senha registrados no sistema de registro para testar o login.
               <br />
               Usuários registrados: {getExistingUsers().length}
+              <button 
+                onClick={() => {
+                  const token = document.cookie.split('; ').find(row => row.startsWith('auth_token='));
+                  if (token) {
+                    toast('Token encontrado nos cookies!', {
+                      icon: '✅',
+                      duration: 3000
+                    });
+                  } else {
+                    toast('Nenhum token encontrado', {
+                      icon: '❌',
+                      duration: 3000
+                    });
+                  }
+                }}
+                className="ml-2 text-xs text-brand-main hover:text-brand-main/80"
+              >
+                Verificar token
+              </button>
             </p>
           </div>
         )}
@@ -424,6 +544,7 @@ export default function LoginPage() {
             <Link 
               href="/registar" 
               className="font-medium text-brand-main hover:text-brand-main/80 transition-colors"
+              onClick={() => toast('Redirecionando para registro...', { icon: '📝', duration: 1500 })}
             >
               Criar conta
             </Link>
@@ -473,9 +594,9 @@ export default function LoginPage() {
               "Acesso a cursos exclusivos",
               "Acompanhamento de progresso",
               "Certificados reconhecidos",
-              "Material didático atualizado",
+              "Material didático actualizado",
               "Suporte de especialistas",
-              "Comunidade ativa"
+              "Comunidade activa"
             ].map((feature, index) => (
               <motion.div
                 key={index}
@@ -503,7 +624,7 @@ export default function LoginPage() {
           >
             <div className="flex items-center justify-center gap-3 text-sm text-gray-400">
               <Lock size={14} />
-              <span>Conexão segura • SSL 256-bit • Dados protegidos</span>
+              <span>Conexão segura • SSL 256-bit • Autenticação com token JWT</span>
             </div>
           </motion.div>
         </div>

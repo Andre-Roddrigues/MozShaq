@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Eye, EyeOff, Lock, Mail, User, Phone, ChevronLeft, Shield, Check, X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import toast, { Toaster } from 'react-hot-toast';
 
 interface UserData {
   fullName: string;
@@ -154,27 +155,30 @@ export default function RegisterPage() {
     // Verificar se há erros
     const hasErrors = Object.values(errors).some(error => error !== '');
     if (hasErrors) {
-      alert('Por favor, corrija os erros no formulário.');
+      const errorMessages = Object.values(errors).filter(msg => msg).join(', ');
+      toast.error(`Erros no formulário: ${errorMessages}`);
       return;
     }
 
     // Verificar se todos os campos foram preenchidos
     const isEmpty = Object.values(formData).some(value => !value.trim());
     if (isEmpty) {
-      alert('Por favor, preencha todos os campos.');
+      toast.error('Por favor, preencha todos os campos.');
       return;
     }
 
     // Verificar confirmação de senha
     if (formData.password !== formData.confirmPassword) {
       setErrors(prev => ({ ...prev, confirmPassword: 'As senhas não coincidem' }));
+      toast.error('As senhas não coincidem!');
       return;
     }
 
     setIsLoading(true);
+    const loadingToast = toast.loading('Registrando sua conta...');
     
     // Simulação de registro
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1500));
     
     try {
       // Salvar usuário no localStorage
@@ -190,7 +194,8 @@ export default function RegisterPage() {
       
       // Verificar se email já existe
       if (existingUsers.some(user => user.email === userData.email)) {
-        alert('Este email já está registrado!');
+        toast.dismiss(loadingToast);
+        toast.error('Este email já está registrado!');
         setIsLoading(false);
         return;
       }
@@ -199,31 +204,51 @@ export default function RegisterPage() {
       const updatedUsers = [...existingUsers, userData];
       localStorage.setItem('registeredUsers', JSON.stringify(updatedUsers));
       
-      // Também podemos salvar como "currentUser" para login automático
+      // Salvar sessão do usuário
       localStorage.setItem('currentUser', JSON.stringify({
         email: userData.email,
-        name: userData.fullName
+        name: userData.fullName,
+        phone: userData.phone,
+        loggedIn: true,
+        registrationDate: new Date().toISOString()
       }));
       
-      // Salvar em sessionStorage para login mais rápido
       sessionStorage.setItem('userSession', JSON.stringify({
         email: userData.email,
         name: userData.fullName,
-        loggedIn: true
+        loggedIn: true,
+        sessionId: Date.now().toString()
       }));
+
+      // Mostrar toast de sucesso
+      toast.dismiss(loadingToast);
+      toast.success(`Conta criada com sucesso, ${userData.fullName}!`, {
+        duration: 4000,
+        icon: '🎉',
+        position: 'top-center'
+      });
+
+      // Toast informativo
+      toast('Redirecionando para login...', {
+        icon: '🔄',
+        duration: 2000,
+        position: 'bottom-center'
+      });
 
       console.log('Usuário registrado:', userData);
       console.log('Todos os usuários:', updatedUsers);
       
       setIsLoading(false);
       
-      // Redirecionar para página de sucesso ou login
-      alert('Registro realizado com sucesso! Agora você pode fazer login.');
-      router.push('/login');
+      // Redirecionar para página de login após delay
+      setTimeout(() => {
+        router.push('/login');
+      }, 2500);
       
     } catch (error) {
       console.error('Erro ao salvar usuário:', error);
-      alert('Erro ao registrar. Tente novamente.');
+      toast.dismiss(loadingToast);
+      toast.error('Erro ao registrar. Tente novamente.');
       setIsLoading(false);
     }
   };
@@ -233,8 +258,65 @@ export default function RegisterPage() {
            Object.values(formData).every(value => value.trim() !== '');
   };
 
+  // Mostrar toast de boas-vindas na primeira visita
+  useEffect(() => {
+    const hasSeenWelcome = localStorage.getItem('hasSeenRegisterWelcome');
+    if (!hasSeenWelcome) {
+      setTimeout(() => {
+        toast('👋 Bem-vindo à página de registro!', {
+          duration: 3000,
+          position: 'top-center'
+        });
+        localStorage.setItem('hasSeenRegisterWelcome', 'true');
+      }, 1000);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-gray-900 flex flex-col md:flex-row">
+      {/* Toaster para notificações */}
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+            borderRadius: '10px',
+            border: '1px solid #4f46e5',
+          },
+          success: {
+            duration: 4000,
+            iconTheme: {
+              primary: '#10B981',
+              secondary: '#fff',
+            },
+            style: {
+              background: '#064e3b',
+              border: '1px solid #10B981',
+            },
+          },
+          error: {
+            duration: 5000,
+            iconTheme: {
+              primary: '#EF4444',
+              secondary: '#fff',
+            },
+            style: {
+              background: '#7f1d1d',
+              border: '1px solid #EF4444',
+            },
+          },
+          loading: {
+            duration: Infinity,
+            style: {
+              background: '#1e293b',
+              border: '1px solid #4f46e5',
+            },
+          },
+        }}
+      />
+
       {/* Left Panel - Image */}
       <motion.div 
         className="hidden md:block md:w-1/2 lg:w-3/5 relative bg-gray-900"
@@ -258,10 +340,6 @@ export default function RegisterPage() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="max-w-xl"
           >
-            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-2xl px-5 py-3 mb-6">
-              <Shield className="text-white" size={22} />
-              <span className="text-white font-medium">Registro Seguro</span>
-            </div>
             
             <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
               Crie sua conta
@@ -301,25 +379,6 @@ export default function RegisterPage() {
               </motion.div>
             ))}
           </motion.div>
-
-          {/* Security Notice */}
-          <motion.div 
-            className="absolute bottom-8 left-8 right-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.6 }}
-          >
-            <div className="bg-black/30 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-              <div className="flex items-center gap-3 mb-2">
-                <Shield size={16} className="text-brand-main" />
-                <span className="text-sm font-medium text-white">Armazenamento Local</span>
-              </div>
-              <p className="text-xs text-gray-400">
-                Seus dados são armazenados apenas no seu navegador para demonstração. 
-                Em produção, os dados seriam criptografados no servidor.
-              </p>
-            </div>
-          </motion.div>
         </div>
       </motion.div>
 
@@ -333,13 +392,6 @@ export default function RegisterPage() {
         <div className="max-w-md mx-auto w-full">
           {/* Header */}
           <div className="mb-8 text-center">
-            <Link 
-              href="/"
-              className="inline-flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-brand-main transition-colors mb-6"
-            >
-              <ChevronLeft size={16} />
-              <span className="ml-1">Voltar ao início</span>
-            </Link>
             
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
               Registrar Nova Conta
@@ -603,11 +655,25 @@ export default function RegisterPage() {
               />
               <label htmlFor="terms" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                 Concordo com os{' '}
-                <Link href="/termos" className="text-brand-main hover:text-brand-main/80">
+                <Link 
+                  href="/termos" 
+                  className="text-brand-main hover:text-brand-main/80"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toast('Abrindo Termos de Uso...', { icon: '📄', duration: 2000 });
+                  }}
+                >
                   Termos de Uso
                 </Link>{' '}
                 e{' '}
-                <Link href="/privacidade" className="text-brand-main hover:text-brand-main/80">
+                <Link 
+                  href="/privacidade" 
+                  className="text-brand-main hover:text-brand-main/80"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toast('Abrindo Política de Privacidade...', { icon: '🔒', duration: 2000 });
+                  }}
+                >
                   Política de Privacidade
                 </Link>
               </label>
@@ -645,22 +711,12 @@ export default function RegisterPage() {
               <Link 
                 href="/login" 
                 className="font-medium text-brand-main hover:text-brand-main/80 transition-colors"
+                onClick={() => toast('Redirecionando para login...', { icon: '🔐', duration: 1500 })}
               >
                 Fazer Login
               </Link>
             </p>
           </div>
-
-          {/* Debug Info (apenas para desenvolvimento) */}
-          {process.env.NODE_ENV === 'development' && (
-            <div className="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-              <p className="text-xs text-gray-600 dark:text-gray-400">
-                <strong>Modo Desenvolvimento:</strong> Dados salvos no localStorage.
-                <br />
-                Total de usuários registrados: {getExistingUsers().length}
-              </p>
-            </div>
-          )}
         </div>
       </motion.div>
 
