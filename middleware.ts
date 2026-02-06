@@ -10,6 +10,8 @@ export function middleware(req: NextRequest) {
     "/",
     "/duvidas",
     "/services",
+    "/consultoria",
+    "/consultoria/",
     "/contacte-nos",
     "/recuperar-senha",
     "/sherq-academy/inicio",
