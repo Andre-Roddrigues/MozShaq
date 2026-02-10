@@ -59,9 +59,8 @@ export default function FormacaoPage() {
             transition={{ duration: 0.6 }}
             className="text-center text-white"
           >
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-              <GraduationCap className="w-5 h-5" />
-              <span className="text-sm font-medium">Formação e Capacitação</span>
+            <div className="inline-flex items-center gap-2  backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+              
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Desenvolvimento de <span className="text-brand-main">Competências</span>

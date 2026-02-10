@@ -54,9 +54,7 @@ export default function EstudosAmbientaisPage() {
             transition={{ duration: 0.6 }}
             className="text-center text-white"
           >
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-              <Leaf className="w-5 h-5" />
-              <span className="text-sm font-medium">Estudos Ambientais</span>
+            <div className="inline-flex items-center gap-2 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Consultoria <span className="text-green-200">Ambiental</span>

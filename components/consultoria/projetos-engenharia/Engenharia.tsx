@@ -56,9 +56,8 @@ export default function ProjetosEngenhariaPage() {
             transition={{ duration: 0.6 }}
             className="text-center text-white"
           >
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-              <Building2 className="w-5 h-5" />
-              <span className="text-sm font-medium">Engenharia e Projectos</span>
+            <div className="inline-flex items-center gap-2 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+             
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Excelência em <span className="text-brand-main">Projectos de Engenharia</span>

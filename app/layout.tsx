@@ -5,6 +5,7 @@ import MinimalFooter from '../components/Landing/Footer/footer';
 import { Metadata } from 'next';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { LanguageProvider } from '../context/LanguageContext';
+import FloatingWhatsApp from '../components/Landing/botaoFlutuante/whatapp';
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -48,12 +49,15 @@ export default function RootLayout({
               <main className="flex-1">
                 {children}
               </main>
-              
+              <FloatingWhatsApp
+                phone="+258835089637"
+                message="Olá! Gostaria de mais informações."
+                // label="Fale conosco"
+                position="bottom-right"
+              />
               {/* Footer fixo na parte inferior */}
-              <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-                <MinimalFooter />
-              </footer>
             </div>
+                <MinimalFooter />
           </LanguageProvider>
         </body>
       </GoogleOAuthProvider>

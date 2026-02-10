@@ -56,9 +56,7 @@ export default function SistemasGestaoPage() {
             transition={{ duration: 0.6 }}
             className="text-center text-white"
           >
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-              <Target className="w-5 h-5" />
-              <span className="text-sm font-medium">Sistemas de Gestão</span>
+            <div className="inline-flex items-center gap-2  backdrop-blur-sm px-4 py-2 rounded-full mb-6">
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Sistemas de Gestão <span className="text-blue-200">Certificados</span>
