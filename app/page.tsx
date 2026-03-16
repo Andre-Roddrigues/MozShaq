@@ -30,9 +30,9 @@ export default function Home() {
       <section id="areas">
         <AreasConsultoria />
       </section>
-      <section id="Teams">
+      {/* <section id="Teams">
         <TeamSection />
-      </section>
+      </section> */}
       <section id="partners">
         <PartnerSlider />
       </section>

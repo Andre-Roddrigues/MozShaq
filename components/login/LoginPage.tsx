@@ -478,39 +478,6 @@ export default function LoginPage() {
           </motion.button>
         </motion.form>
 
-        {/* Demo Credentials (apenas para desenvolvimento) */}
-        {process.env.NODE_ENV === 'development' && (
-          <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-            <p className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">
-              👨‍💻 Modo Desenvolvimento
-            </p>
-            <p className="text-xs text-blue-700 dark:text-blue-400">
-              Use um email/senha registrados no sistema de registro para testar o login.
-              <br />
-              Usuários registrados: {getExistingUsers().length}
-              <button 
-                onClick={() => {
-                  const token = document.cookie.split('; ').find(row => row.startsWith('auth_token='));
-                  if (token) {
-                    toast('Token encontrado nos cookies!', {
-                      icon: '✅',
-                      duration: 3000
-                    });
-                  } else {
-                    toast('Nenhum token encontrado', {
-                      icon: '❌',
-                      duration: 3000
-                    });
-                  }
-                }}
-                className="ml-2 text-xs text-brand-main hover:text-brand-main/80"
-              >
-                Verificar token
-              </button>
-            </p>
-          </div>
-        )}
-
         {/* Sign Up Link */}
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -518,7 +485,7 @@ export default function LoginPage() {
             <Link 
               href="/registar" 
               className="font-medium text-brand-main hover:text-brand-main/80 transition-colors"
-              onClick={() => toast('Redirecionando para registro...', { icon: '📝', duration: 1500 })}
+              onClick={() => toast('Redirecionando para registro...', { icon: '', duration: 1500 })}
             >
               Criar conta
             </Link>
@@ -553,7 +520,7 @@ export default function LoginPage() {
               Bem-vindo à <span className="text-brand-main">SHERQ Academy</span>
             </h2>
             <p className="text-xl text-gray-300 mb-10">
-              Acesso à plataforma de formação profissional mais completa em gestão integrada.
+              Acesso à plataforma de formação profissional.
             </p>
           </motion.div>
 
@@ -570,7 +537,6 @@ export default function LoginPage() {
               "Certificados reconhecidos",
               "Material didático actualizado",
               "Suporte de especialistas",
-              "Comunidade activa"
             ].map((feature, index) => (
               <motion.div
                 key={index}
