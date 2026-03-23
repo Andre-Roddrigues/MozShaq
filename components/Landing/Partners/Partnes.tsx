@@ -9,10 +9,10 @@ const PartnerSlider = () => {
   // Lista de parceiros
   const partnerLogos = [
     { id: 1, name: "EDM", image: "/images/EDM.png" },
-    { id: 2, name: "Pinto e Cruz", image: "/images/PEC.png" },
+    { id: 2, name: "Pinto e Cruz", image: "/images/PEC.jpg" },
     { id: 3, name: "Lalgy", image: "/images/LALGY.png" },
     { id: 5, name: "MCNET", image: "/images/MCNET.png" },
-    // { id: 6, name: "Mio Reabilitação", image: "/images/mio.png" },
+    { id: 6, name: "Mio Reabilitação", image: "/images/VIVO.svg" },
     // { id: 7, name: "Empresa Nacional de Uniformes", image: "/images/ENU.png" },
     // { id: 8, name: "EGIP", image: "/images/EGIP.png" },
     // { id: 9, name: "Ebnezer Gráfica e Consultoria", image: "/images/egc.jpg" },
