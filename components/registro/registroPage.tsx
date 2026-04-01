@@ -1,17 +1,10 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, Lock, Mail, User, Phone, ChevronLeft, Shield, Check, X } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, User, Phone, ChevronLeft, Check, X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
-
-interface UserData {
-  fullName: string;
-  email: string;
-  phone: string;
-  password: string;
-}
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -19,47 +12,39 @@ export default function RegisterPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: '',
+    name: '',
     email: '',
     phone: '',
     password: '',
     confirmPassword: ''
   });
   const [errors, setErrors] = useState({
-    fullName: '',
+    name: '',
     email: '',
     phone: '',
     password: '',
     confirmPassword: ''
   });
   const [touched, setTouched] = useState({
-    fullName: false,
+    name: false,
     email: false,
     phone: false,
     password: false,
     confirmPassword: false
   });
 
-  // Carregar usuários existentes do localStorage
-  const getExistingUsers = (): UserData[] => {
-    if (typeof window === 'undefined') return [];
-    const users = localStorage.getItem('registeredUsers');
-    return users ? JSON.parse(users) : [];
-  };
-
   // Validação em tempo real
   useEffect(() => {
     const newErrors = { ...errors };
-    const existingUsers = getExistingUsers();
 
     // Validação do nome
-    if (touched.fullName) {
-      if (!formData.fullName.trim()) {
-        newErrors.fullName = 'Nome é obrigatório';
-      } else if (formData.fullName.trim().length < 3) {
-        newErrors.fullName = 'Nome deve ter pelo menos 3 caracteres';
+    if (touched.name) {
+      if (!formData.name.trim()) {
+        newErrors.name = 'Nome é obrigatório';
+      } else if (formData.name.trim().length < 3) {
+        newErrors.name = 'Nome deve ter pelo menos 3 caracteres';
       } else {
-        newErrors.fullName = '';
+        newErrors.name = '';
       }
     }
 
@@ -70,8 +55,6 @@ export default function RegisterPage() {
         newErrors.email = 'Email é obrigatório';
       } else if (!emailRegex.test(formData.email)) {
         newErrors.email = 'Email inválido';
-      } else if (existingUsers.some(user => user.email === formData.email)) {
-        newErrors.email = 'Este email já está registrado';
       } else {
         newErrors.email = '';
       }
@@ -89,7 +72,6 @@ export default function RegisterPage() {
       }
     }
 
-    // Validação da senha
     if (touched.password) {
       if (!formData.password) {
         newErrors.password = 'Senha é obrigatória';
@@ -100,7 +82,6 @@ export default function RegisterPage() {
       }
     }
 
-    // Validação da confirmação de senha
     if (touched.confirmPassword) {
       if (!formData.confirmPassword) {
         newErrors.confirmPassword = 'Confirmação de senha é obrigatória';
@@ -141,114 +122,72 @@ export default function RegisterPage() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Marcar todos os campos como tocados para mostrar erros
-    setTouched({
-      fullName: true,
-      email: true,
-      phone: true,
-      password: true,
-      confirmPassword: true
-    });
+  e.preventDefault();
 
-    // Verificar se há erros
-    const hasErrors = Object.values(errors).some(error => error !== '');
-    if (hasErrors) {
-      const errorMessages = Object.values(errors).filter(msg => msg).join(', ');
-      toast.error(`Erros no formulário: ${errorMessages}`);
-      return;
-    }
+  setTouched({
+    name: true,
+    email: true,
+    phone: true,
+    password: true,
+    confirmPassword: true
+  });
 
-    // Verificar se todos os campos foram preenchidos
-    const isEmpty = Object.values(formData).some(value => !value.trim());
-    if (isEmpty) {
-      toast.error('Por favor, preencha todos os campos.');
-      return;
-    }
+  const hasErrors = Object.values(errors).some(error => error !== '');
+  if (hasErrors) {
+    toast.error('Corrija os erros no formulário');
+    return;
+  }
 
-    // Verificar confirmação de senha
-    if (formData.password !== formData.confirmPassword) {
-      setErrors(prev => ({ ...prev, confirmPassword: 'As senhas não coincidem' }));
-      toast.error('As senhas não coincidem!');
-      return;
-    }
+  if (formData.password !== formData.confirmPassword) {
+    toast.error('As senhas não coincidem');
+    return;
+  }
 
-    setIsLoading(true);
-    const loadingToast = toast.loading('Registrando sua conta...');
-    
-    // Simulação de registro
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    try {
-      // Salvar usuário no localStorage
-      const userData: UserData = {
-        fullName: formData.fullName,
+  setIsLoading(true);
+  const loadingToast = toast.loading('Criando conta...');
+
+  try {
+    const response = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: formData.name,
         email: formData.email,
         phone: formData.phone,
-        password: formData.password // ATENÇÃO: Em produção, NUNCA armazene senhas em localStorage sem hash
-      };
+        password: formData.password
+      }),
+    });
 
-      // Obter usuários existentes
-      const existingUsers = getExistingUsers();
-      
-      // Verificar se email já existe
-      if (existingUsers.some(user => user.email === userData.email)) {
-        toast.dismiss(loadingToast);
-        toast.error('Este email já está registrado!');
-        setIsLoading(false);
-        return;
-      }
+    const data = await response.json();
 
-      // Adicionar novo usuário
-      const updatedUsers = [...existingUsers, userData];
-      localStorage.setItem('registeredUsers', JSON.stringify(updatedUsers));
-      
-      // Salvar sessão do usuário
-      localStorage.setItem('currentUser', JSON.stringify({
-        email: userData.email,
-        name: userData.fullName,
-        phone: userData.phone,
-        loggedIn: true,
-        registrationDate: new Date().toISOString()
-      }));
-      
-      sessionStorage.setItem('userSession', JSON.stringify({
-        email: userData.email,
-        name: userData.fullName,
-        loggedIn: true,
-        sessionId: Date.now().toString()
-      }));
-
-      // Mostrar toast de sucesso
-      toast.dismiss(loadingToast);
-      toast.success(`Conta criada com sucesso, ${userData.fullName}!`, {
-        duration: 4000,
-        icon: '',
-        position: 'top-center'
-      });
-
-      console.log('Usuário registrado:', userData);
-      console.log('Todos os usuários:', updatedUsers);
-      
-      setIsLoading(false);
-      
-      // Redirecionar para página de login após delay
-      setTimeout(() => {
-        router.push('/login');
-      }, 2500);
-      
-    } catch (error) {
-      console.error('Erro ao salvar usuário:', error);
-      toast.dismiss(loadingToast);
-      toast.error('Erro ao registrar. Tente novamente.');
-      setIsLoading(false);
+    if (!data.success) {
+      throw new Error(data.error || "Erro ao registrar");
     }
-  };
+
+    toast.dismiss(loadingToast);
+    toast.success(`Bem-vindo, ${formData.name}!`);
+
+    console.log("Usuário:", data.user);
+
+    // 🔥 já está logado → vai direto para perfil
+    setTimeout(() => {
+      router.replace('/user/perfil');
+    }, 1200);
+
+  } catch (error: any) {
+    toast.dismiss(loadingToast);
+    toast.error(error.message || "Erro ao registrar");
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const isFormValid = () => {
     return Object.values(errors).every(error => !error) && 
-           Object.values(formData).every(value => value.trim() !== '');
+           Object.values(formData).every(value => value.trim() !== '') &&
+           formData.password === formData.confirmPassword;
   };
 
   // Mostrar toast de boas-vindas na primeira visita
@@ -264,6 +203,24 @@ export default function RegisterPage() {
       }, 1000);
     }
   }, []);
+
+  // Verificar se já está logado
+  useEffect(() => {
+  const checkLoggedIn = async () => {
+    try {
+      const res = await fetch("/api/auth/me");
+      const data = await res.json();
+
+      if (data.success) {
+        router.replace('/user/perfil');
+      }
+    } catch (error) {
+      // não autenticado
+    }
+  };
+
+  checkLoggedIn();
+}, [router]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-gray-900 flex flex-col md:flex-row">
@@ -350,7 +307,6 @@ export default function RegisterPage() {
           >
             {[
               "Acesso imediato após registro",
-              "Dados armazenados localmente",
               "Login rápido e seguro",
               "Progresso salvo automaticamente",
               "Certificados disponíveis",
@@ -404,37 +360,37 @@ export default function RegisterPage() {
           >
             {/* Full Name Field */}
             <div>
-              <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Nome Completo *
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User size={18} className={errors.fullName && touched.fullName ? "text-red-500" : "text-gray-400"} />
+                  <User size={18} className={errors.name && touched.name ? "text-red-500" : "text-gray-400"} />
                 </div>
                 <input
-                  id="fullName"
-                  name="fullName"
+                  id="name"
+                  name="name"
                   type="text"
                   autoComplete="name"
                   required
-                  value={formData.fullName}
+                  value={formData.name}
                   onChange={handleChange}
-                  onBlur={() => handleBlur('fullName')}
+                  onBlur={() => handleBlur('name')}
                   placeholder="João da Silva"
-                  className={getInputClassName('fullName')}
+                  className={getInputClassName('name')}
                 />
-                {touched.fullName && (
+                {touched.name && (
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-                    {errors.fullName ? (
+                    {errors.name ? (
                       <X size={18} className="text-red-500" />
-                    ) : formData.fullName && (
+                    ) : formData.name && (
                       <Check size={18} className="text-green-500" />
                     )}
                   </div>
                 )}
               </div>
-              {errors.fullName && touched.fullName && (
-                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.fullName}</p>
+              {errors.name && touched.name && (
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>
               )}
             </div>
 
@@ -617,41 +573,6 @@ export default function RegisterPage() {
                 </p>
               )}
             </div>
-
-            {/* Terms Checkbox */}
-            {/* <div className="flex items-start pt-2">
-              <input
-                id="terms"
-                name="terms"
-                type="checkbox"
-                required
-                className="h-4 w-4 text-brand-main focus:ring-brand-main border-gray-300 rounded mt-1"
-              />
-              <label htmlFor="terms" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-                Concordo com os{' '}
-                <Link 
-                  href="/termos" 
-                  className="text-brand-main hover:text-brand-main/80"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toast('Abrindo Termos de Uso...', { icon: '📄', duration: 2000 });
-                  }}
-                >
-                  Termos de Uso
-                </Link>{' '}
-                e{' '}
-                <Link 
-                  href="/privacidade" 
-                  className="text-brand-main hover:text-brand-main/80"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toast('Abrindo Política de Privacidade...', { icon: '🔒', duration: 2000 });
-                  }}
-                >
-                  Política de Privacidade
-                </Link>
-              </label>
-            </div> */}
 
             {/* Submit Button */}
             <motion.button

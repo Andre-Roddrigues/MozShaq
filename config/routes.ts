@@ -1,14 +1,15 @@
 
-// const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-const API_BASE_URL = "http://192.168.1.113:3000";
-const LOCAL_SERVER = "http://192.168.43.177:5000";
+ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+// const API_BASE_URL = "http://192.168.1.113:3000";
+// const LOCAL_SERVER = "http://192.168.43.177:5000";
 
 export const routes = {
   googleLogin: `${API_BASE_URL}/auth/google`,
   backend_url: `${API_BASE_URL}`,
-  register: `${API_BASE_URL}/auth/register`,
+  authMe: `${API_BASE_URL}/student/auth/me`,
+  registerStudent: `${API_BASE_URL}/student/auth/register`,
   newpassword: `${API_BASE_URL}/auth/reset-password`,
-  login: `${API_BASE_URL}/auth/login`,
+  login: `${API_BASE_URL}/student/auth/login`,
   authresendotp: `${API_BASE_URL}/auth/resend-otp`,
   forgotpassword: `${API_BASE_URL}/auth/forgot-password`,
   userprofile: `${API_BASE_URL}/user-perfil`,

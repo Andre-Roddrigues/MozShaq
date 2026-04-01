@@ -1,17 +1,10 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, Lock, Mail, BookOpen, ChevronLeft, Check, X } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, ChevronLeft, Check, X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
-
-interface UserData {
-  fullName: string;
-  email: string;
-  phone: string;
-  password: string;
-}
 
 export default function LoginPage() {
   const router = useRouter();
@@ -29,56 +22,6 @@ export default function LoginPage() {
     email: false,
     password: false
   });
-
-  // Carregar usuários do localStorage
-  const getExistingUsers = (): UserData[] => {
-    if (typeof window === 'undefined') return [];
-    const users = localStorage.getItem('registeredUsers');
-    return users ? JSON.parse(users) : [];
-  };
-
-  // Gerar token JWT-like
-  const generateToken = (userId: string): string => {
-    // Header - informações do algoritmo
-    const header = {
-      alg: 'HS256',
-      typ: 'JWT'
-    };
-    
-    // Payload - dados do usuário
-    const payload = {
-      sub: userId, // subject (ID do usuário)
-      email: formData.email,
-      iat: Math.floor(Date.now() / 1000), // issued at
-      exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60), // expira em 24 horas
-      jti: Math.random().toString(36).substring(2) + Date.now().toString(36) // ID único do token
-    };
-    
-    // Em produção, seria gerada uma assinatura real
-    // Aqui estamos apenas simulando um token JWT
-    const encodedHeader = btoa(JSON.stringify(header));
-    const encodedPayload = btoa(JSON.stringify(payload));
-    const signature = btoa(Math.random().toString(36).substring(2) + Date.now().toString(36));
-    
-    return `${encodedHeader}.${encodedPayload}.${signature}`;
-  };
-
-  // Salvar token nos cookies
-  const setAuthTokenCookie = (token: string) => {
-    const expirationDate = new Date();
-    expirationDate.setTime(expirationDate.getTime() + (24 * 60 * 60 * 1000)); // 24 horas
-    
-    const cookie = `auth_token=${token}; expires=${expirationDate.toUTCString()}; path=/; SameSite=Strict;`;
-    
-    if (process.env.NODE_ENV === 'production') {
-      document.cookie = cookie + ' Secure;'; // Secure apenas em produção
-    } else {
-      document.cookie = cookie;
-    }
-    
-    // Também salvar no localStorage para fácil acesso (opcional)
-    localStorage.setItem('auth_token', token);
-  };
 
   // Validação em tempo real
   useEffect(() => {
@@ -162,69 +105,43 @@ export default function LoginPage() {
     setIsLoading(true);
     const loadingToast = toast.loading('Autenticando...');
     
-    // Simulação de delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
     try {
-      // Obter usuários do localStorage
-      const existingUsers = getExistingUsers();
-      
-      // Verificar credenciais
-      const user = existingUsers.find(
-        user => user.email === formData.email && user.password === formData.password
-      );
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 
+          email: formData.email, 
+          password: formData.password 
+        }),
+      });
 
-      if (!user) {
-        toast.dismiss(loadingToast);
-        toast.error('Email ou senha incorretos!');
-        setIsLoading(false);
-        return;
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Erro no login");
       }
-
-      // Gerar token JWT-like
-      const authToken = generateToken(user.email);
-      
-      // Salvar token nos cookies
-      setAuthTokenCookie(authToken);
-
-      // Salvar sessão do usuário
-      localStorage.setItem('currentUser', JSON.stringify({
-        email: user.email,
-        name: user.fullName,
-        phone: user.phone,
-        loggedIn: true,
-        loginTime: new Date().toISOString(),
-        authToken: authToken
-      }));
-
-      sessionStorage.setItem('userSession', JSON.stringify({
-        email: user.email,
-        name: user.fullName,
-        loggedIn: true,
-        sessionId: Date.now().toString(),
-        token: authToken
-      }));
 
       // Mostrar toast de sucesso
       toast.dismiss(loadingToast);
-      toast.success(`Bem-vindo de volta, ${user.fullName}!`, {
+      toast.success('Login realizado com sucesso!', {
         duration: 3000,
         icon: '',
         position: 'top-center'
       });
 
-      console.log('Usuário logado:', user);
-      console.log('Token gerado:', authToken);
+      console.log('Usuário logado:', data.user);
       
-      // Redirecionar para perfil após delay
+      // Redirecionar para dashboard após delay
       setTimeout(() => {
-        router.push('/user/perfil');
+        router.push('/dashboard');
       }, 2000);
       
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erro ao fazer login:', error);
       toast.dismiss(loadingToast);
-      toast.error('Erro ao fazer login. Tente novamente.');
+      toast.error(error.message || 'Email ou senha inválidos');
       setIsLoading(false);
     }
   };
@@ -236,10 +153,15 @@ export default function LoginPage() {
 
   // Verificar se já está logado
   useEffect(() => {
-    const checkLoggedIn = () => {
-      const currentUser = localStorage.getItem('currentUser');
-      const userSession = sessionStorage.getItem('userSession');
-      
+    const checkLoggedIn = async () => {
+      try {
+        const response = await fetch("/api/auth/me");
+        if (response.ok) {
+          router.push('/dashboard');
+        }
+      } catch (error) {
+        // Não está logado, continua na página de login
+      }
     };
 
     checkLoggedIn();
@@ -485,7 +407,7 @@ export default function LoginPage() {
             <Link 
               href="/registar" 
               className="font-medium text-brand-main hover:text-brand-main/80 transition-colors"
-              onClick={() => toast('Redirecionando para registro...', { icon: '', duration: 1500 })}
+              onClick={() => toast('Redirecionando para registro...', { icon: '📝', duration: 1500 })}
             >
               Criar conta
             </Link>
@@ -564,7 +486,7 @@ export default function LoginPage() {
           >
             <div className="flex items-center justify-center gap-3 text-sm text-gray-400">
               <Lock size={14} />
-              <span>Conexão segura • SSL 256-bit • Autenticação com token JWT</span>
+              <span>Conexão segura • SSL 256-bit • Autenticação JWT</span>
             </div>
           </motion.div>
         </div>
