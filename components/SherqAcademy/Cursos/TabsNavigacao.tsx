@@ -54,7 +54,7 @@ export function TabsNavigacao({ cursoDetalhes }: TabsNavigacaoProps) {
     { id: 'conteudo', label: 'Conteúdo Programático', icon: FileText },
     { id: 'metodologia', label: 'Metodologia', icon: GraduationCap },
     { id: 'formador', label: 'Formador', icon: Users },
-    { id: 'certificado', label: 'Certificado', icon: Award },
+    // { id: 'certificado', label: 'Certificado', icon: Award },
   ];
 
   return (

@@ -100,10 +100,10 @@ export default function CardCurso({ curso }: CardCursoProps) {
               <Users className="w-4 h-4 text-gray-600" />
               <span>{curso.studentsCount} alunos</span>
             </div>
-            <div className="flex items-center gap-1">
+            {/* <div className="flex items-center gap-1">
               <Star className="w-4 h-4 text-yellow-400 fill-current" />
               <span>{curso.avaliacao.toFixed(1)}</span>
-            </div>
+            </div> */}
           </div>
         </div>
 

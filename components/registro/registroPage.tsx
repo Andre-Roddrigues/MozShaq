@@ -33,6 +33,35 @@ export default function RegisterPage() {
     confirmPassword: false
   });
 
+  // Função para validar telefone
+  const validatePhone = (phone: string) => {
+    // Remove caracteres especiais
+    const cleanPhone = phone.replace(/[\s\-\(\)\+]/g, '');
+    
+    // Verifica se tem 9 dígitos
+    if (cleanPhone.length === 0) return 'Telefone é obrigatório';
+    if (cleanPhone.length !== 9) return 'Telefone deve ter 9 dígitos';
+    
+    // Verifica se são apenas números
+    if (!/^\d+$/.test(cleanPhone)) return 'Telefone deve conter apenas números';
+    
+    return '';
+  };
+
+  // Formata o telefone enquanto o usuário digita
+  const formatPhone = (value: string) => {
+    // Remove tudo que não é número
+    let numbers = value.replace(/\D/g, '');
+    
+    // Limita a 9 números
+    if (numbers.length > 9) numbers = numbers.slice(0, 9);
+    
+    // Formata como quiser (ex: 841 234 567)
+    if (numbers.length <= 3) return numbers;
+    if (numbers.length <= 6) return `${numbers.slice(0, 3)} ${numbers.slice(3)}`;
+    return `${numbers.slice(0, 3)} ${numbers.slice(3, 6)} ${numbers.slice(6, 9)}`;
+  };
+
   // Validação em tempo real
   useEffect(() => {
     const newErrors = { ...errors };
@@ -60,16 +89,10 @@ export default function RegisterPage() {
       }
     }
 
-    // Validação do telefone
+    // Validação do telefone (NOVA VERSÃO)
     if (touched.phone) {
-      const phoneRegex = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
-      if (!formData.phone.trim()) {
-        newErrors.phone = 'Telefone é obrigatório';
-      } else if (!phoneRegex.test(formData.phone.replace(/\s/g, ''))) {
-        newErrors.phone = 'Telefone inválido';
-      } else {
-        newErrors.phone = '';
-      }
+      const phoneError = validatePhone(formData.phone);
+      newErrors.phone = phoneError;
     }
 
     if (touched.password) {
@@ -101,10 +124,20 @@ export default function RegisterPage() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    
+    if (name === 'phone') {
+      // Aplica formatação para telefone
+      const formatted = formatPhone(value);
+      setFormData({
+        ...formData,
+        [name]: formatted
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   const getInputClassName = (field: keyof typeof errors) => {
@@ -122,67 +155,77 @@ export default function RegisterPage() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  setTouched({
-    name: true,
-    email: true,
-    phone: true,
-    password: true,
-    confirmPassword: true
-  });
-
-  const hasErrors = Object.values(errors).some(error => error !== '');
-  if (hasErrors) {
-    toast.error('Corrija os erros no formulário');
-    return;
-  }
-
-  if (formData.password !== formData.confirmPassword) {
-    toast.error('As senhas não coincidem');
-    return;
-  }
-
-  setIsLoading(true);
-  const loadingToast = toast.loading('Criando conta...');
-
-  try {
-    const response = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        password: formData.password
-      }),
+    setTouched({
+      name: true,
+      email: true,
+      phone: true,
+      password: true,
+      confirmPassword: true
     });
 
-    const data = await response.json();
-
-    if (!data.success) {
-      throw new Error(data.error || "Erro ao registrar");
+    const hasErrors = Object.values(errors).some(error => error !== '');
+    if (hasErrors) {
+      toast.error('Corrija os erros no formulário');
+      return;
     }
 
-    toast.dismiss(loadingToast);
-    toast.success(`Bem-vindo, ${formData.name}!`);
+    if (formData.password !== formData.confirmPassword) {
+      toast.error('As senhas não coincidem');
+      return;
+    }
 
-    console.log("Usuário:", data.user);
+    setIsLoading(true);
+    const loadingToast = toast.loading('Criando conta...');
 
-    // 🔥 já está logado → vai direto para perfil
-    setTimeout(() => {
-      router.replace('/user/perfil');
-    }, 1200);
+    try {
+      // Limpa o telefone antes de enviar
+      const cleanPhone = formData.phone.replace(/\D/g, '');
+      
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: cleanPhone, // Envia apenas os 9 números
+          password: formData.password
+        }),
+      });
 
-  } catch (error: any) {
-    toast.dismiss(loadingToast);
-    toast.error(error.message || "Erro ao registrar");
-  } finally {
-    setIsLoading(false);
-  }
-};
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Erro ao registrar");
+      }
+
+      toast.dismiss(loadingToast);
+      toast.success(`Bem-vindo, ${formData.name}! Conta criada com sucesso!`);
+
+      console.log("Usuário registrado:", data.user);
+
+      // Salva o token no localStorage se necessário
+      if (data.user?.accessToken) {
+        localStorage.setItem('accessToken', data.user.accessToken);
+      }
+
+      // Redireciona para o perfil após registro
+      setTimeout(() => {
+        router.push('/user/perfil');
+        router.refresh(); // Força refresh da página
+      }, 1500);
+
+    } catch (error: any) {
+      toast.dismiss(loadingToast);
+      toast.error(error.message || "Erro ao registrar. Tente novamente.");
+      console.error("Erro no registro:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const isFormValid = () => {
     return Object.values(errors).every(error => !error) && 
@@ -206,21 +249,19 @@ export default function RegisterPage() {
 
   // Verificar se já está logado
   useEffect(() => {
-  const checkLoggedIn = async () => {
-    try {
-      const res = await fetch("/api/auth/me");
-      const data = await res.json();
-
-      if (data.success) {
-        router.replace('/user/perfil');
+    const checkLoggedIn = async () => {
+      try {
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+          router.replace('/user/perfil');
+        }
+      } catch (error) {
+        // não autenticado
       }
-    } catch (error) {
-      // não autenticado
-    }
-  };
+    };
 
-  checkLoggedIn();
-}, [router]);
+    checkLoggedIn();
+  }, [router]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-gray-900 flex flex-col md:flex-row">
@@ -290,7 +331,6 @@ export default function RegisterPage() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="max-w-xl"
           >
-            
             <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
               Crie sua conta
             </h2>
@@ -341,7 +381,6 @@ export default function RegisterPage() {
         <div className="max-w-md mx-auto w-full">
           {/* Header */}
           <div className="mb-8 text-center">
-            
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
               Registrar Nova Conta
             </h2>
@@ -433,7 +472,7 @@ export default function RegisterPage() {
             {/* Phone Field */}
             <div>
               <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Telefone *
+                Telefone * (9 dígitos)
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -448,14 +487,14 @@ export default function RegisterPage() {
                   value={formData.phone}
                   onChange={handleChange}
                   onBlur={() => handleBlur('phone')}
-                  placeholder="+258 84 123 4567"
+                  placeholder="841 234 567"
                   className={getInputClassName('phone')}
                 />
                 {touched.phone && (
                   <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
                     {errors.phone ? (
                       <X size={18} className="text-red-500" />
-                    ) : formData.phone && (
+                    ) : formData.phone && formData.phone.replace(/\D/g, '').length === 9 && (
                       <Check size={18} className="text-green-500" />
                     )}
                   </div>
@@ -463,6 +502,11 @@ export default function RegisterPage() {
               </div>
               {errors.phone && touched.phone && (
                 <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.phone}</p>
+              )}
+              {!errors.phone && touched.phone && formData.phone && formData.phone.replace(/\D/g, '').length === 9 && (
+                <p className="mt-1 text-sm text-green-600 dark:text-green-400">
+                  ✓ Telefone válido
+                </p>
               )}
             </div>
 
@@ -513,7 +557,7 @@ export default function RegisterPage() {
               {errors.password && touched.password && (
                 <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.password}</p>
               )}
-              {!errors.password && touched.password && formData.password && (
+              {!errors.password && touched.password && formData.password && formData.password.length >= 6 && (
                 <p className="mt-1 text-sm text-green-600 dark:text-green-400">
                   ✓ Senha válida (mínimo 6 caracteres)
                 </p>
@@ -557,7 +601,7 @@ export default function RegisterPage() {
                     <div className="pr-3">
                       {errors.confirmPassword ? (
                         <X size={18} className="text-red-500" />
-                      ) : formData.confirmPassword && (
+                      ) : formData.confirmPassword && formData.password === formData.confirmPassword && (
                         <Check size={18} className="text-green-500" />
                       )}
                     </div>

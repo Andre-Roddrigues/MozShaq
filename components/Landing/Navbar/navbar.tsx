@@ -8,14 +8,15 @@ import NavLinks from "./NavLinks";
 import DarkModeToggle from "./DarkModeToggle";
 import ProfileDropdown from "./ProfileDropdown";
 import Image from "next/image";
+import { useAuth } from "../../../hooks/useAuth";
 
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("Início");
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollAnimationRef = useRef<number | null>(null);
+  const { user, loading: authLoading } = useAuth();
 
   const navLinksConfig = [
     { name: "Início", sectionId: "inicio", icon: Home },
@@ -131,12 +132,6 @@ const Navbar = () => {
       document.documentElement.classList.add("dark");
       setDarkMode(true);
     }
-
-    const authCheckInterval = setInterval(() => {
-      setIsLoggedIn(document.cookie.split("; ").some((row) => row.startsWith("auth_token=")));
-    }, 1000);
-
-    return () => clearInterval(authCheckInterval);
   }, []);
 
   const toggleDarkMode = () => {
@@ -156,6 +151,8 @@ const Navbar = () => {
     open: { x: 0 },
     closed: { x: "-100%" },
   };
+
+  const isLoggedIn = !!user;
 
   return (
     <nav
@@ -198,9 +195,10 @@ const Navbar = () => {
           {/* Ações */}
           <div className="flex items-center space-x-3">
             <span className="md:flex hidden">
-            <DarkModeToggle darkMode={darkMode} onToggle={toggleDarkMode} />
+              <DarkModeToggle darkMode={darkMode} onToggle={toggleDarkMode} />
             </span>
-            {!isLoggedIn ? (
+            
+            {!authLoading && !isLoggedIn ? (
               <>
                 <Link
                   href="/login"
@@ -216,7 +214,7 @@ const Navbar = () => {
                 </Link>
               </>
             ) : (
-              <ProfileDropdown />
+              !authLoading && <ProfileDropdown />
             )}
 
             {/* Botão menu mobile */}
@@ -327,7 +325,7 @@ const Navbar = () => {
                       <DarkModeToggle darkMode={darkMode} onToggle={toggleDarkMode} />
                     </div>
 
-                    {!isLoggedIn ? (
+                    {!authLoading && !isLoggedIn ? (
                       <div className="space-y-3">
                         <Link
                           href="/login"
@@ -345,30 +343,42 @@ const Navbar = () => {
                         </Link>
                       </div>
                     ) : (
-                      <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl">
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="w-10 h-10 rounded-full bg-brand-main/20 flex items-center justify-center">
-                            <Users className="w-5 h-5 text-brand-main" />
-                          </div>
-                          <div>
-                            <div className="font-medium text-gray-900 dark:text-white">
-                              Utilizador
+                      !authLoading && user && (
+                        <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                          <div className="flex items-center gap-3 mb-4">
+                            <div className="w-10 h-10 rounded-full bg-brand-main/20 flex items-center justify-center">
+                              <span className="text-sm font-bold text-brand-main">
+                                {user.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)}
+                              </span>
                             </div>
-                            <div className="text-xs text-gray-500 dark:text-gray-400">
-                              Conta ativa
+                            <div>
+                              <div className="font-medium text-gray-900 dark:text-white truncate">
+                                {user.name}
+                              </div>
+                              <div className="text-xs text-gray-500 dark:text-gray-400">
+                                {user.email}
+                              </div>
                             </div>
                           </div>
+                          <Link
+                            href="/user/perfil"
+                            onClick={() => setIsMobileOpen(false)}
+                            className="block w-full py-2.5 text-center text-sm text-brand-main hover:bg-brand-main/10 rounded-lg transition-colors"
+                          >
+                            Meu Perfil
+                          </Link>
+                          <button
+                            onClick={async () => {
+                              await fetch('/api/auth/logout', { method: 'POST' });
+                              setIsMobileOpen(false);
+                              window.location.href = '/login';
+                            }}
+                            className="w-full mt-2 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                          >
+                            Terminar Sessão
+                          </button>
                         </div>
-                        <button
-                          onClick={() => {
-                            // Handle logout
-                            setIsMobileOpen(false);
-                          }}
-                          className="w-full py-2.5 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
-                        >
-                          Terminar Sessão
-                        </button>
-                      </div>
+                      )
                     )}
                   </div>
                 </div>
