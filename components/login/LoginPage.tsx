@@ -135,7 +135,7 @@ export default function LoginPage() {
       
       // Redirecionar para dashboard após delay
       setTimeout(() => {
-        router.push('/dashboard');
+        router.push('/user/perfil');
       }, 2000);
       
     } catch (error: any) {
@@ -157,7 +157,7 @@ export default function LoginPage() {
       try {
         const response = await fetch("/api/auth/me");
         if (response.ok) {
-          router.push('/dashboard');
+          router.push('/user/perfil');
         }
       } catch (error) {
         // Não está logado, continua na página de login
