@@ -50,7 +50,7 @@ export default function RootLayout({
                 {children}
               </main>
               <FloatingWhatsApp
-                phone="+258835089637"
+                phone="+258876634686"
                 message="Olá! Gostaria de mais informações."
                 // label="Fale conosco"
                 position="bottom-right"

@@ -26,14 +26,15 @@ const ServicesCTA = () => {
           podem impulsionar a sustentabilidade, segurança e excelência operacional da sua organização.
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
-          <motion.button
+            <motion.a
+            href="/contacte-nos"
             className="px-8 py-4 bg-white text-brand-main rounded-xl hover:bg-gray-100 transition-colors duration-300 font-semibold text-lg flex items-center gap-3"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-          >
+            >
             <MessageCircle className="w-5 h-5" />
             Entrar em Contacto
-          </motion.button>
+            </motion.a>
         </div>
       </div>
     </motion.div>

@@ -1,10 +1,12 @@
 "use client"
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const PartnerSlider = () => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
+  const offsetRef = useRef(0); // posição atual em px (sempre negativa ou zero)
 
   // Lista de parceiros
   const partnerLogos = [
@@ -13,21 +15,6 @@ const PartnerSlider = () => {
     { id: 3, name: "Lalgy", image: "/images/LALGY.png" },
     { id: 5, name: "MCNET", image: "/images/MCNET.png" },
     { id: 6, name: "Mio Reabilitação", image: "/images/VIVO.svg" },
-    // { id: 7, name: "Empresa Nacional de Uniformes", image: "/images/ENU.png" },
-    // { id: 8, name: "EGIP", image: "/images/EGIP.png" },
-    // { id: 9, name: "Ebnezer Gráfica e Consultoria", image: "/images/egc.jpg" },
-    // { id: 10, name: "Building Mozambique Group", image: "/images/BMG1.png" },
-    // { id: 11, name: "Naturis", image: "/images/naturis.png" },
-    // { id: 12, name: "Xiphefu", image: "/images/XPF.png" },
-    // { id: 13, name: "PRI", image: "/images/PRI.png" },
-    // { id: 14, name: "TC", image: "/images/TC.png" },
-    // { id: 15, name: "Enviro Works - Solucões ambientais", image: "/images/enviroWorks.jpg" },
-    // { id: 16, name: "Aro Moçambique", image: "/images/Aro.png" },
-    // { id: 17, name: "Agência de Desenvolvimento e Empreendedorismo", image: "/images/ADE.png" },
-    // { id: 18, name: "Blue Art Files", image: "/images/blue_art.png" },
-    // { id: 21, name: "Charles Metalomecânica", image: "/images/charlesMetal.png" },
-    // { id: 19, name: "Espaço Tlangano", image: "/images/Tlangano.png" },
-    // { id: 20, name: "Auto Suiça", image: "/images/AutoSuica.jpg" },
   ];
 
   // Duplicar a lista para o efeito de loop infinito
@@ -38,28 +25,57 @@ const PartnerSlider = () => {
     if (!slider) return;
 
     let animationId: number;
-    let startTime: number | null = null;
-    const duration = 40000; // 30 segundos
-    const totalWidth = slider.scrollWidth / 2; // Metade da largura total (já que duplicamos)
+    let lastTimestamp: number | null = null;
+    const speed = 40; // px por segundo (ajusta a velocidade aqui)
+
+    const totalWidth = slider.scrollWidth / 2; // largura de um "conjunto" de logos
 
     const animate = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      
+      if (lastTimestamp === null) lastTimestamp = timestamp;
+      const delta = timestamp - lastTimestamp;
+      lastTimestamp = timestamp;
+
       if (!isPaused) {
-        const elapsed = timestamp - startTime;
-        const progress = (elapsed % duration) / duration;
-        
-        // Usando transform para melhor performance
-        slider.style.transform = `translateX(-${progress * totalWidth}px)`;
+        offsetRef.current -= (speed * delta) / 1000;
+
+        // Loop infinito: quando ultrapassa a largura de um conjunto, reseta
+        if (Math.abs(offsetRef.current) >= totalWidth) {
+          offsetRef.current += totalWidth;
+        }
+
+        slider.style.transform = `translateX(${offsetRef.current}px)`;
       }
-      
+
       animationId = requestAnimationFrame(animate);
     };
 
     animationId = requestAnimationFrame(animate);
-
     return () => cancelAnimationFrame(animationId);
   }, [isPaused]);
+
+  // Move manualmente para a esquerda ou direita
+  const handleManualScroll = (direction: "left" | "right") => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    const totalWidth = slider.scrollWidth / 2;
+    const step = 200; // px por clique (ajusta conforme o tamanho dos logos)
+
+    if (direction === "left") {
+      offsetRef.current += step;
+      // Evita que o offset fique positivo (voltar demasiado para trás)
+      if (offsetRef.current > 0) {
+        offsetRef.current -= totalWidth;
+      }
+    } else {
+      offsetRef.current -= step;
+      if (Math.abs(offsetRef.current) >= totalWidth) {
+        offsetRef.current += totalWidth;
+      }
+    }
+
+    slider.style.transform = `translateX(${offsetRef.current}px)`;
+  };
 
   return (
     <section className="py-12 bg-gradient-to-tr from-brand-main-light/5 via-white to-brand-main-light/10 dark:from-gray-900 dark:via-gray-800 dark:to-brand-main/10">
@@ -69,13 +85,33 @@ const PartnerSlider = () => {
           <span className="text-gray-800 dark:text-white">Parceiros</span>
         </h2>
 
-        <div 
+        <div
           className="relative overflow-hidden"
-          onMouseEnter={() => setIsPaused(false)}
+          onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div 
-            ref={sliderRef} 
+          {/* Seta esquerda */}
+          <button
+            type="button"
+            aria-label="Deslizar para a esquerda"
+            onClick={() => handleManualScroll("left")}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-white/90 dark:bg-gray-700/90 shadow-md hover:bg-white dark:hover:bg-gray-600 transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5 text-gray-700 dark:text-white" />
+          </button>
+
+          {/* Seta direita */}
+          <button
+            type="button"
+            aria-label="Deslizar para a direita"
+            onClick={() => handleManualScroll("right")}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-white/90 dark:bg-gray-700/90 shadow-md hover:bg-white dark:hover:bg-gray-600 transition-colors"
+          >
+            <ChevronRight className="w-5 h-5 text-gray-700 dark:text-white" />
+          </button>
+
+          <div
+            ref={sliderRef}
             className="flex whitespace-nowrap will-change-transform"
           >
             {logosLoop.map((partner, index) => (
@@ -92,9 +128,10 @@ const PartnerSlider = () => {
                     className="object-contain rounded-lg w-32 h-16"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const fallback = document.createElement('div');
-                      fallback.className = 'flex items-center justify-center w-full h-full text-gray-500 text-xs font-medium text-center';
+                      target.style.display = "none";
+                      const fallback = document.createElement("div");
+                      fallback.className =
+                        "flex items-center justify-center w-full h-full text-gray-500 text-xs font-medium text-center";
                       fallback.textContent = partner.name;
                       target.parentNode?.appendChild(fallback);
                     }}
@@ -111,7 +148,6 @@ const PartnerSlider = () => {
             opacity: 0.7;
             transition: all 0.3s ease;
           }
-
           .partner-logo:hover {
             filter: grayscale(0);
             opacity: 1;
