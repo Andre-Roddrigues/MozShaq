@@ -8,7 +8,9 @@ import {
   CheckCircle,
   FileText,
   Map,
-  Users
+  Users,
+  Home,
+  Handshake
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -17,22 +19,39 @@ export default function EstudosAmbientaisPage() {
     {
       title: "Avaliação de Impacto Ambiental (AIA)",
       description: "Estudos detalhados de impactos ambientais para projetos de diferentes categorias.",
-      categories: ["Categoria A+", "Categoria A", "Categoria B", "Categoria C"]
+      categories: ["Categoria A+", "Categoria A", "Categoria B", "Categoria C"],
+      icon: FileText
     },
     {
       title: "Planos de Gestão Ambiental",
       description: "Desenvolvimento de estratégias para minimizar impactos ambientais.",
-      categories: ["Monitorização", "Mitigação", "Compensação", "Relatórios"]
+      categories: ["Monitorização", "Mitigação", "Compensação", "Relatórios"],
+      icon: Leaf
     },
     {
       title: "Auditorias Ambientais",
       description: "Verificação da conformidade ambiental e identificação de oportunidades de melhoria.",
-      categories: ["Conformidade Legal", "Desempenho", "Sistemas", "Sítios"]
+      categories: ["Conformidade Legal", "Desempenho", "Sistemas", "Sítios"],
+      icon: CheckCircle
     },
     {
       title: "Gestão Costeira",
       description: "Proteção e gestão sustentável de zonas costeiras.",
-      categories: ["Erosão Costeira", "Ecossistemas", "Planeamento", "Monitorização"]
+      categories: ["Erosão Costeira", "Ecossistemas", "Planeamento", "Monitorização"],
+      icon: Waves
+    },
+    {
+      title: "Reassentamento e Compensação",
+      description: "Planeamento e implementação de programas de reassentamento involuntário e compensação justa.",
+      categories: [
+        "Planos de Ação de Reassentamento (PAR)", 
+        "Compensação Justa e Adequada", 
+        "Restauração de Meios de Subsistência",
+        "Consulta e Participação Comunitária",
+        "Monitorização Pós-Reassentamento",
+        "Safeguards do Banco Mundial"
+      ],
+      icon: Home
     }
   ];
 
@@ -40,7 +59,8 @@ export default function EstudosAmbientaisPage() {
     "Projecto de Mineração - Tete",
     "Porto de Pemba - Reabilitação",
     "Linha de Transmissão - Norte",
-    "Parque Industrial - Maputo"
+    "Parque Industrial - Maputo",
+    "Projecto de Barragem - Cahora Bassa"
   ];
 
   return (
@@ -93,32 +113,107 @@ export default function EstudosAmbientaisPage() {
               </div>
 
               <div className="grid md:grid-cols-2 gap-6 mt-8">
-                {services.map((service, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * index }}
-                    className="bg-gradient-to-br from-green-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl p-6 border border-green-100 dark:border-gray-700"
-                  >
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <TreePine className="w-6 h-6 text-green-600 dark:text-green-400" />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-gray-900 dark:text-white mb-2">{service.title}</h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{service.description}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {service.categories.map((category, idx) => (
-                            <span key={idx} className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full text-xs">
-                              {category}
-                            </span>
-                          ))}
+                {services.map((service, index) => {
+                  const Icon = service.icon;
+                  return (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 * index }}
+                      className={`bg-gradient-to-br from-green-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl p-6 border ${
+                        index === 4 ? 'border-amber-200 dark:border-amber-700' : 'border-green-100 dark:border-gray-700'
+                      }`}
+                    >
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                          index === 4 
+                            ? 'bg-amber-100 dark:bg-amber-900' 
+                            : 'bg-green-100 dark:bg-green-900'
+                        }`}>
+                          <Icon className={`w-6 h-6 ${
+                            index === 4 
+                              ? 'text-amber-600 dark:text-amber-400' 
+                              : 'text-green-600 dark:text-green-400'
+                          }`} />
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-gray-900 dark:text-white mb-2">{service.title}</h3>
+                          <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{service.description}</p>
+                          <div className="flex flex-wrap gap-2">
+                            {service.categories.map((category, idx) => (
+                              <span key={idx} className={`px-3 py-1 rounded-full text-xs ${
+                                index === 4
+                                  ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300'
+                                  : 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                              }`}>
+                                {category}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+
+            {/* Reassentamento Detail Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-gradient-to-br from-amber-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl shadow-xl p-8 border border-amber-100 dark:border-amber-700"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center">
+                  <Handshake className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                    Reassentamento Involuntário
+                  </h3>
+                  <p className="text-amber-600 dark:text-amber-400 font-medium">
+                    Conformidade com Padrões Internacionais
+                  </p>
+                </div>
+              </div>
+              <div className="grid md:grid-cols-2 gap-6 text-gray-700 dark:text-gray-300">
+                <div>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">Nossa Abordagem</h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <span>Planos de Ação de Reassentamento (PAR) alinhados com a legislação moçambicana e padrões internacionais (Banco Mundial, IFC)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <span>Compensação justa e adequada para bens e meios de subsistência</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <span>Restauração e melhoria dos meios de subsistência das comunidades afectadas</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-900 dark:text-white mb-3">Processo Participativo</h4>
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-2">
+                      <Users className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <span>Consulta e participação activa das comunidades</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Users className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <span>Mecanismos de reclamação e resolução de conflitos</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Users className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <span>Monitorização e avaliação pós-reassentamento</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -143,7 +238,7 @@ export default function EstudosAmbientaisPage() {
                     <div>
                       <div className="font-medium text-gray-900 dark:text-white">{project}</div>
                       <div className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                        AIA e Gestão Ambiental
+                        AIA, Gestão Ambiental e Reassentamento
                       </div>
                     </div>
                   </div>
@@ -156,29 +251,36 @@ export default function EstudosAmbientaisPage() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 }}
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 text-white"
+              className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6"
             >
               <h3 className="text-xl font-bold mb-6 text-gray-900 dark:text-white">Nossa Especialização</h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
-                  <Waves className="w-8 h-8" />
+                  <Waves className="w-8 h-8 text-cyan-600 dark:text-cyan-400" />
                   <div>
                     <div className="font-medium text-gray-900 dark:text-white">Gestão de Recursos Hídricos</div>
-                    <div className="text-sm text-gray-400">Hidrologia e qualidade da água</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">Hidrologia e qualidade da água</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Mountain className="w-8 h-8" />
+                  <Mountain className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
                   <div>
                     <div className="font-medium text-gray-900 dark:text-white">Conservação da Biodiversidade</div>
-                    <div className="text-sm text-gray-400">Estudos e planos de conservação</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">Estudos e planos de conservação</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Users className="w-8 h-8" />
+                  <Users className="w-8 h-8 text-blue-600 dark:text-blue-400" />
                   <div>
                     <div className="font-medium text-gray-900 dark:text-white">Safeguards do Banco Mundial</div>
-                    <div className="text-sm text-gray-400">Monitorização e conformidade</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">Monitorização e conformidade</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Home className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+                  <div>
+                    <div className="font-medium text-gray-900 dark:text-white">Reassentamento Involuntário</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">PAR, compensação e restauração de subsistência</div>
                   </div>
                 </div>
               </div>
@@ -217,7 +319,7 @@ export default function EstudosAmbientaisPage() {
           transition={{ delay: 0.6 }}
           className="mt-12"
         >
-          <Link  href="/#areas">
+          <Link href="/#areas">
             <button className="flex items-center gap-2 text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
