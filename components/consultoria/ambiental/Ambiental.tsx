@@ -148,7 +148,7 @@ export default function EstudosAmbientaisPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="md:col-span-2 bg-gradient-to-br from-amber-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl p-6 border-2 border-amber-200 dark:border-amber-700"
+                  className="md:col-span-2 bg-gradient-to-br from-green-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl p-6 border-2 border-green-200 dark:border-green-700"
                 >
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center flex-shrink-0">
