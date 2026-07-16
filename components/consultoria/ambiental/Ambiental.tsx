@@ -113,7 +113,7 @@ export default function EstudosAmbientaisPage() {
               </div>
 
               <div className="grid md:grid-cols-2 gap-6 mt-8">
-                {services.map((service, index) => {
+                {services.slice(0, 4).map((service, index) => {
                   const Icon = service.icon;
                   return (
                     <motion.div
@@ -121,32 +121,18 @@ export default function EstudosAmbientaisPage() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 * index }}
-                      className={`bg-gradient-to-br from-green-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl p-6 border ${
-                        index === 4 ? 'border-amber-200 dark:border-amber-700' : 'border-green-100 dark:border-gray-700'
-                      }`}
+                      className="bg-gradient-to-br from-green-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl p-6 border border-green-100 dark:border-gray-700"
                     >
                       <div className="flex items-start gap-4 mb-4">
-                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                          index === 4 
-                            ? 'bg-amber-100 dark:bg-amber-900' 
-                            : 'bg-green-100 dark:bg-green-900'
-                        }`}>
-                          <Icon className={`w-6 h-6 ${
-                            index === 4 
-                              ? 'text-amber-600 dark:text-amber-400' 
-                              : 'text-green-600 dark:text-green-400'
-                          }`} />
+                        <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <Icon className="w-6 h-6 text-green-600 dark:text-green-400" />
                         </div>
                         <div>
                           <h3 className="font-bold text-gray-900 dark:text-white mb-2">{service.title}</h3>
                           <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{service.description}</p>
                           <div className="flex flex-wrap gap-2">
                             {service.categories.map((category, idx) => (
-                              <span key={idx} className={`px-3 py-1 rounded-full text-xs ${
-                                index === 4
-                                  ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300'
-                                  : 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
-                              }`}>
+                              <span key={idx} className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full text-xs">
                                 {category}
                               </span>
                             ))}
@@ -156,6 +142,41 @@ export default function EstudosAmbientaisPage() {
                     </motion.div>
                   );
                 })}
+
+                {/* Reassentamento - col-span-2 */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="md:col-span-2 bg-gradient-to-br from-amber-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl p-6 border-2 border-amber-200 dark:border-amber-700"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Home className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="font-bold text-gray-900 dark:text-white text-lg">
+                          Reassentamento e Compensação
+                        </h3>
+                        <span className="px-3 py-1 bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 rounded-full text-xs font-medium">
+                          Safeguards Sociais
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                        Planeamento e implementação de programas de reassentamento involuntário e compensação justa, 
+                        em conformidade com a legislação moçambicana e padrões internacionais (Banco Mundial, IFC).
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {services[4].categories.map((category, idx) => (
+                          <span key={idx} className="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 rounded-full text-xs">
+                            {category}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
             </motion.div>
 
