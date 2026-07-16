@@ -151,15 +151,15 @@ export default function EstudosAmbientaisPage() {
                   className="md:col-span-2 bg-gradient-to-br from-amber-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl p-6 border-2 border-amber-200 dark:border-amber-700"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Home className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                    <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Home className="w-6 h-6 text-green-600 dark:text-green-400" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="font-bold text-gray-900 dark:text-white text-lg">
                           Reassentamento e Compensação
                         </h3>
-                        <span className="px-3 py-1 bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 rounded-full text-xs font-medium">
+                        <span className="px-3 py-1 bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 rounded-full text-xs font-medium">
                           Safeguards Sociais
                         </span>
                       </div>
@@ -169,7 +169,7 @@ export default function EstudosAmbientaisPage() {
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {services[4].categories.map((category, idx) => (
-                          <span key={idx} className="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 rounded-full text-xs">
+                          <span key={idx} className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full text-xs">
                             {category}
                           </span>
                         ))}
@@ -185,17 +185,17 @@ export default function EstudosAmbientaisPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="bg-gradient-to-br from-amber-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl shadow-xl p-8 border border-amber-100 dark:border-amber-700"
+              className="bg-gradient-to-br from-green-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl shadow-xl p-8 border border-green-100 dark:border-green-700"
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center">
-                  <Handshake className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
+                  <Handshake className="w-6 h-6 text-green-600 dark:text-green-400" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
                     Reassentamento Involuntário
                   </h3>
-                  <p className="text-amber-600 dark:text-amber-400 font-medium">
+                  <p className="text-green-600 dark:text-green-400 font-medium">
                     Conformidade com Padrões Internacionais
                   </p>
                 </div>
@@ -205,15 +205,15 @@ export default function EstudosAmbientaisPage() {
                   <h4 className="font-bold text-gray-900 dark:text-white mb-3">Nossa Abordagem</h4>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                       <span>Planos de Ação de Reassentamento (PAR) alinhados com a legislação moçambicana e padrões internacionais (Banco Mundial, IFC)</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                       <span>Compensação justa e adequada para bens e meios de subsistência</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                       <span>Restauração e melhoria dos meios de subsistência das comunidades afectadas</span>
                     </li>
                   </ul>
@@ -222,15 +222,15 @@ export default function EstudosAmbientaisPage() {
                   <h4 className="font-bold text-gray-900 dark:text-white mb-3">Processo Participativo</h4>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2">
-                      <Users className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <Users className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                       <span>Consulta e participação activa das comunidades</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <Users className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <Users className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                       <span>Mecanismos de reclamação e resolução de conflitos</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <Users className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <Users className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                       <span>Monitorização e avaliação pós-reassentamento</span>
                     </li>
                   </ul>
