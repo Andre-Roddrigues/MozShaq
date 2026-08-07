@@ -23,6 +23,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <head>
+        <meta name="author" content="William Cossa">
+        <meta name="author" content="Andre Novela">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-3YZK3D46ZS"></script>
         <script
           dangerouslySetInnerHTML={{
