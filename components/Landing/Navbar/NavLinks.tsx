@@ -16,7 +16,7 @@ const menuItems = [
   { name: "Início", id: "inicio", href: "/#inicio", type: "section" },
   { name: "Sobre-nós", id: "sobre", href: "/#sobre", type: "section" },
   { name: "Consultoria", id: "areas", href: "/#areas", type: "section" },
-  // { name: "Teams", id: "teams", href: "/#teams", type: "section" },
+  { name: "Projectos", id: "projects", href: "/projectos", type: "page" },
   { name: "Serviços", id: "services-overview", href: "/#services-overview", type: "section" },
   { name: "Sherq Academy", id: "/sherq-academy/inicio",  type: "page" },
   { name: "Cursos", id: "/cursos",  type: "page" },

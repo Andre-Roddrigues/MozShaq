@@ -41,9 +41,16 @@ export function middleware(req: NextRequest) {
   if (token && authRoutes.includes(pathname)) {
     return NextResponse.redirect(new URL("/user/perfil", req.url));
   }
- if (pathname.startsWith("/consultoria")) {
+
+  // Permitir consultoria e seus subcaminhos
+  if (pathname.startsWith("/consultoria")) {
     return NextResponse.next();
   }
+
+  if (pathname.startsWith("/projectos")) {
+    return NextResponse.next();
+  }
+
   // Se rota pública ou cursos → liberar
   if (
     publicRoutes.includes(pathname) ||

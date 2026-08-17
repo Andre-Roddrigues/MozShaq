@@ -4,7 +4,7 @@
 
 import { CoursesQueryParams, CoursesResponse, Course, CourseResponse } from "../../types/courseTypes";
 
-const API_BASE_URL = 'https://backend-mozshaq.onrender.com/api/public';
+const API_BASE_URL = 'https://www.backend-mozshaq.co.mz/api';
 
 /**
  * Busca todos os cursos com filtros opcionais
