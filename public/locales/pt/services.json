@@ -1,0 +1,47 @@
+{
+  "title": "Serviços Especializados",
+  "subtitle": "Serviços completos de consultoria para impulsionar sua organização rumo à excelência sustentável através de estudos especializados, avaliações e implementação estratégica.",
+  
+  "services": {
+    "environmental": {
+      "title": "Consultoria Ambiental",
+      "description": "Estratégias de desenvolvimento sustentável e avaliações de impacto ambiental."
+    },
+    "health-safety": {
+      "title": "Segurança e Saúde",
+      "description": "Protocolos de segurança no trabalho e sistemas de gestão de riscos."
+    },
+    "social-responsibility": {
+      "title": "Responsabilidade Social",
+      "description": "Engajamento comunitário e avaliações de impacto social."
+    },
+    "quality": {
+      "title": "Gestão da Qualidade",
+      "description": "Certificação ISO e implementação de sistemas de controlo de qualidade."
+    },
+    "sustainability-reporting": {
+      "title": "Relatórios de Sustentabilidade",
+      "description": "Reporte ESG e métricas de desempenho sustentável."
+    },
+    "industrial-compliance": {
+      "title": "Conformidade Industrial",
+      "description": "Conformidade regulatória e padrões de segurança industrial."
+    },
+    "circular-economy": {
+      "title": "Economia Circular",
+      "description": "Gestão de resíduos e implementação de economia circular."
+    },
+    "courses": {
+      "title": "Treinamentos",
+      "description": "Capacitação em diversas áreas, com certificação ao concluir."
+    }
+  },
+  
+  "cta": {
+    "title": "Precisa de uma Solução Personalizada?",
+    "description": "Nossos especialistas estão prontos para desenvolver uma estratégia sob medida para as necessidades específicas da sua organização.",
+    "button1": "Agendar Consulta",
+    "button2": "Ver Todos os Serviços"
+  },
+  "viewMore": "Ver Mais"
+}

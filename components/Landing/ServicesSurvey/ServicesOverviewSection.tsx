@@ -1,69 +1,65 @@
+// components/Landing/Services/ServicesOverviewSection.tsx
 "use client"
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight,GraduationCap, Globe, Shield, Users, Target, BarChart3, Factory, Recycle } from 'lucide-react';
+import { ArrowRight, GraduationCap, Globe, Shield, Users, Target, BarChart3, Factory, Recycle } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslation } from '../../../hooks/useTranslation';
 
 const ServicesOverviewSection = () => {
-  const services = [
-    {
-      icon: Globe,
-      title: "Consultoria Ambiental",
-      description: "Estratégias de desenvolvimento sustentável e avaliações de impacto ambiental.",
-      color: "from-blue-500 to-cyan-600",
-      href: "/services#environmental"
-    },
-    {
-      icon: Shield,
-      title: "Segurança e Saúde",
-      description: "Protocolos de segurança no trabalho e sistemas de gestão de riscos.",
-      color: "from-blue-500 to-cyan-600",
-      href: "/services#health-safety"
-    },
-    {
-      icon: Users,
-      title: "Responsabilidade Social",
-      description: "Engajamento comunitário e avaliações de impacto social.",
-      color: "from-blue-500 to-cyan-600",
-      href: "/services#social-responsibility"
-    },
-    {
-      icon: Target,
-      title: "Gestão da Qualidade",
-      description: "Certificação ISO e implementação de sistemas de controlo de qualidade.",
-      color: "from-blue-500 to-cyan-600",
-      href: "/services#quality"
-    },
-    {
-      icon: BarChart3,
-      title: "Relatórios de Sustentabilidade",
-      description: "Reporte ESG e métricas de desempenho sustentável.",
-      color: "from-blue-500 to-cyan-600",
-      href: "/services#sustainability-reporting"
-    },
-    {
-      icon: Factory,
-      title: "Conformidade Industrial",
-      description: "Conformidade regulatória e padrões de segurança industrial.",
-      color: "from-blue-500 to-cyan-600",
-      href: "/services#industrial-compliance"
-    },
-    {
-      icon: Recycle,
-      title: "Economia Circular",
-      description: "Gestão de resíduos e implementação de economia circular.",
-      color: "from-blue-500 to-cyan-600",
-      href: "/services#circular-economy"
-    },
-    {
-  icon: GraduationCap,
-  title: "Treinamentos",
-  description: "Capacitação em diversas áreas, com certificação ao concluir.",
-  color: "from-blue-500 to-cyan-600",
-  href: "/services#courses"
-}
+  const { t } = useTranslation('services');
+  const [mounted, setMounted] = useState(false);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Mapeamento de ícones para cada serviço
+  const iconMap: Record<string, any> = {
+    'environmental': Globe,
+    'health-safety': Shield,
+    'social-responsibility': Users,
+    'quality': Target,
+    'sustainability-reporting': BarChart3,
+    'industrial-compliance': Factory,
+    'circular-economy': Recycle,
+    'courses': GraduationCap
+  };
+
+  // Mapeamento de cores
+  const colorMap: Record<string, string> = {
+    'environmental': 'from-blue-500 to-cyan-600',
+    'health-safety': 'from-blue-500 to-cyan-600',
+    'social-responsibility': 'from-blue-500 to-cyan-600',
+    'quality': 'from-blue-500 to-cyan-600',
+    'sustainability-reporting': 'from-blue-500 to-cyan-600',
+    'industrial-compliance': 'from-blue-500 to-cyan-600',
+    'circular-economy': 'from-blue-500 to-cyan-600',
+    'courses': 'from-blue-500 to-cyan-600'
+  };
+
+  // IDs dos serviços
+  const serviceIds = [
+    'environmental',
+    'health-safety',
+    'social-responsibility',
+    'quality',
+    'sustainability-reporting',
+    'industrial-compliance',
+    'circular-economy',
+    'courses'
   ];
+
+  // Construir array de serviços com traduções
+  const services = serviceIds.map((id) => ({
+    id,
+    icon: iconMap[id],
+    title: t(`services.${id}.title`),
+    description: t(`services.${id}.description`),
+    color: colorMap[id],
+    href: `/services#${id}`
+  }));
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -86,6 +82,20 @@ const ServicesOverviewSection = () => {
     }
   };
 
+  // Se não estiver montado ou não estiver pronto, mostrar placeholder
+  if (!mounted) {
+    return (
+      <section className="relative py-20 bg-white dark:bg-gray-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="w-12 h-12 border-4 border-brand-main border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-gray-600 dark:text-gray-400">Carregando serviços...</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="services-overview" className="relative py-20 bg-white dark:bg-gray-900">
       {/* Background Elements - Mais sutis */}
@@ -101,17 +111,6 @@ const ServicesOverviewSection = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          {/* <motion.div
-            className="inline-flex items-center gap-2 bg-brand-main/10 text-brand-main px-4 py-2 rounded-full mb-6"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className="w-2 h-2 bg-brand-main rounded-full"></div>
-            <span className="text-sm font-medium">Serviços Especializados</span>
-          </motion.div> */}
-
           <motion.h2
             className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
             initial={{ opacity: 0, y: 20 }}
@@ -119,7 +118,7 @@ const ServicesOverviewSection = () => {
             transition={{ delay: 0.3, duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Serviços Especializados
+            {t('title')}
           </motion.h2>
           
           <motion.p
@@ -129,8 +128,7 @@ const ServicesOverviewSection = () => {
             transition={{ delay: 0.4, duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Serviços completos de consultoria para impulsionar sua organização rumo à excelência 
-            sustentável através de estudos especializados, avaliações e implementação estratégica.
+            {t('subtitle')}
           </motion.p>
         </motion.div>
 
@@ -142,41 +140,44 @@ const ServicesOverviewSection = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
         >
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              className="group"
-              variants={itemVariants}
-            >
-              <Link href={service.href}>
-                <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm dark:shadow-gray-900/10 hover:shadow-xl dark:hover:shadow-gray-900/30 transition-all duration-500 h-full border border-gray-100 dark:border-gray-700/50 group-hover:border-brand-main/20 group-hover:scale-[1.02]">
-                  
-                  {/* Icon with Gradient - Mais clean */}
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${service.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                    <service.icon className="w-6 h-6 text-white" />
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            return (
+              <motion.div
+                key={service.id}
+                className="group"
+                variants={itemVariants}
+              >
+                <Link href={service.href}>
+                  <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm dark:shadow-gray-900/10 hover:shadow-xl dark:hover:shadow-gray-900/30 transition-all duration-500 h-full border border-gray-100 dark:border-gray-700/50 group-hover:border-brand-main/20 group-hover:scale-[1.02]">
+                    
+                    {/* Icon with Gradient - Mais clean */}
+                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${service.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
+
+                    {/* Content */}
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-brand-main transition-colors duration-300 leading-tight">
+                      {service.title}
+                    </h3>
+                    
+                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-5">
+                      {service.description}
+                    </p>
+
+                    {/* CTA Arrow - Mais discreto */}
+                    <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm font-medium group-hover:text-brand-main transition-all duration-300">
+                      {t('viewMore')}
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                    </div>
+
+                    {/* Hover Effect */}
+                    <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-brand-main/10 transition-all duration-300 pointer-events-none"></div>
                   </div>
-
-                  {/* Content */}
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-brand-main transition-colors duration-300 leading-tight">
-                    {service.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-5">
-                    {service.description}
-                  </p>
-
-                  {/* CTA Arrow - Mais discreto */}
-                  <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm font-medium group-hover:text-brand-main transition-all duration-300">
-                    Ver Mais
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                  </div>
-
-                  {/* Hover Effect */}
-                  <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-brand-main/10 transition-all duration-300 pointer-events-none"></div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+                </Link>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         {/* Bottom CTA */}
@@ -195,21 +196,20 @@ const ServicesOverviewSection = () => {
             viewport={{ once: true }}
           >
             <h3 className="text-2xl md:text-3xl font-bold text-brand-main dark:text-white mb-4">
-              Precisa de uma Solução Personalizada?
+              {t('cta.title')}
             </h3>
             <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
-              Nossos especialistas estão prontos para desenvolver uma estratégia sob medida 
-              para as necessidades específicas da sua organização.
+              {t('cta.description')}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/contacte-nos">
-              <motion.button
-                className="px-8 py-3 bg-brand-main text-white rounded-xl hover:bg-brand-main/90 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Agendar Consulta
-              </motion.button>
+                <motion.button
+                  className="px-8 py-3 bg-brand-main text-white rounded-xl hover:bg-brand-main/90 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {t('cta.button1')}
+                </motion.button>
               </Link>
               <Link href="/services">
                 <motion.button
@@ -217,7 +217,7 @@ const ServicesOverviewSection = () => {
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Ver Todos os Serviços
+                  {t('cta.button2')}
                 </motion.button>
               </Link>
             </div>

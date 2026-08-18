@@ -4,7 +4,7 @@
 
 import { CoursesQueryParams, CoursesResponse, Course, CourseResponse } from "../../types/courseTypes";
 
-const API_BASE_URL = 'https://www.backend-mozshaq.co.mz/api';
+const API_BASE_URL = 'https://www.backend.mozshaq.co.mz/api/public';
 
 /**
  * Busca todos os cursos com filtros opcionais
@@ -26,7 +26,7 @@ export async function fetchCourses(params?: CoursesQueryParams): Promise<Courses
       if (params.sortOrder) queryParams.append('sortOrder', params.sortOrder);
     }
     
-    const url = `${API_BASE_URL}/courses${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
+    const url = `${API_BASE_URL}/courses`;
     
     const response = await fetch(url, {
       method: 'GET',

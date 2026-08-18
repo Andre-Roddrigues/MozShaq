@@ -1,48 +1,92 @@
-"use client";
+// components/LanguageSwitcher.tsx (versão mais leve)
+'use client';
 
-import { useState } from "react";
-import { Globe } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useLanguage } from "../../../context/LanguageContext";
+import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Languages, Check } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function LanguageSwitcher() {
-  const { language, setLanguage } = useLanguage();
-  const [open, setOpen] = useState(false);
+  const { i18n } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentLang, setCurrentLang] = useState('pt');
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const toggle = () => setOpen(!open);
+  const languages = [
+    { code: 'pt', label: 'Português', flag: '🇵🇹' },
+    { code: 'en', label: 'English', flag: '🇬🇧' },
+  ];
+
+  useEffect(() => {
+    setCurrentLang(i18n.language || 'pt');
+  }, [i18n.language]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const changeLanguage = (langCode: string) => {
+    if (langCode === currentLang) {
+      setIsOpen(false);
+      return;
+    }
+    
+    i18n.changeLanguage(langCode);
+    setCurrentLang(langCode);
+    localStorage.setItem('i18nextLng', langCode);
+    setIsOpen(false);
+  };
+
+  const currentLangData = languages.find(l => l.code === currentLang) || languages[0];
 
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
-        onClick={toggle}
-        className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center justify-center w-9 h-9 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+        aria-label="Mudar idioma"
       >
-        <Globe className="w-4 h-4 text-gray-700 dark:text-gray-200" />
-        <span className="text-sm font-medium text-gray-700 dark:text-gray-200">{language}</span>
+        <Languages className="w-5 h-5" />
       </button>
 
       <AnimatePresence>
-        {open && (
+        {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 w-20 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-1 z-50 border border-gray-200 dark:border-gray-700"
+            initial={{ opacity: 0, y: -8, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.95 }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
+            className="absolute right-0 mt-2 min-w-[160px] bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden z-50"
           >
-            {["PT", "EN"].map((lang) => (
-              <button
-                key={lang}
-                onClick={() => { setLanguage(lang); setOpen(false); }}
-                className={`w-full px-4 py-2 text-sm text-left transition ${
-                  language === lang
-                    ? "bg-brand-main text-white"
-                    : "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
-                }`}
-              >
-                {lang}
-              </button>
-            ))}
+            <div className="py-1.5">
+              {languages.map((lang) => {
+                const isActive = currentLang === lang.code;
+                return (
+                  <button
+                    key={lang.code}
+                    onClick={() => changeLanguage(lang.code)}
+                    className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-all duration-150 ${
+                      isActive
+                        ? 'bg-brand-main/10 text-brand-main dark:bg-brand-main/20 dark:text-brand-400'
+                        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                    }`}
+                  >
+                    <span className="text-lg">{lang.flag}</span>
+                    <span className="flex-1 text-left font-medium">{lang.label}</span>
+                    {isActive && (
+                      <Check className="w-4 h-4 text-brand-main dark:text-brand-400" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

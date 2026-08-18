@@ -1,0 +1,17 @@
+{
+  "title": "Training & Specialized Consulting",
+  "subtitle": "Professional development and integrated business solutions",
+  "description": "We combine certified training with specialized consulting in sustainable development, occupational safety, and management systems for companies in Mozambique.",
+  "btnSherq": "SHERQ ACADEMY",
+  "btnConsulting": "CONSULTING",
+  "courses": {
+    "environmental": "Environmental Management",
+    "safety": "Occupational Safety",
+    "quality": "Quality Systems",
+    "audits": "Internal Audits",
+    "legislation": "Environmental Legislation",
+    "waste": "Waste Management",
+    "risks": "Risk Prevention",
+    "iso": "ISO Certification"
+  }
+}

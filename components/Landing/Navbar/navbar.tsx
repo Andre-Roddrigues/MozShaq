@@ -1,3 +1,4 @@
+// components/Landing/Navbar/navbar.tsx
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
@@ -9,6 +10,8 @@ import DarkModeToggle from "./DarkModeToggle";
 import ProfileDropdown from "./ProfileDropdown";
 import Image from "next/image";
 import { useAuth } from "../../../hooks/useAuth";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -17,15 +20,16 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollAnimationRef = useRef<number | null>(null);
   const { user, loading: authLoading } = useAuth();
+  const { t } = useTranslation('navbar');
 
   const navLinksConfig = [
-    { name: "Início", sectionId: "inicio", icon: Home },
-    { name: "Sobre", sectionId: "sobre", icon: Info },
-    { name: "Consultoria", sectionId: "areas", icon: Briefcase },
-    { name: "Teams", sectionId: "teams", icon: Users },
-    { name: "Serviços", sectionId: "services-overview", icon: Wrench },
-    { name: "Cursos", pagePath: "/cursos", icon: BookOpen },
-    { name: "Contacto", pagePath: "/contacte-nos", icon: Phone },
+    { name: t("home"), sectionId: "inicio", icon: Home },
+    { name: t("about"), sectionId: "sobre", icon: Info },
+    { name: t("consulting"), sectionId: "areas", icon: Briefcase },
+    { name: t("teams"), sectionId: "teams", icon: Users },
+    { name: t("services"), sectionId: "services-overview", icon: Wrench },
+    { name: t("courses"), pagePath: "/cursos", icon: BookOpen },
+    { name: t("contact"), pagePath: "/contacte-nos", icon: Phone },
   ];
 
   // Detecta scroll para background e seção ativa
@@ -37,7 +41,7 @@ const Navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    updateActiveSection(); // inicial
+    updateActiveSection();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -60,17 +64,17 @@ const Navbar = () => {
     });
 
     const sectionMap: Record<string, string> = {
-      inicio: "Início",
-      sobre: "Sobre",
-      areas: "Áreas de Actuação",
-      teams: "Teams",
-      "services-overview": "Serviços",
-      servicos: "Serviços",
-      cursos: "Cursos",
-      contacto: "Contacto",
+      inicio: t("home"),
+      sobre: t("about"),
+      areas: t("consulting"),
+      teams: t("teams"),
+      "services-overview": t("services"),
+      servicos: t("services"),
+      cursos: t("courses"),
+      contacto: t("contact"),
     };
 
-    setActiveLink(sectionMap[currentSection] || "Início");
+    setActiveLink(sectionMap[currentSection] || t("home"));
   };
 
   // Scroll suave com easing
@@ -81,7 +85,7 @@ const Navbar = () => {
     const navbarOffset = 80;
     const start = window.pageYOffset;
     const end = targetElement.getBoundingClientRect().top + start - navbarOffset;
-    const duration = 600; // ms
+    const duration = 600;
     const startTime = performance.now();
 
     const easeInOutCubic = (t: number) =>
@@ -170,7 +174,7 @@ const Navbar = () => {
             className="relative w-32 h-12 cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
-              handleNavigation("Início");
+              handleNavigation(t("home"));
             }}
           >
             <Image
@@ -194,6 +198,9 @@ const Navbar = () => {
 
           {/* Ações */}
           <div className="flex items-center space-x-3">
+            {/* Language Switcher */}
+            {/* <LanguageSwitcher /> */}
+
             <span className="md:flex hidden">
               <DarkModeToggle darkMode={darkMode} onToggle={toggleDarkMode} />
             </span>
@@ -204,13 +211,13 @@ const Navbar = () => {
                   href="/login"
                   className="hidden dark:text-white sm:inline-block px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                 >
-                  Entrar
+                  {t("login")}
                 </Link>
                 <Link
                   href="/registro"
                   className="hidden sm:inline-block px-4 py-2 rounded-lg text-sm font-medium bg-brand-main text-white hover:bg-brand-main/90 transition-colors"
                 >
-                  Registro
+                  {t("register")}
                 </Link>
               </>
             ) : (
@@ -221,7 +228,7 @@ const Navbar = () => {
             <button
               onClick={() => setIsMobileOpen(true)}
               className="md:hidden p-2.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Abrir menu"
+              aria-label={t("openMenu")}
             >
               <Menu className="w-6 h-6 text-gray-700 dark:text-gray-200" />
             </button>
@@ -233,7 +240,6 @@ const Navbar = () => {
       <AnimatePresence>
         {isMobileOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -242,7 +248,6 @@ const Navbar = () => {
               onClick={() => setIsMobileOpen(false)}
             />
 
-            {/* Sidebar */}
             <motion.div
               className="fixed top-0 left-0 h-screen w-80 max-w-[85vw] bg-white dark:bg-gray-900 shadow-2xl z-50 md:hidden flex flex-col"
               initial="closed"
@@ -251,14 +256,13 @@ const Navbar = () => {
               variants={mobileSidebarVariants}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
             >
-              {/* Header */}
               <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800">
                 <Link
                   href="/"
                   className="flex items-center gap-3"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavigation("Início");
+                    handleNavigation(t("home"));
                     setIsMobileOpen(false);
                   }}
                 >
@@ -273,19 +277,20 @@ const Navbar = () => {
                   </div>
                   <div>
                     <div className="font-bold text-gray-900 dark:text-white">MozShaq</div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">Consultoria & Formação</div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      {t("consultingTraining")}
+                    </div>
                   </div>
                 </Link>
                 <button
                   onClick={() => setIsMobileOpen(false)}
                   className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                  aria-label="Fechar menu"
+                  aria-label={t("closeMenu")}
                 >
                   <X className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                 </button>
               </div>
 
-              {/* Navigation Links */}
               <div className="flex-1 overflow-y-auto py-4">
                 <div className="space-y-1 px-4">
                   {navLinksConfig.map((item) => {
@@ -315,12 +320,19 @@ const Navbar = () => {
                   })}
                 </div>
 
-                {/* User Actions Section */}
                 <div className="mt-8 px-4">
                   <div className="border-t border-gray-100 dark:border-gray-800 pt-6">
+                    {/* Language in mobile */}
                     <div className="flex items-center justify-between mb-6">
                       <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                        Tema
+                        {t("language")}
+                      </span>
+                      <LanguageSwitcher />
+                    </div>
+
+                    <div className="flex items-center justify-between mb-6">
+                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                        {t("theme")}
                       </span>
                       <DarkModeToggle darkMode={darkMode} onToggle={toggleDarkMode} />
                     </div>
@@ -332,14 +344,14 @@ const Navbar = () => {
                           onClick={() => setIsMobileOpen(false)}
                           className="block w-full py-3 px-4 text-center rounded-lg border border-gray-300 dark:border-gray-600 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                         >
-                          Entrar na Conta
+                          {t("login")}
                         </Link>
                         <Link
                           href="/registro"
                           onClick={() => setIsMobileOpen(false)}
                           className="block w-full py-3 px-4 text-center rounded-lg bg-brand-main text-white text-sm font-medium hover:bg-brand-main/90 transition-colors"
                         >
-                          Criar Conta
+                          {t("register")}
                         </Link>
                       </div>
                     ) : (
@@ -365,7 +377,7 @@ const Navbar = () => {
                             onClick={() => setIsMobileOpen(false)}
                             className="block w-full py-2.5 text-center text-sm text-brand-main hover:bg-brand-main/10 rounded-lg transition-colors"
                           >
-                            Meu Perfil
+                            {t("profile")}
                           </Link>
                           <button
                             onClick={async () => {
@@ -375,7 +387,7 @@ const Navbar = () => {
                             }}
                             className="w-full mt-2 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
                           >
-                            Terminar Sessão
+                            {t("logout")}
                           </button>
                         </div>
                       )

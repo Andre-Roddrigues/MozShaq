@@ -1,0 +1,47 @@
+{
+  "title": "Specialized Services",
+  "subtitle": "Complete consulting services to drive your organization towards sustainable excellence through specialized studies, assessments, and strategic implementation.",
+  
+  "services": {
+    "environmental": {
+      "title": "Environmental Consulting",
+      "description": "Sustainable development strategies and environmental impact assessments."
+    },
+    "health-safety": {
+      "title": "Health and Safety",
+      "description": "Workplace safety protocols and risk management systems."
+    },
+    "social-responsibility": {
+      "title": "Social Responsibility",
+      "description": "Community engagement and social impact assessments."
+    },
+    "quality": {
+      "title": "Quality Management",
+      "description": "ISO certification and quality control system implementation."
+    },
+    "sustainability-reporting": {
+      "title": "Sustainability Reporting",
+      "description": "ESG reporting and sustainable performance metrics."
+    },
+    "industrial-compliance": {
+      "title": "Industrial Compliance",
+      "description": "Regulatory compliance and industrial safety standards."
+    },
+    "circular-economy": {
+      "title": "Circular Economy",
+      "description": "Waste management and circular economy implementation."
+    },
+    "courses": {
+      "title": "Training",
+      "description": "Training in various areas with certification upon completion."
+    }
+  },
+  
+  "cta": {
+    "title": "Need a Custom Solution?",
+    "description": "Our experts are ready to develop a tailored strategy for your organization's specific needs.",
+    "button1": "Schedule Consultation",
+    "button2": "View All Services"
+  },
+  "viewMore": "View More"
+}

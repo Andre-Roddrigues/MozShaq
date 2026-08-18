@@ -1,19 +1,25 @@
+// components/SherqAcademy/Hero/HeroSectionSherq.tsx
 "use client"
+
 import React from 'react';
 import { BookOpen, ArrowRight, Wrench } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from "next/link";
+import { useTranslation } from '../../../hooks/useTranslation';
 
 export default function HeroSectionSherq() {
+  const { t } = useTranslation('hero');
+
+  // Cursos com tradução
   const courses = [
-    "Gestão Ambiental",
-    "Segurança no Trabalho",
-    "Sistemas de Qualidade",
-    "Auditorias Internas",
-    "Legislação Ambiental",
-    "Gestão de Resíduos",
-    "Prevenção de Riscos",
-    "Certificação ISO"
+    t('courses.environmental'),
+    t('courses.safety'),
+    t('courses.quality'),
+    t('courses.audits'),
+    t('courses.legislation'),
+    t('courses.waste'),
+    t('courses.risks'),
+    t('courses.iso')
   ];
 
   return (
@@ -51,10 +57,12 @@ export default function HeroSectionSherq() {
               transition={{ delay: 0.4, duration: 0.6 }}
             >
               <span className="text-brand-main block sm:inline">
-                Formação & Consultoria
+                {t('title').split('&')[0].trim()}
               </span>
               <br className="hidden sm:block" />
-              <span className="block sm:inline"> Especializada</span>
+              <span className="block sm:inline">
+                & {t('title').split('&')[1]?.trim() || ''}
+              </span>
             </motion.h1>
 
             {/* Subtítulo */}
@@ -64,7 +72,7 @@ export default function HeroSectionSherq() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
             >
-              Desenvolvimento profissional e soluções empresariais integradas
+              {t('subtitle')}
             </motion.p>
 
             {/* Descrição */}
@@ -74,9 +82,7 @@ export default function HeroSectionSherq() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
             >
-              Combinamos formação certificada com consultoria especializada em
-              desenvolvimento sustentável, segurança ocupacional e sistemas de
-              gestão para empresas em Moçambique.
+              {t('description')}
             </motion.p>
 
             {/* CTA Buttons */}
@@ -94,7 +100,7 @@ export default function HeroSectionSherq() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <BookOpen size={18} className="shrink-0" />
-                  <span className="whitespace-nowrap">SHERQ ACADEMY</span>
+                  <span className="whitespace-nowrap">{t('btnSherq')}</span>
                   <motion.div
                     animate={{ x: [0, 5, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
@@ -112,7 +118,7 @@ export default function HeroSectionSherq() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Wrench size={18} className="shrink-0" />
-                  <span className="whitespace-nowrap">CONSULTORIA</span>
+                  <span className="whitespace-nowrap">{t('btnConsulting')}</span>
                   <motion.div
                     animate={{ x: [0, 5, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}

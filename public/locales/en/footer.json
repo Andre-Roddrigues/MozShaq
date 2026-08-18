@@ -1,0 +1,43 @@
+{
+  "sherqAcademy": {
+    "title": "SHERQ ACADEMY",
+    "description": "Professional training accredited by the government of Mozambique.",
+    "email": "sherqacademy@mozshaq.co.mz"
+  },
+  "mozshaq": {
+    "title": "MOZSHAQ",
+    "description": "Specialized consulting in sustainable development.",
+    "email": "info@mozshaq.co.mz"
+  },
+  "areasAtuacao": {
+    "title": "Areas of Operation",
+    "items": {
+      "environmental": "Environmental Studies",
+      "occupational": "Occupational Safety",
+      "management": "Management Systems",
+      "renewable": "Renewable Energies"
+    }
+  },
+  "areasFormacao": {
+    "title": "Training Areas",
+    "items": {
+      "healthSafety": "Health and Safety",
+      "management": "Management Systems",
+      "equipment": "Equipment Operation",
+      "softSkills": "Soft Skills"
+    }
+  },
+  "localizacao": {
+    "title": "Location",
+    "locations": {
+      "maputo": "Maputo - Mozambique",
+      "tete": "Tete - Mozambique",
+      "pemba": "Pemba - Mozambique"
+    },
+    "license": "Lic. 1091/051/CFP/2019"
+  },
+  "footer": {
+    "copyright": "© 2026 MOZSHAQ - SHERQ ACADEMY Consultancy & Services. All rights reserved.",
+    "trained": "+500 Trained Professionals"
+  }
+}

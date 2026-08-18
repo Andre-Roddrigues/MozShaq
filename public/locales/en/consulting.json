@@ -1,0 +1,90 @@
+{
+  "title": "Our Consulting Areas",
+  "subtitle": "Specialists in integrated solutions for the sustainable development of Mozambique. Each consulting area is handled with excellence and international standards.",
+  
+  "areas": {
+    "sistemas-gestao": {
+      "name": "Management Systems",
+      "description": "Certification and implementation of ISO standards",
+      "subareas": [
+        "ISO 9001 - Quality",
+        "ISO 14001 - Environmental",
+        "ISO 45001 - Safety",
+        "ISO 27001 - Information Security"
+      ]
+    },
+    "ambiental": {
+      "name": "Environmental Studies",
+      "description": "Impact assessment and environmental management",
+      "subareas": [
+        "EIA - Environmental Impact Assessment",
+        "Environmental Management Plans",
+        "Environmental Audits",
+        "Environmental Monitoring"
+      ]
+    },
+    "seguranca-saude": {
+      "name": "Occupational Safety and Health",
+      "description": "Human capital protection",
+      "subareas": [
+        "Safety Plans",
+        "Risk Assessment",
+        "Protection Equipment",
+        "Accident Investigation"
+      ]
+    },
+    "formacao": {
+      "name": "Training and Capacity Building",
+      "description": "Skills development",
+      "subareas": [
+        "Operator Training",
+        "Workplace Safety",
+        "Project Management",
+        "Technical Skills"
+      ]
+    },
+    "projetos-engenharia": {
+      "name": "Engineering and Projects",
+      "description": "Design, supervision and project management",
+      "subareas": [
+        "Feasibility Studies",
+        "Infrastructure Design",
+        "Project Management",
+        "Construction Supervision"
+      ]
+    },
+    "energia-sustentavel": {
+      "name": "Sustainable Energy",
+      "description": "Renewable energy solutions",
+      "subareas": [
+        "Feasibility Studies",
+        "Energy Audits",
+        "Renewable Projects",
+        "Energy Efficiency"
+      ]
+    },
+    "topografia-geotecnia": {
+      "name": "Topography and Geotechnics",
+      "description": "Soil studies and mapping",
+      "subareas": [
+        "Topographic Surveys",
+        "Geotechnical Studies",
+        "Cartography and Mapping",
+        "Soil Profiles"
+      ]
+    },
+    "conteudo-local": {
+      "name": "Local Content and CSR",
+      "description": "Community and sustainable development",
+      "subareas": [
+        "Local Content Plan",
+        "Supplier Development",
+        "Social Responsibility",
+        "Community Capacity Building"
+      ]
+    }
+  },
+  
+  "cta": "Learn more",
+  "more": "more..."
+}

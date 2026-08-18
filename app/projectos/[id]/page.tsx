@@ -294,7 +294,7 @@ export default function ProjectDetailPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-brand-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">Carregando projeto...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Carregando projecto...</p>
         </div>
       </div>
     );
@@ -307,11 +307,11 @@ export default function ProjectDetailPage() {
           <div className="w-20 h-20 text-gray-400 mx-auto mb-4">
             <FileText className="w-20 h-20" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-700 dark:text-gray-300 mb-2">Projeto não encontrado</h2>
-          <p className="text-gray-500 dark:text-gray-400 mb-6">O projeto que você está procurando não existe ou foi removido.</p>
+          <h2 className="text-2xl font-bold text-gray-700 dark:text-gray-300 mb-2">Projecto não encontrado</h2>
+          <p className="text-gray-500 dark:text-gray-400 mb-6">O projecto que você está procurando não existe ou foi removido.</p>
           <Link href="/projects">
             <button className="px-6 py-3 bg-brand-500 text-white rounded-xl hover:bg-brand-600 transition-colors">
-              Voltar para Projetos
+              Voltar para Projectos
             </button>
           </Link>
         </div>
@@ -385,7 +385,7 @@ export default function ProjectDetailPage() {
               transition={{ delay: 0.1 }}
               className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 md:p-8"
             >
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Informações do Projeto</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Informações do Projecto</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <InfoItem icon={Building} label="Cliente" value={project.client} />
                 <InfoItem icon={MapPin} label="Localização" value={project.location} />
@@ -394,7 +394,7 @@ export default function ProjectDetailPage() {
                   label="Período de Execução" 
                   value={`${project.executionPeriod.start} - ${project.executionPeriod.end}`} 
                 />
-                <InfoItem icon={Target} label="Setor/Área" value={project.sector} />
+                <InfoItem icon={Target} label="Sector/Área" value={project.sector} />
               </div>
             </motion.div>
 
@@ -405,7 +405,7 @@ export default function ProjectDetailPage() {
               transition={{ delay: 0.2 }}
               className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 md:p-8"
             >
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Objetivo do Projeto</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Objectivo do Projecto</h2>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
                 {project.objective}
               </p>
@@ -427,7 +427,7 @@ export default function ProjectDetailPage() {
             >
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 md:p-8">
                 <ListSection 
-                  title="Principais Atividades" 
+                  title="Principais Actividades" 
                   items={project.mainActivities} 
                   icon={FileText}
                 />
@@ -543,7 +543,7 @@ export default function ProjectDetailPage() {
                   <span className="text-gray-900 dark:text-white">{project.location}</span>
                 </div>
                 <div className="flex justify-between py-2 border-b border-gray-100 dark:border-gray-700">
-                  <span className="text-gray-500 dark:text-gray-400">Setor</span>
+                  <span className="text-gray-500 dark:text-gray-400">Sector</span>
                   <span className="text-gray-900 dark:text-white">{project.sector}</span>
                 </div>
                 <div className="flex justify-between py-2">
@@ -566,12 +566,8 @@ export default function ProjectDetailPage() {
               transition={{ delay: 0.3 }}
               className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6"
             >
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Ações</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Acções</h3>
               <div className="space-y-3">
-                <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-brand-500 text-white rounded-xl hover:bg-brand-600 transition-colors font-medium">
-                  <Download className="w-4 h-4" />
-                  Baixar Relatório
-                </button>
                 <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium">
                   <Share2 className="w-4 h-4" />
                   Compartilhar
@@ -594,7 +590,7 @@ export default function ProjectDetailPage() {
                 className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6"
               >
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-                  Projetos Relacionados
+                  Projectos Relacionados
                 </h3>
                 <div className="space-y-4">
                   {relatedProjectsList.map((related) => (
@@ -631,9 +627,9 @@ export default function ProjectDetailPage() {
                     </Link>
                   ))}
                 </div>
-                <Link href="/projects">
+                <Link href="/projectos">
                   <button className="w-full mt-4 text-center text-sm text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 font-medium">
-                    Ver todos os projetos →
+                    Ver todos os projectos →
                   </button>
                 </Link>
               </motion.div>

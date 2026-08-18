@@ -1,0 +1,41 @@
+{
+  "title": "Quem Somos",
+  "subtitle": "Sobre a Mozshaq",
+  "description": "Somos a <strong>Mozshaq Consultoria e Serviços</strong>, uma empresa genuinamente moçambicana que oferece soluções integradas em estudos e consultoria especializada para o desenvolvimento sustentável de Moçambique.",
+  "description2": "Estabelecida em 2013, a <strong>MOZSHAQ</strong> conta com uma equipa técnica especializada nas áreas das suas operações, focada em assistência técnica e serviços, proporcionando aos seus clientes respostas locais com padrões internacionais.",
+  "description3": "A experiência adquirida ao longo dos mais de 12 anos de existência e o conhecimento acumulado pelos colaboradores constituem uma vantagem competitiva para a empresa e contribuem para resolver os desafios colocados pelas necessidades de satisfazer plenamente os nossos clientes.",
+  "description4": "Esforçamo-nos todos os dias para entregar soluções de valor acrescentado aos nossos clientes em qualquer sector de actividade, permitindo que se diferenciem neste mercado cada vez mais competitivo.",
+  
+  "mission": {
+    "title": "Missão",
+    "description": "Optimizar organizações através de normas nacionais e internacionais para reduzir custos, aumentar a produtividade e mitigar impactos ambientais e riscos de saúde, garantindo um desenvolvimento sustentável contínuo."
+  },
+  
+  "vision": {
+    "title": "Visão",
+    "description": "Tornar-nos a melhor e preferida empresa moçambicana de assistência técnica em Estudos e Consultoria Especializada, Gestão de Projectos, Formação e soluções de Outsourcing."
+  },
+  
+  "values": {
+    "title": "Valores",
+    "items": {
+      "safety": "Segurança & Saúde",
+      "sustainability": "Sustentabilidade",
+      "responsibility": "Responsabilidade",
+      "customerFocus": "Foco no Cliente"
+    }
+  },
+  
+  "team": {
+    "title": "O Nosso Maior Património: <span>A Nossa Equipa</span>",
+    "description": "Com cerca de <strong>60% de uma equipa jovem e dinâmica</strong>, a MOZSHAQ possui uma equipa multidisciplinar, motivada pelo denominador comum: <span>o desenvolvimento sustentável.</span>",
+    "description2": "Priorizamos a transferência de conhecimento e estamos comprometidos em criar capacidade interna. Em todos os projectos, encontramos um consultor externo para acrescentar valor aos nossos consultores locais através da ferramenta de transferência de conhecimento."
+  },
+  
+  "stats": {
+    "experience": "Anos de Experiência",
+    "youngTeam": "Equipa Jovem",
+    "projects": "Projectos Concluídos",
+    "sectors": "Sectores de Actuação"
+  }
+}

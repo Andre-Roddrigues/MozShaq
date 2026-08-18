@@ -129,7 +129,7 @@ export default function ProjectsPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-brand-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">Carregando projetos...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Carregando projectos...</p>
         </div>
       </div>
     );
@@ -148,10 +148,10 @@ export default function ProjectsPage() {
             className="text-center text-white"
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Nossos <span className="text-brand-bgdark">Projetos</span>
+              Nossos <span className="text-brand-bgdark">Projectos</span>
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              Conheça os projetos realizados pela Mozshaq em consultoria ambiental e gestão sustentável em Moçambique.
+              Conheça os projectos realizados pela Mozshaq em consultoria ambiental e gestão sustentável em Moçambique.
             </p>
           </motion.div>
         </div>
@@ -166,7 +166,7 @@ export default function ProjectsPage() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
-                placeholder="Buscar projetos..."
+                placeholder="Buscar projectos..."
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
@@ -230,7 +230,7 @@ export default function ProjectsPage() {
               </div>
 
               <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                {filteredProjects.length} projetos
+                {filteredProjects.length} projectos
               </span>
             </div>
           </div>
@@ -265,14 +265,14 @@ export default function ProjectsPage() {
                 {/* Setor */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Setor
+                    Sector
                   </label>
                   <select
                     value={filters.sector || ''}
                     onChange={(e) => handleFilterChange({ sector: e.target.value || undefined })}
                     className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
                   >
-                    <option value="">Todos os setores</option>
+                    <option value="">Todos os sectores</option>
                     {sectors.map((sector) => (
                       <option key={sector} value={sector}>{sector}</option>
                     ))}
@@ -375,7 +375,7 @@ export default function ProjectsPage() {
           <div className="text-center py-20 bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
             <FolderOpen className="w-20 h-20 text-gray-400 mx-auto mb-4" />
             <h3 className="text-2xl font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Nenhum projeto encontrado
+              Nenhum projecto encontrado
             </h3>
             <p className="text-gray-500 dark:text-gray-400">
               Tente ajustar os filtros de busca para encontrar o que procura.
@@ -394,7 +394,7 @@ export default function ProjectsPage() {
             isLoading={isLoadingMore}
             endMessage={
               <p className="text-gray-500 dark:text-gray-400 text-sm">
-                🎉 Todos os {filteredProjects.length} projetos foram carregados
+                Todos os {filteredProjects.length} projectos foram carregados
               </p>
             }
           >

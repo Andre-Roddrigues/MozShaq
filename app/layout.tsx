@@ -1,11 +1,12 @@
+// app/layout.tsx
 import { Outfit } from 'next/font/google';
 import './globals.css';
 import Navbar from '../components/Landing/Navbar/navbar';
 import MinimalFooter from '../components/Landing/Footer/footer';
 import { Metadata } from 'next';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { LanguageProvider } from '../context/LanguageContext';
 import FloatingWhatsApp from '../components/Landing/botaoFlutuante/whatapp';
+import { LanguageProvider } from '../context/LanguageContext';
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -21,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="pt" className="h-full">
       <head>
         <meta name="author" content="William Cossa"/>
         <meta name="author" content="Andre Novela"/>
@@ -40,26 +41,21 @@ export default function RootLayout({
       <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
         <body className={`h-full ${outfit.className} bg-white dark:bg-gray-900`}>
           <LanguageProvider>
-            {/* Container principal com flex column */}
             <div className="min-h-screen flex flex-col">
-              {/* Navbar fixo no topo */}
               <header className="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
                 <Navbar />
               </header>
               
-              {/* Conteúdo principal que vai fazer scroll */}
               <main className="flex-1">
                 {children}
               </main>
               <FloatingWhatsApp
                 phone="+258876634686"
                 message="Olá! Gostaria de mais informações."
-                // label="Fale conosco"
                 position="bottom-right"
               />
-              {/* Footer fixo na parte inferior */}
             </div>
-                <MinimalFooter />
+            <MinimalFooter />
           </LanguageProvider>
         </body>
       </GoogleOAuthProvider>

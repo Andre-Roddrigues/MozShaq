@@ -16,8 +16,8 @@ export interface Project {
   description: string;
   partners: string[];
   hasPhotos: boolean;
-  photos?: string[]; // URLs das fotos
-  coverImage?: string; // URL da foto de capa
+  photos?: string[]; 
+  coverImage?: string; 
   observations?: string;
   status: 'concluido' | 'em_andamento' | 'planejado';
   category: string[];

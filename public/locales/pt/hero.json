@@ -1,0 +1,17 @@
+{
+  "title": "Formação & Consultoria Especializada",
+  "subtitle": "Desenvolvimento profissional e soluções empresariais integradas",
+  "description": "Combinamos formação certificada com consultoria especializada em desenvolvimento sustentável, segurança ocupacional e sistemas de gestão para empresas em Moçambique.",
+  "btnSherq": "SHERQ ACADEMY",
+  "btnConsulting": "CONSULTORIA",
+  "courses": {
+    "environmental": "Gestão Ambiental",
+    "safety": "Segurança no Trabalho",
+    "quality": "Sistemas de Qualidade",
+    "audits": "Auditorias Internas",
+    "legislation": "Legislação Ambiental",
+    "waste": "Gestão de Resíduos",
+    "risks": "Prevenção de Riscos",
+    "iso": "Certificação ISO"
+  }
+}
