@@ -4,7 +4,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import {
   ArrowLeft,
@@ -17,19 +16,19 @@ import {
   Image as ImageIcon,
   Target,
   Award,
-  Link2,
   Share2,
-  Download,
   ChevronLeft,
   ChevronRight,
   X,
-  ExternalLink,
   Briefcase,
   FileText,
-  Home
+  Home,
+  Loader2,
+  AlertCircle
 } from 'lucide-react';
 import { projectActions } from '../../../components/actions/project-actions';
 import { Project } from '../../../types/project';
+
 
 // Componente de Galeria de Imagens
 function ImageGallery({ images, projectName }: { images: string[]; projectName: string }) {
@@ -192,13 +191,25 @@ function ImageGallery({ images, projectName }: { images: string[]; projectName: 
 
 // Componente de Status
 function StatusBadge({ status }: { status: string }) {
-  const statusMap = {
-    'concluido': { label: 'Concluído', icon: CheckCircle, className: 'bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400 border-green-200 dark:border-green-800' },
-    'em_andamento': { label: 'Em Andamento', icon: Clock, className: 'bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400 border-blue-200 dark:border-blue-800' },
-    'planejado': { label: 'Planejado', icon: Target, className: 'bg-amber-500/10 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400 border-amber-200 dark:border-amber-800' }
+  const statusMap: Record<string, { label: string; icon: any; className: string }> = {
+    'done': { 
+      label: 'Concluído', 
+      icon: CheckCircle, 
+      className: 'bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400 border-green-200 dark:border-green-800' 
+    },
+    'inProgress': { 
+      label: 'Em Andamento', 
+      icon: Clock, 
+      className: 'bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400 border-blue-200 dark:border-blue-800' 
+    },
+    'process': { 
+      label: 'Em Processo', 
+      icon: AlertCircle, 
+      className: 'bg-amber-500/10 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400 border-amber-200 dark:border-amber-800' 
+    }
   };
   
-  const info = statusMap[status as keyof typeof statusMap] || statusMap['planejado'];
+  const info = statusMap[status] || statusMap['process'];
   const Icon = info.icon;
 
   return (
@@ -225,7 +236,7 @@ function InfoItem({ icon: Icon, label, value, className = '' }: { icon: any; lab
 }
 
 // Componente de Lista
-function ListSection({ title, items, icon: Icon }: { title: string; items: string[]; icon: any }) {
+function ListSection({ title, items, icon: Icon }: { title: string; items: any[]; icon: any }) {
   if (!items || items.length === 0) return null;
   
   return (
@@ -244,7 +255,7 @@ function ListSection({ title, items, icon: Icon }: { title: string; items: strin
             className="flex items-start gap-3 text-gray-700 dark:text-gray-300"
           >
             <CheckCircle className="w-5 h-5 text-brand-500 mt-0.5 flex-shrink-0" />
-            <span>{item}</span>
+            <span>{typeof item === 'string' ? item : item.name}</span>
           </motion.li>
         ))}
       </ul>
@@ -258,36 +269,55 @@ export default function ProjectDetailPage() {
   const [project, setProject] = useState<Project | null>(null);
   const [relatedProjects, setRelatedProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadProject = async () => {
       setIsLoading(true);
+      setError(null);
 
       const id = Array.isArray(params.id) ? params.id[0] : params.id;
 
       if (!id) {
-        setProject(null);
-        setRelatedProjects([]);
+        setError('ID do projeto não fornecido');
         setIsLoading(false);
         return;
       }
 
-      const found = projectActions.getProjectById(id);
-
-      if (found) {
-        setProject(found);
-        const related = projectActions.getRelatedProjects(found, 4);
-        setRelatedProjects(related);
-      } else {
-        setProject(null);
-        setRelatedProjects([]);
+      try {
+        // Buscar projeto por ID da API
+        const response = await projectActions.fetchProjectById(id);
+        
+        if (response.success && response.project) {
+          setProject(response.project);
+          
+          // Buscar projetos relacionados
+          const related = await projectActions.getRelatedProjects(response.project, 4);
+          setRelatedProjects(related);
+        } else {
+          setError(response.error || 'Projeto não encontrado');
+        }
+      } catch (err) {
+        console.error('Erro ao carregar projeto:', err);
+        setError('Erro ao carregar os dados do projeto');
+      } finally {
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     };
 
     loadProject();
   }, [params.id]);
+
+  // Formatar data
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('pt-MZ', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+  };
 
   if (isLoading) {
     return (
@@ -300,16 +330,20 @@ export default function ProjectDetailPage() {
     );
   }
 
-  if (!project) {
+  if (error || !project) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <div className="text-center">
+        <div className="text-center max-w-md mx-auto p-8">
           <div className="w-20 h-20 text-gray-400 mx-auto mb-4">
             <FileText className="w-20 h-20" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-700 dark:text-gray-300 mb-2">Projecto não encontrado</h2>
-          <p className="text-gray-500 dark:text-gray-400 mb-6">O projecto que você está procurando não existe ou foi removido.</p>
-          <Link href="/projects">
+          <h2 className="text-2xl font-bold text-gray-700 dark:text-gray-300 mb-2">
+            {error || 'Projecto não encontrado'}
+          </h2>
+          <p className="text-gray-500 dark:text-gray-400 mb-6">
+            O projecto que você está procurando não existe ou foi removido.
+          </p>
+          <Link href="/projectos">
             <button className="px-6 py-3 bg-brand-500 text-white rounded-xl hover:bg-brand-600 transition-colors">
               Voltar para Projectos
             </button>
@@ -319,7 +353,19 @@ export default function ProjectDetailPage() {
     );
   }
 
-  const relatedProjectsList = projectActions.getRelatedProjects(project, 4);
+  // Extrair dados para exibição
+  const startDate = project.startDate ? formatDate(project.startDate) : '';
+  const endDate = project.endDate ? formatDate(project.endDate) : '';
+  const period = startDate && endDate ? `${startDate} - ${endDate}` : '';
+
+  // Extrair nomes dos serviços
+  const serviceNames = project.servicesProvided?.map((s: any) => s.name) || [];
+  
+  // Extrair nomes dos parceiros
+  const partnerNames = project.partners?.map((p: any) => p.name) || [];
+  
+  // Extrair URLs das fotos
+  const photoUrls = project.photos?.map((p: any) => p.url) || [];
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -362,7 +408,7 @@ export default function ProjectDetailPage() {
                 {project.hasPhotos && (
                   <span className="text-white/70 text-sm bg-black/30 px-3 py-1 rounded-full flex items-center gap-1">
                     <ImageIcon className="w-4 h-4" />
-                    {project.photos?.length || 0} fotos
+                    {photoUrls.length} fotos
                   </span>
                 )}
               </div>
@@ -392,7 +438,7 @@ export default function ProjectDetailPage() {
                 <InfoItem 
                   icon={Calendar} 
                   label="Período de Execução" 
-                  value={`${project.executionPeriod.start} - ${project.executionPeriod.end}`} 
+                  value={period || 'Não definido'} 
                 />
                 <InfoItem icon={Target} label="Sector/Área" value={project.sector} />
               </div>
@@ -428,41 +474,43 @@ export default function ProjectDetailPage() {
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 md:p-8">
                 <ListSection 
                   title="Principais Actividades" 
-                  items={project.mainActivities} 
+                  items={project.results || []} 
                   icon={FileText}
                 />
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 md:p-8">
                 <ListSection 
                   title="Resultados Alcançados" 
-                  items={project.results} 
+                  items={project.results || []} 
                   icon={Award}
                 />
               </div>
             </motion.div>
 
             {/* Serviços Prestados */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 md:p-8"
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <Briefcase className="w-5 h-5 text-brand-500" />
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Serviços Prestados</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {project.servicesProvided.map((service, idx) => (
-                  <span key={idx} className="px-4 py-2 bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-300 rounded-xl text-sm font-medium border border-brand-100 dark:border-brand-800">
-                    {service}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
+            {serviceNames.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 md:p-8"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <Briefcase className="w-5 h-5 text-brand-500" />
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Serviços Prestados</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {serviceNames.map((service, idx) => (
+                    <span key={idx} className="px-4 py-2 bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-300 rounded-xl text-sm font-medium border border-brand-100 dark:border-brand-800">
+                      {service}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            )}
 
             {/* Parceiros */}
-            {project.partners && project.partners.length > 0 && (
+            {partnerNames.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -474,7 +522,7 @@ export default function ProjectDetailPage() {
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">Parceiros Envolvidos</h3>
                 </div>
                 <div className="flex flex-wrap gap-3">
-                  {project.partners.map((partner, idx) => (
+                  {partnerNames.map((partner, idx) => (
                     <span key={idx} className="px-4 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-xl text-sm font-medium border border-blue-100 dark:border-blue-800 flex items-center gap-2">
                       <Users className="w-4 h-4" />
                       {partner}
@@ -485,7 +533,7 @@ export default function ProjectDetailPage() {
             )}
 
             {/* Observações */}
-            {project.observations && (
+            {project.observation && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -493,12 +541,12 @@ export default function ProjectDetailPage() {
                 className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl shadow-lg p-6 md:p-8"
               >
                 <h3 className="text-lg font-bold text-amber-800 dark:text-amber-300 mb-2">Observações Adicionais</h3>
-                <p className="text-amber-700 dark:text-amber-400">{project.observations}</p>
+                <p className="text-amber-700 dark:text-amber-400">{project.observation}</p>
               </motion.div>
             )}
 
             {/* Galeria de Fotos */}
-            {project.photos && project.photos.length > 0 && (
+            {photoUrls.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -511,10 +559,10 @@ export default function ProjectDetailPage() {
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white">Galeria de Fotos</h3>
                   </div>
                   <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {project.photos.length} fotos
+                    {photoUrls.length} fotos
                   </span>
                 </div>
-                <ImageGallery images={project.photos} projectName={project.name} />
+                <ImageGallery images={photoUrls} projectName={project.name} />
               </motion.div>
             )}
           </div>
@@ -550,7 +598,7 @@ export default function ProjectDetailPage() {
                   <span className="text-gray-500 dark:text-gray-400">Fotos</span>
                   <span className="text-gray-900 dark:text-white flex items-center gap-1">
                     {project.hasPhotos ? (
-                      <span className="text-green-500">✓ {project.photos?.length || 0} disponíveis</span>
+                      <span className="text-green-500">✓ {photoUrls.length} disponíveis</span>
                     ) : (
                       <span className="text-gray-400">Nenhuma</span>
                     )}
@@ -568,7 +616,21 @@ export default function ProjectDetailPage() {
             >
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Acções</h3>
               <div className="space-y-3">
-                <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium">
+                <button 
+                  onClick={() => {
+                    if (navigator.share) {
+                      navigator.share({
+                        title: project.name,
+                        text: project.description,
+                        url: window.location.href,
+                      });
+                    } else {
+                      navigator.clipboard.writeText(window.location.href);
+                      alert('Link copiado para a área de transferência!');
+                    }
+                  }}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium"
+                >
                   <Share2 className="w-4 h-4" />
                   Compartilhar
                 </button>
@@ -582,7 +644,7 @@ export default function ProjectDetailPage() {
             </motion.div>
 
             {/* Projetos Relacionados */}
-            {relatedProjectsList.length > 0 && (
+            {relatedProjects.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -593,8 +655,8 @@ export default function ProjectDetailPage() {
                   Projectos Relacionados
                 </h3>
                 <div className="space-y-4">
-                  {relatedProjectsList.map((related) => (
-                    <Link href={`/projects/${related.id}`} key={related.id}>
+                  {relatedProjects.map((related) => (
+                    <Link href={`/projectos/${related.id}`} key={related.id}>
                       <div className="group flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer">
                         <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-gray-200 dark:bg-gray-700">
                           {related.coverImage ? (

@@ -1,7 +1,7 @@
 // app/projects/page.tsx
 "use client"
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Search,
@@ -10,17 +10,14 @@ import {
   Grid3x3,
   List,
   FolderOpen,
-  ChevronDown,
-  Calendar,
-  Building,
-  MapPin,
-  Image as ImageIcon
+  ChevronDown
 } from 'lucide-react';
-import type { Project, ProjectFilters, ProjectStats } from '../../types/project';
+import { Project, ProjectFilters, ProjectStats } from '../../types/project';
+import { projectActions } from '../actions/project-actions';
+import { InfiniteScroll } from './InfiniteScroll';
 import { ProjectCard } from './ProjectCard';
 import { ProjectModal } from './ProjectModal';
-import { InfiniteScroll } from './InfiniteScroll';
-import { projectActions } from '../actions/project-actions';
+
 
 const ITEMS_PER_PAGE = 12;
 
@@ -39,23 +36,51 @@ export default function ProjectsPage() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
+  const [filtersData, setFiltersData] = useState({
+    clients: [] as string[],
+    sectors: [] as string[],
+    locations: [] as string[],
+    years: [] as string[]
+  });
 
   // Carregar dados iniciais
   useEffect(() => {
-    const loadData = () => {
+    const loadData = async () => {
       setIsLoading(true);
-      const projects = projectActions.getProjects();
-      const projectStats = projectActions.getProjectStats();
       
-      setAllProjects(projects);
-      setFilteredProjects(projects);
-      setStats(projectStats);
-      
-      // Carregar primeira página
-      const initialProjects = projects.slice(0, ITEMS_PER_PAGE);
-      setDisplayedProjects(initialProjects);
-      setHasMore(projects.length > ITEMS_PER_PAGE);
-      setIsLoading(false);
+      try {
+        // Buscar projetos
+        const response = await projectActions.fetchProjects({ limit: 1000 });
+        
+        if (response.success) {
+          const projects = response.projects || [];
+          setAllProjects(projects);
+          setFilteredProjects(projects);
+          
+          // Carregar primeira página
+          const initialProjects = projects.slice(0, ITEMS_PER_PAGE);
+          setDisplayedProjects(initialProjects);
+          setHasMore(projects.length > ITEMS_PER_PAGE);
+          
+          // Buscar estatísticas
+          const statsData = await projectActions.getProjectStats();
+          setStats(statsData);
+          
+          // Buscar dados para filtros
+          const [clients, sectors, locations, years] = await Promise.all([
+            projectActions.getUniqueClients(),
+            projectActions.getUniqueSectors(),
+            projectActions.getUniqueLocations(),
+            projectActions.getUniqueYears()
+          ]);
+          
+          setFiltersData({ clients, sectors, locations, years });
+        }
+      } catch (error) {
+        console.error('Erro ao carregar dados:', error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     loadData();
@@ -63,11 +88,18 @@ export default function ProjectsPage() {
 
   // Aplicar filtros
   useEffect(() => {
-    const filtered = projectActions.getProjects(filters);
-    setFilteredProjects(filtered);
-    setDisplayedProjects(filtered.slice(0, ITEMS_PER_PAGE));
-    setPage(1);
-    setHasMore(filtered.length > ITEMS_PER_PAGE);
+    const applyFilters = async () => {
+      const response = await projectActions.fetchProjects(filters);
+      if (response.success) {
+        const projects = response.projects || [];
+        setFilteredProjects(projects);
+        setDisplayedProjects(projects.slice(0, ITEMS_PER_PAGE));
+        setPage(1);
+        setHasMore(projects.length > ITEMS_PER_PAGE);
+      }
+    };
+
+    applyFilters();
   }, [filters]);
 
   // Carregar mais projetos
@@ -76,10 +108,8 @@ export default function ProjectsPage() {
 
     setIsLoadingMore(true);
     
-    // Simular delay de carregamento
     setTimeout(() => {
       const nextPage = page + 1;
-      const start = 0;
       const end = nextPage * ITEMS_PER_PAGE;
       const newProjects = filteredProjects.slice(0, end);
       
@@ -110,16 +140,10 @@ export default function ProjectsPage() {
     setSelectedProject(null);
   };
 
-  // Get unique values for filters
-  const clients = projectActions.getUniqueClients();
-  const sectors = projectActions.getUniqueSectors();
-  const locations = projectActions.getUniqueLocations();
-  const years = projectActions.getUniqueYears();
-
   const statusOptions = [
-    { value: 'concluido', label: 'Concluído' },
-    { value: 'em_andamento', label: 'Em Andamento' },
-    { value: 'planejado', label: 'Planejado' }
+    { value: 'done', label: 'Concluído' },
+    { value: 'inProgress', label: 'Em Andamento' },
+    { value: 'process', label: 'Em Processo' }
   ];
 
   const hasActiveFilters = Object.values(filters).some(v => v !== undefined && v !== '');
@@ -256,7 +280,7 @@ export default function ProjectsPage() {
                     className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
                   >
                     <option value="">Todos os clientes</option>
-                    {clients.map((client) => (
+                    {filtersData.clients.map((client) => (
                       <option key={client} value={client}>{client}</option>
                     ))}
                   </select>
@@ -273,7 +297,7 @@ export default function ProjectsPage() {
                     className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
                   >
                     <option value="">Todos os sectores</option>
-                    {sectors.map((sector) => (
+                    {filtersData.sectors.map((sector) => (
                       <option key={sector} value={sector}>{sector}</option>
                     ))}
                   </select>
@@ -296,8 +320,7 @@ export default function ProjectsPage() {
                   </select>
                 </div>
 
-                {/* Localização */}
-                <div>
+                {/* <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Localização
                   </label>
@@ -307,13 +330,12 @@ export default function ProjectsPage() {
                     className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
                   >
                     <option value="">Todas as localizações</option>
-                    {locations.map((location) => (
+                    {filtersData.locations.map((location) => (
                       <option key={location} value={location}>{location}</option>
                     ))}
                   </select>
                 </div>
 
-                {/* Ano */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                     Ano
@@ -324,31 +346,12 @@ export default function ProjectsPage() {
                     className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
                   >
                     <option value="">Todos os anos</option>
-                    {years.map((year) => (
+                    {filtersData.years.map((year) => (
                       <option key={year} value={year}>{year}</option>
                     ))}
                   </select>
-                </div>
-
-                {/* Fotos */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Fotos disponíveis
-                  </label>
-                  <select
-                    value={filters.hasPhotos !== undefined ? String(filters.hasPhotos) : ''}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      handleFilterChange({ hasPhotos: value ? value === 'true' : undefined });
-                    }}
-                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
-                  >
-                    <option value="">Todos</option>
-                    <option value="true">Com fotos</option>
-                    <option value="false">Sem fotos</option>
-                  </select>
-                </div>
-              </div>
+                </div>*/}
+              </div> 
 
               <div className="mt-4 flex justify-end gap-2">
                 <button
@@ -410,9 +413,7 @@ export default function ProjectsPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: Math.min(index * 0.05, 0.5) }}
                 >
-                  <ProjectCard
-                    project={project}
-                  />
+                  <ProjectCard project={project} />
                 </motion.div>
               ))}
             </div>

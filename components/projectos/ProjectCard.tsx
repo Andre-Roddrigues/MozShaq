@@ -21,16 +21,27 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const getStatusInfo = (status: string) => {
-    const statusMap = {
-      'concluido': { label: 'Concluído', icon: CheckCircle, className: 'bg-green-500' },
-      'em_andamento': { label: 'Em Andamento', icon: ClockIcon, className: 'bg-blue-500' },
-      'planejado': { label: 'Planejado', icon: AlertCircle, className: 'bg-amber-500' }
+    const statusMap: Record<string, { label: string; icon: any; className: string }> = {
+      'done': { label: 'Concluído', icon: CheckCircle, className: 'bg-green-500' },
+      'inProgress': { label: 'Em Andamento', icon: ClockIcon, className: 'bg-blue-500' },
+      'process': { label: 'Em Processo', icon: AlertCircle, className: 'bg-amber-500' }
     };
-    return statusMap[status as keyof typeof statusMap] || statusMap['planejado'];
+    return statusMap[status] || statusMap['process'];
   };
 
   const status = getStatusInfo(project.status);
   const StatusIcon = status.icon;
+
+  // Formatar datas
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('pt-MZ', { month: '2-digit', year: 'numeric' });
+  };
+
+  const startDate = project.startDate ? formatDate(project.startDate) : '';
+  const endDate = project.endDate ? formatDate(project.endDate) : '';
+  const period = startDate && endDate ? `${startDate} - ${endDate}` : '';
 
   return (
     <Link href={`/projectos/${project.id}`}>
@@ -95,10 +106,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
               <MapPin className="w-4 h-4 flex-shrink-0" />
               <span className="truncate">{project.location}</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Calendar className="w-4 h-4 flex-shrink-0" />
-              <span className="text-xs">{project.executionPeriod.start} - {project.executionPeriod.end}</span>
-            </div>
+            {period && (
+              <div className="flex items-center gap-1.5">
+                <Calendar className="w-4 h-4 flex-shrink-0" />
+                <span className="text-xs">{period}</span>
+              </div>
+            )}
           </div>
 
           <p className="mt-3 text-sm text-gray-600 dark:text-gray-400 line-clamp-2 flex-1">
@@ -107,12 +120,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
           <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
             <div className="flex flex-wrap gap-1.5">
-              {project.servicesProvided.slice(0, 3).map((service, idx) => (
+              {project.servicesProvided?.slice(0, 3).map((service, idx) => (
                 <span key={idx} className="px-2.5 py-1 bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-300 rounded-full text-xs font-medium">
-                  {service.length > 20 ? service.slice(0, 20) + '...' : service}
+                  {service.name.length > 20 ? service.name.slice(0, 20) + '...' : service.name}
                 </span>
               ))}
-              {project.servicesProvided.length > 3 && (
+              {project.servicesProvided && project.servicesProvided.length > 3 && (
                 <span className="px-2.5 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-full text-xs">
                   +{project.servicesProvided.length - 3}
                 </span>

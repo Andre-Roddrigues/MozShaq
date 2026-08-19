@@ -78,11 +78,7 @@ export default function MinimalFooter() {
                       </div>
                       <div className="flex items-center gap-3">
                         <Phone className="w-4 h-4 text-gray-400" />
-                        <span className="text-sm text-gray-400">+258 82 559 8146</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Phone className="w-4 h-4 text-gray-400" />
-                        <span className="text-sm text-gray-400">+258 21 320873</span>
+                        <span className="text-sm text-gray-400">+258 876 634 686</span>
                       </div>
                     </div>
                   </div>
