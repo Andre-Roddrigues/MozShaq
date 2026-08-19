@@ -1,7 +1,7 @@
 // app/projects/components/ProjectFilters.tsx
 "use client"
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Search, 
@@ -10,10 +10,11 @@ import {
   Grid3x3, 
   List,
   ChevronDown,
-  Calendar
+  Calendar,
+  Loader2
 } from 'lucide-react';
-import type { ProjectFilters } from '../../types/project';
 import { projectActions } from '../actions/project-actions';
+import type { ProjectFilters } from '../../types/project';
 
 interface ProjectFiltersProps {
   filters: ProjectFilters;
@@ -33,17 +34,42 @@ export function ProjectFilters({
   totalProjects
 }: ProjectFiltersProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [clients, setClients] = useState<string[]>([]);
+  const [sectors, setSectors] = useState<string[]>([]);
+  const [locations, setLocations] = useState<string[]>([]);
+  const [years, setYears] = useState<string[]>([]);
 
-  // Buscar dados para os filtros
-  const clients = projectActions.getUniqueClients();
-  const sectors = projectActions.getUniqueSectors();
-  const locations = projectActions.getUniqueLocations();
-  const years = projectActions.getUniqueYears();
+  // Carregar dados para os filtros
+  useEffect(() => {
+    const loadFilterData = async () => {
+      setIsLoading(true);
+      try {
+        const [clientsData, sectorsData, locationsData, yearsData] = await Promise.all([
+          projectActions.getUniqueClients(),
+          projectActions.getUniqueSectors(),
+          projectActions.getUniqueLocations(),
+          projectActions.getUniqueYears()
+        ]);
+        
+        setClients(clientsData || []);
+        setSectors(sectorsData || []);
+        setLocations(locationsData || []);
+        setYears(yearsData || []);
+      } catch (error) {
+        console.error('Erro ao carregar dados dos filtros:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadFilterData();
+  }, []);
 
   const statusOptions = [
-    { value: 'concluido', label: 'Concluído' },
-    { value: 'em_andamento', label: 'Em Andamento' },
-    { value: 'planejado', label: 'Planejado' }
+    { value: 'done', label: 'Concluído' },
+    { value: 'inProgress', label: 'Em Andamento' },
+    { value: 'process', label: 'Em Processo' }
   ];
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -136,155 +162,124 @@ export function ProjectFilters({
             className="overflow-hidden"
           >
             <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {/* Cliente */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Cliente
-                  </label>
-                  <select
-                    value={filters.client || ''}
-                    onChange={(e) => handleFilterChange('client', e.target.value)}
-                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
-                  >
-                    <option value="">Todos os clientes</option>
-                    {clients.map((client) => (
-                      <option key={client} value={client}>{client}</option>
-                    ))}
-                  </select>
+              {isLoading ? (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="w-6 h-6 animate-spin text-brand-500" />
+                  <span className="ml-2 text-gray-500 dark:text-gray-400">Carregando filtros...</span>
                 </div>
+              ) : (
+                <>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {/* Cliente */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Cliente
+                      </label>
+                      <select
+                        value={filters.client || ''}
+                        onChange={(e) => handleFilterChange('client', e.target.value)}
+                        className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
+                      >
+                        <option value="">Todos os clientes</option>
+                        {clients.map((client) => (
+                          <option key={client} value={client}>{client}</option>
+                        ))}
+                      </select>
+                    </div>
 
-                {/* Setor */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Setor
-                  </label>
-                  <select
-                    value={filters.sector || ''}
-                    onChange={(e) => handleFilterChange('sector', e.target.value)}
-                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
-                  >
-                    <option value="">Todos os setores</option>
-                    {sectors.map((sector) => (
-                      <option key={sector} value={sector}>{sector}</option>
-                    ))}
-                  </select>
-                </div>
+                    {/* Setor */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Setor
+                      </label>
+                      <select
+                        value={filters.sector || ''}
+                        onChange={(e) => handleFilterChange('sector', e.target.value)}
+                        className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
+                      >
+                        <option value="">Todos os setores</option>
+                        {sectors.map((sector) => (
+                          <option key={sector} value={sector}>{sector}</option>
+                        ))}
+                      </select>
+                    </div>
 
-                {/* Status */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Status
-                  </label>
-                  <select
-                    value={filters.status || ''}
-                    onChange={(e) => handleFilterChange('status', e.target.value)}
-                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
-                  >
-                    <option value="">Todos os status</option>
-                    {statusOptions.map((status) => (
-                      <option key={status.value} value={status.value}>{status.label}</option>
-                    ))}
-                  </select>
-                </div>
+                    {/* Status */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Status
+                      </label>
+                      <select
+                        value={filters.status || ''}
+                        onChange={(e) => handleFilterChange('status', e.target.value)}
+                        className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
+                      >
+                        <option value="">Todos os status</option>
+                        {statusOptions.map((status) => (
+                          <option key={status.value} value={status.value}>{status.label}</option>
+                        ))}
+                      </select>
+                    </div>
 
-                {/* Ano */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Ano
-                  </label>
-                  <select
-                    value={filters.year || ''}
-                    onChange={(e) => handleFilterChange('year', e.target.value)}
-                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
-                  >
-                    <option value="">Todos os anos</option>
-                    {years.map((year) => (
-                      <option key={year} value={year}>{year}</option>
-                    ))}
-                  </select>
-                </div>
+                    {/* Categoria */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Categoria
+                      </label>
+                      <select
+                        value={filters.category || ''}
+                        onChange={(e) => handleFilterChange('category', e.target.value)}
+                        className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
+                      >
+                        <option value="">Todas as categorias</option>
+                        {/* Aqui você pode adicionar as categorias da API */}
+                      </select>
+                    </div>
 
-                {/* Localização */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Localização
-                  </label>
-                  <select
-                    value={filters.location || ''}
-                    onChange={(e) => handleFilterChange('location', e.target.value)}
-                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
-                  >
-                    <option value="">Todas as localizações</option>
-                    {locations.map((location) => (
-                      <option key={location} value={location}>{location}</option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Fotos */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Fotos disponíveis
-                  </label>
-                  <select
-                    value={filters.hasPhotos !== undefined ? String(filters.hasPhotos) : ''}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      onFilterChange({ hasPhotos: value ? value === 'true' : undefined });
-                    }}
-                    className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white"
-                  >
-                    <option value="">Todos</option>
-                    <option value="true">Com fotos</option>
-                    <option value="false">Sem fotos</option>
-                  </select>
-                </div>
-
-                {/* Período */}
-                <div className="sm:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Período de execução
-                  </label>
-                  <div className="flex gap-2">
-                    <div className="flex-1 relative">
-                      <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+                    {/* Data de início */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Data Início
+                      </label>
                       <input
-                        type="month"
-                        value={filters.dateFrom || ''}
-                        onChange={(e) => handleFilterChange('dateFrom', e.target.value)}
-                        className="w-full pl-9 pr-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white text-sm"
+                        type="date"
+                        value={filters.startDate || ''}
+                        onChange={(e) => handleFilterChange('startDate', e.target.value)}
+                        className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white text-sm"
                       />
                     </div>
-                    <span className="text-gray-500 self-center">até</span>
-                    <div className="flex-1 relative">
-                      <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+
+                    {/* Data de fim */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Data Fim
+                      </label>
                       <input
-                        type="month"
-                        value={filters.dateTo || ''}
-                        onChange={(e) => handleFilterChange('dateTo', e.target.value)}
-                        className="w-full pl-9 pr-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white text-sm"
+                        type="date"
+                        value={filters.endDate || ''}
+                        onChange={(e) => handleFilterChange('endDate', e.target.value)}
+                        className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent dark:text-white text-sm"
                       />
                     </div>
                   </div>
-                </div>
-              </div>
 
-              {/* Ações dos filtros */}
-              <div className="mt-4 flex justify-end gap-2">
-                <button
-                  onClick={onClearFilters}
-                  className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
-                >
-                  Limpar todos
-                </button>
-                <button
-                  onClick={() => setIsExpanded(false)}
-                  className="px-4 py-2 bg-brand-500 text-white rounded-lg hover:bg-brand-600 transition-colors"
-                >
-                  Aplicar filtros
-                </button>
-              </div>
+                  {/* Ações dos filtros */}
+                  <div className="mt-4 flex justify-end gap-2">
+                    <button
+                      onClick={onClearFilters}
+                      className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
+                    >
+                      Limpar todos
+                    </button>
+                    <button
+                      onClick={() => setIsExpanded(false)}
+                      className="px-4 py-2 bg-brand-500 text-white rounded-lg hover:bg-brand-600 transition-colors"
+                    >
+                      Aplicar filtros
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </motion.div>
         )}
