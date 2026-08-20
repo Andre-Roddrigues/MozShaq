@@ -38,7 +38,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
+      {/* <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}> */}
         <body className={`h-full ${outfit.className} bg-white dark:bg-gray-900`}>
           <LanguageProvider>
             <div className="min-h-screen flex flex-col">
@@ -58,7 +58,7 @@ export default function RootLayout({
             <MinimalFooter />
           </LanguageProvider>
         </body>
-      </GoogleOAuthProvider>
+      {/* </GoogleOAuthProvider> */}
     </html>
   );
 }
