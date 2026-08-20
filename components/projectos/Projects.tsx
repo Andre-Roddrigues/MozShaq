@@ -172,7 +172,7 @@ export default function ProjectsPage() {
             className="text-center text-white"
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Nossos <span className="text-brand-bgdark">Projectos</span>
+              Nossos Projectos
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
               Conheça os projectos realizados pela Mozshaq em consultoria ambiental e gestão sustentável em Moçambique.

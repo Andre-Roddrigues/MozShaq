@@ -532,19 +532,6 @@ export default function ProjectDetailPage() {
               </motion.div>
             )}
 
-            {/* Observações */}
-            {project.observation && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl shadow-lg p-6 md:p-8"
-              >
-                <h3 className="text-lg font-bold text-amber-800 dark:text-amber-300 mb-2">Observações Adicionais</h3>
-                <p className="text-amber-700 dark:text-amber-400">{project.observation}</p>
-              </motion.div>
-            )}
-
             {/* Galeria de Fotos */}
             {photoUrls.length > 0 && (
               <motion.div
