@@ -17,7 +17,7 @@ import {
   Award,
   Link2
 } from 'lucide-react';
-import { Project } from '../../types/project';
+import type { Project } from '../../types/project';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -28,17 +28,54 @@ interface ProjectModalProps {
 export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
   if (!project) return null;
 
+  // Mapeamento de status para a API
   const getStatusInfo = (status: string) => {
-    const statusMap = {
-      'concluido': { label: 'Concluído', icon: CheckCircle, className: 'text-green-600 bg-green-50 dark:bg-green-900/30 dark:text-green-400' },
-      'em_andamento': { label: 'Em Andamento', icon: Clock, className: 'text-blue-600 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400' },
-      'planejado': { label: 'Planejado', icon: Target, className: 'text-amber-600 bg-amber-50 dark:bg-amber-900/30 dark:text-amber-400' }
+    const statusMap: Record<string, { label: string; icon: any; className: string }> = {
+      'done': { 
+        label: 'Concluído', 
+        icon: CheckCircle, 
+        className: 'text-green-600 bg-green-50 dark:bg-green-900/30 dark:text-green-400' 
+      },
+      'inProgress': { 
+        label: 'Em Andamento', 
+        icon: Clock, 
+        className: 'text-blue-600 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400' 
+      },
+      'process': { 
+        label: 'Em Processo', 
+        icon: Target, 
+        className: 'text-amber-600 bg-amber-50 dark:bg-amber-900/30 dark:text-amber-400' 
+      }
     };
-    return statusMap[status as keyof typeof statusMap] || statusMap['planejado'];
+    return statusMap[status] || statusMap['process'];
   };
 
   const status = getStatusInfo(project.status);
   const StatusIcon = status.icon;
+
+  // Extrair nomes dos serviços
+  const serviceNames = project.servicesProvided?.map((s: any) => s.name) || [];
+  
+  // Extrair nomes dos parceiros
+  const partnerNames = project.partners?.map((p: any) => p.name) || [];
+  
+  // Extrair nomes das atividades principais
+  const activityNames = project.results?.map((r: any) => r.name) || [];
+
+  // Formatar datas
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('pt-MZ', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+  };
+
+  const startDate = project.startDate ? formatDate(project.startDate) : '';
+  const endDate = project.endDate ? formatDate(project.endDate) : '';
+  const period = startDate && endDate ? `${startDate} - ${endDate}` : '';
 
   return (
     <AnimatePresence>
@@ -115,7 +152,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     <div className="flex items-center gap-2 mt-1">
                       <Calendar className="w-5 h-5 text-gray-400" />
                       <span className="text-gray-700 dark:text-gray-300">
-                        {project.executionPeriod.start} - {project.executionPeriod.end}
+                        {period || 'Não definido'}
                       </span>
                     </div>
                   </div>
@@ -138,11 +175,17 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                       Serviços Prestados
                     </label>
                     <div className="flex flex-wrap gap-2 mt-1">
-                      {project.servicesProvided.map((service, idx) => (
-                        <span key={idx} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm">
-                          {service}
+                      {serviceNames.length > 0 ? (
+                        serviceNames.map((service, idx) => (
+                          <span key={idx} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm">
+                            {service}
+                          </span>
+                        ))
+                      ) : (
+                        <span className="text-sm text-gray-400 dark:text-gray-500">
+                          Nenhum serviço registrado
                         </span>
-                      ))}
+                      )}
                     </div>
                   </div>
 
@@ -154,19 +197,19 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     <div className="flex items-center gap-2 mt-1">
                       <Image className={`w-5 h-5 ${project.hasPhotos ? 'text-brand-500' : 'text-gray-400'}`} />
                       <span className={project.hasPhotos ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'}>
-                        {project.hasPhotos ? 'Sim' : 'Não'}
+                        {project.hasPhotos ? `Sim (${project.photos?.length || 0} fotos)` : 'Não'}
                       </span>
                     </div>
                   </div>
 
                   {/* Parceiros */}
-                  {project.partners && project.partners.length > 0 && (
+                  {partnerNames.length > 0 && (
                     <div>
                       <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                         Parceiros Envolvidos
                       </label>
                       <div className="flex flex-wrap gap-2 mt-1">
-                        {project.partners.map((partner, idx) => (
+                        {partnerNames.map((partner, idx) => (
                           <span key={idx} className="flex items-center gap-1 px-3 py-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-full text-sm">
                             <Users className="w-3 h-3" />
                             {partner}
@@ -205,12 +248,18 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                       Principais Atividades Realizadas
                     </label>
                     <ul className="mt-2 space-y-1.5">
-                      {project.mainActivities.map((activity, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
-                          <CheckCircle className="w-4 h-4 text-brand-500 mt-1 flex-shrink-0" />
-                          <span>{activity}</span>
+                      {activityNames.length > 0 ? (
+                        activityNames.map((activity, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
+                            <CheckCircle className="w-4 h-4 text-brand-500 mt-1 flex-shrink-0" />
+                            <span>{activity}</span>
+                          </li>
+                        ))
+                      ) : (
+                        <li className="text-sm text-gray-400 dark:text-gray-500">
+                          Nenhuma atividade registrada
                         </li>
-                      ))}
+                      )}
                     </ul>
                   </div>
 
@@ -220,23 +269,29 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                       Resultados Alcançados
                     </label>
                     <ul className="mt-2 space-y-1.5">
-                      {project.results.map((result, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
-                          <Award className="w-4 h-4 text-amber-500 mt-1 flex-shrink-0" />
-                          <span>{result}</span>
+                      {project.results && project.results.length > 0 ? (
+                        project.results.map((result, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
+                            <Award className="w-4 h-4 text-amber-500 mt-1 flex-shrink-0" />
+                            <span>{result.name}</span>
+                          </li>
+                        ))
+                      ) : (
+                        <li className="text-sm text-gray-400 dark:text-gray-500">
+                          Nenhum resultado registrado
                         </li>
-                      ))}
+                      )}
                     </ul>
                   </div>
 
                   {/* Observações */}
-                  {project.observations && (
+                  {project.observation && (
                     <div>
                       <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                         Observações Adicionais
                       </label>
                       <p className="mt-1 text-gray-700 dark:text-gray-300 leading-relaxed">
-                        {project.observations}
+                        {project.observation}
                       </p>
                     </div>
                   )}
@@ -246,10 +301,10 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
               {/* Footer */}
               <div className="mt-8 pt-4 border-t border-gray-200 dark:border-gray-700 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-500 dark:text-gray-400">
                 <span>
-                  Criado em: {new Date(project.createdAt).toLocaleDateString('pt-MZ')}
+                  Criado em: {formatDate(project.createdAt)}
                 </span>
                 <span>
-                  Última atualização: {new Date(project.updatedAt).toLocaleDateString('pt-MZ')}
+                  Última atualização: {formatDate(project.updatedAt)}
                 </span>
               </div>
             </div>
