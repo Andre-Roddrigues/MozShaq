@@ -120,18 +120,6 @@ export default function HeroSectionSherq() {
         {/* Hero Content */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-8 sm:pb-10 md:pb-16 lg:pb-32 flex-1 flex items-center justify-center">
           <div className="flex flex-col items-center justify-center text-center w-full max-w-xs sm:max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto">
-            
-            {/* Indicador de Autoplay */}
-            <motion.div
-              className="mb-4 flex items-center gap-2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <span className="text-xs text-white/50 bg-white/10 px-3 py-1 rounded-full">
-                {isAutoPlaying ? '▶ Reproduzindo automaticamente' : '⏸ Pausado'}
-              </span>
-            </motion.div>
 
             {/* Slide Content com AnimatePresence */}
             <AnimatePresence mode="wait">

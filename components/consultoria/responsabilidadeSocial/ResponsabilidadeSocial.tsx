@@ -51,7 +51,7 @@ export default function ResponsabilidadeSocialPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-blue-600 to-rose-700 dark:from-blue-900 dark:to-rose-900">
+      <section className="relative py-20 bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-900 dark:to-blue-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -107,7 +107,7 @@ export default function ResponsabilidadeSocialPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 * index }}
-                    className="bg-gradient-to-br from-blue-50 to-rose-50 dark:from-gray-700 dark:to-gray-800 rounded-xl p-6 border border-blue-100 dark:border-gray-700"
+                    className="bg-gradient-to-br from-blue-50 to-blue-50 dark:from-gray-700 dark:to-gray-800 rounded-xl p-6 border border-blue-100 dark:border-gray-700"
                   >
                     <div className="flex items-start gap-4 mb-4">
                       <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -195,7 +195,7 @@ export default function ResponsabilidadeSocialPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="bg-gradient-to-r from-blue-600 to-rose-700 rounded-2xl shadow-xl p-6 text-center text-white"
+              className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl shadow-xl p-6 text-center text-white"
             >
               <h3 className="text-xl font-bold mb-4">
                 Implemente sua Estratégia de RSE
