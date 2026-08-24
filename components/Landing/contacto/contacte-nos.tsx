@@ -62,7 +62,7 @@ export default function ContactPage() {
     {
       icon: Phone,
       title: 'Telefones',
-      details: ['+258 82 559 8146', '+258 87 559 8145', '+258 21 320873'],
+      details: ['+258 87 559 8145', '+258 21 320873'],
       color: 'text-gray-700 dark:text-gray-300'
     },
     {
@@ -74,7 +74,7 @@ export default function ContactPage() {
     {
       icon: Clock,
       title: 'Horário de Atendimento',
-      details: ['Segunda - Sexta: 8h00 - 17h00', 'Sábado: 8h00 - 12h00'],
+      details: ['Segunda - Sexta: 8h00 - 17h00'],
       color: 'text-gray-700 dark:text-gray-300'
     }
   ];

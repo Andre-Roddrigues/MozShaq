@@ -3,16 +3,6 @@
   "subtitle": "Specialists in integrated solutions for the sustainable development of Mozambique. Each consulting area is handled with excellence and international standards.",
   
   "areas": {
-    "sistemas-gestao": {
-      "name": "Management Systems",
-      "description": "Certification and implementation of ISO standards",
-      "subareas": [
-        "ISO 9001 - Quality",
-        "ISO 14001 - Environmental",
-        "ISO 45001 - Safety",
-        "ISO 27001 - Information Security"
-      ]
-    },
     "ambiental": {
       "name": "Environmental Studies",
       "description": "Impact assessment and environmental management",
@@ -33,6 +23,18 @@
         "Accident Investigation"
       ]
     },
+    "sistemas-gestao": {
+      "name": "Management Systems",
+      "description": "Certification and implementation of ISO standards",
+      "subareas": [
+        "ISO 9001 - Quality",
+        "ISO 14001 - Environmental",
+        "ISO 45001 - Safety",
+        "ISO 27001 - Information Security"
+      ]
+    },
+    
+    
     "formacao": {
       "name": "Training and Capacity Building",
       "description": "Skills development",
@@ -81,6 +83,56 @@
         "Supplier Development",
         "Social Responsibility",
         "Community Capacity Building"
+      ]
+    },
+    "responsabilidade-social": {
+      "name": "Social Responsibility",
+      "description": "Community engagement and social impact assessments",
+      "subareas": [
+        "CSR Programs",
+        "Community Engagement",
+        "Social Impact Assessment",
+        "Sustainable Development"
+      ]
+    },
+    "gestao-qualidade": {
+      "name": "Quality Management",
+      "description": "ISO certification and quality control system implementation",
+      "subareas": [
+        "ISO 9001 - Quality",
+        "Quality Control",
+        "Continuous Improvement",
+        "Process Management"
+      ]
+    },
+    "relatorios-sustentabilidade": {
+      "name": "Sustainability Reporting",
+      "description": "ESG reporting and sustainable performance metrics",
+      "subareas": [
+        "ESG Reporting",
+        "Sustainability Metrics",
+        "Environmental Compliance",
+        "Sustainability Communication"
+      ]
+    },
+    "conformidade-industrial": {
+      "name": "Industrial Compliance",
+      "description": "Regulatory compliance and industrial safety standards",
+      "subareas": [
+        "Compliance Audits",
+        "Safety Standards",
+        "Industrial Regulation",
+        "Licensing"
+      ]
+    },
+    "economia-circular": {
+      "name": "Circular Economy",
+      "description": "Waste management and circular economy implementation",
+      "subareas": [
+        "Waste Management",
+        "Recycling and Reuse",
+        "Resource Efficiency",
+        "Circular Business Models"
       ]
     }
   },

@@ -1,17 +1,45 @@
 {
-  "title": "Formação & Consultoria Especializada",
-  "subtitle": "Desenvolvimento profissional e soluções empresariais integradas",
-  "description": "Combinamos formação certificada com consultoria especializada em desenvolvimento sustentável, segurança ocupacional e sistemas de gestão para empresas em Moçambique.",
-  "btnSherq": "SHERQ ACADEMY",
-  "btnConsulting": "CONSULTORIA",
+  "title": "MozShaq Consultoria & SherqAcademy Formação",
+  "subtitle": "Excelência em Consultoria, Auditoria e Formação Profissional",
+  "description": "A MozShaq oferece soluções completas em consultoria e auditoria empresarial, enquanto a SherqAcademy proporciona formações especializadas para o desenvolvimento profissional contínuo.",
+  "btnSherq": "SherqAcademy",
+  "btnConsulting": "Consultoria",
   "courses": {
-    "environmental": "Gestão Ambiental",
-    "safety": "Segurança no Trabalho",
-    "quality": "Sistemas de Qualidade",
-    "audits": "Auditorias Internas",
-    "legislation": "Legislação Ambiental",
-    "waste": "Gestão de Resíduos",
-    "risks": "Prevenção de Riscos",
-    "iso": "Certificação ISO"
+    "environmental": "Ambiente",
+    "safety": "Segurança",
+    "quality": "Qualidade",
+    "audits": "Auditorias",
+    "legislation": "Legislação",
+    "waste": "Resíduos",
+    "risks": "Riscos",
+    "iso": "ISO"
+  },
+  "consulting": {
+    "title": "Consultoria e Auditoria",
+    "subtitle": "Excelência em soluções empresariais",
+    "description": "Oferecemos serviços especializados em consultoria e auditoria para empresas que buscam excelência em gestão, compliance e melhoria contínua.",
+    "btnConsulting": "Solicitar Consultoria",
+    "courses": {
+      "audits": "Auditorias Internas",
+      "compliance": "Compliance e Regulamentação",
+      "management": "Gestão de Riscos",
+      "processes": "Otimização de Processos"
+    }
+  },
+  "academy": {
+    "title": "Formação",
+    "subtitle": "Capacitação profissional de alto nível",
+    "description": "Formações especializadas nas áreas de Segurança, Higiene, Ambiente, Qualidade e muito mais. Desenvolva suas competências com os melhores profissionais.",
+    "btnSherq": "Ver Cursos",
+    "courses": {
+      "environmental": "Ambiente",
+      "safety": "Segurança",
+      "quality": "Qualidade",
+      "audits": "Auditorias",
+      "legislation": "Legislação",
+      "waste": "Resíduos",
+      "risks": "Riscos",
+      "iso": "ISO"
+    }
   }
 }

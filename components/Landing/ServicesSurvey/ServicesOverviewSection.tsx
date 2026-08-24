@@ -140,7 +140,7 @@ const ServicesOverviewSection = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
         >
-          {services.map((service, index) => {
+          {/* {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <motion.div
@@ -151,12 +151,10 @@ const ServicesOverviewSection = () => {
                 <Link href={service.href}>
                   <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm dark:shadow-gray-900/10 hover:shadow-xl dark:hover:shadow-gray-900/30 transition-all duration-500 h-full border border-gray-100 dark:border-gray-700/50 group-hover:border-brand-main/20 group-hover:scale-[1.02]">
                     
-                    {/* Icon with Gradient - Mais clean */}
                     <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${service.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                       <Icon className="w-6 h-6 text-white" />
                     </div>
 
-                    {/* Content */}
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 group-hover:text-brand-main transition-colors duration-300 leading-tight">
                       {service.title}
                     </h3>
@@ -165,19 +163,17 @@ const ServicesOverviewSection = () => {
                       {service.description}
                     </p>
 
-                    {/* CTA Arrow - Mais discreto */}
                     <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm font-medium group-hover:text-brand-main transition-all duration-300">
                       {t('viewMore')}
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
 
-                    {/* Hover Effect */}
                     <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-brand-main/10 transition-all duration-300 pointer-events-none"></div>
                   </div>
                 </Link>
               </motion.div>
             );
-          })}
+          })} */}
         </motion.div>
 
         {/* Bottom CTA */}

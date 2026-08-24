@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { routes } from '../../../../config/routes';
 
 export async function POST(request: Request) {
   try {
@@ -45,7 +46,7 @@ export async function POST(request: Request) {
     }
     
     // Preparar dados para enviar ao backend
-    const backendUrl = 'https://www.backend.mozshaq.co.mz/api/student/auth/register';
+    const backendUrl = `${routes.backend_url}/api/student/auth/register`;
     
     const response = await fetch(backendUrl, {
       method: 'POST',

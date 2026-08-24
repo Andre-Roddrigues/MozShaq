@@ -1,6 +1,7 @@
 // app/api/student/payments/route.ts
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { routes } from "../../../../config/routes";
 
 export async function POST(request: Request) {
   try {
@@ -59,8 +60,8 @@ export async function POST(request: Request) {
     backendFormData.append("courseId", courseId as string);
     backendFormData.append("paymentProof", new Blob([buffer], { type: paymentProof.type }), paymentProof.name);
 
-    const backendUrl = process.env.BACKEND_URL || "https://backend-mozshaq.onrender.com";
-    const response = await fetch(`${backendUrl}/api/student/payments`, {
+    const backendUrl = routes.backend_url;
+    const response = await fetch(`${backendUrl}/student/payments`, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${token}`,
@@ -108,7 +109,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const courseId = searchParams.get("courseId");
 
-    let url = `${process.env.BACKEND_URL}/api/student/payments`;
+    let url = `${routes.backend_url}/student/payments`;
     if (courseId) {
       url += `?courseId=${courseId}`;
     }

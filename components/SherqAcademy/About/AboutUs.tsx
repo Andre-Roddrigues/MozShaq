@@ -54,11 +54,6 @@ export default function AboutSection() {
 
   const areasFormacao = [
     {
-      icon: Shield,
-      title: "Saúde e Segurança",
-      description: "Formação completa em SSO e prevenção de riscos"
-    },
-    {
       icon: Settings,
       title: "Operação de Equipamentos",
       description: "Certificação em operação de máquinas e equipamentos"
@@ -287,7 +282,7 @@ export default function AboutSection() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {areasFormacao.map((area, index) => {
               const AreaIcon = area.icon;
               return (

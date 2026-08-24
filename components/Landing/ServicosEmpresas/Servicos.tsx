@@ -24,7 +24,10 @@ import {
   HeartPulse,
   Leaf,
   BookOpen,
-  Cpu
+  Cpu,
+  BarChart3,
+  Recycle,
+  CheckCircle
 } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslation } from '../../../hooks/useTranslation';
@@ -45,7 +48,12 @@ export default function AreasConsultoria() {
     'projetos-engenharia': Building2,
     'energia-sustentavel': Zap,
     'topografia-geotecnia': Mountain,
-    'conteudo-local': Users
+    'conteudo-local': Users,
+    'responsabilidade-social': HeartPulse,
+    'gestao-qualidade': CheckCircle,
+    'relatorios-sustentabilidade': BarChart3,
+    'conformidade-industrial': Factory,
+    'economia-circular': Recycle,
   };
 
   // Mapeamento de cores para cada área
@@ -57,19 +65,29 @@ export default function AreasConsultoria() {
     'projetos-engenharia': 'from-brand-main to-brand-main',
     'energia-sustentavel': 'from-brand-blue to-brand-blue',
     'topografia-geotecnia': 'from-brand-main to-brand-main',
-    'conteudo-local': 'from-teal-500 to-green-500'
+    'conteudo-local': 'from-teal-500 to-green-500',
+    'responsabilidade-social': 'from-pink-500 to-rose-500',
+    'gestao-qualidade': 'from-blue-600 to-indigo-600',
+    'relatorios-sustentabilidade': 'from-emerald-500 to-teal-500',
+    'conformidade-industrial': 'from-orange-500 to-amber-500',
+    'economia-circular': 'from-green-600 to-emerald-600',
   };
 
-  // IDs das áreas
+  // IDs das áreas (incluindo as novas)
   const areaIds = [
-    'sistemas-gestao',
     'ambiental',
     'seguranca-saude',
-    'formacao',
-    'projetos-engenharia',
+    'conteudo-local',
+    'sistemas-gestao',
     'energia-sustentavel',
     'topografia-geotecnia',
-    'conteudo-local'
+    'projetos-engenharia',
+    'formacao',
+    'responsabilidade-social',
+    'gestao-qualidade',
+    'relatorios-sustentabilidade',
+    'conformidade-industrial',
+    'economia-circular',
   ];
 
   // Construir array de áreas com traduções
@@ -113,7 +131,7 @@ export default function AreasConsultoria() {
           </p>
         </motion.div>
 
-        {/* Grid de Áreas de Consultoria */}
+        {/* Grid de Áreas de Consultoria - Agora com 4 colunas para acomodar 14 áreas */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {areasConsultoria.map((area, index) => {
             const Icon = area.icon;
@@ -122,7 +140,7 @@ export default function AreasConsultoria() {
                 key={area.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
               >
                 <Link href={`/consultoria/${area.id}`}>
                   <motion.div 

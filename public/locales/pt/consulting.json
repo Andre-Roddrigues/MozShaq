@@ -3,16 +3,6 @@
   "subtitle": "Especialistas em soluções integradas para o desenvolvimento sustentável de Moçambique. Cada área de consultoria é tratada com excelência e padrões internacionais.",
   
   "areas": {
-    "sistemas-gestao": {
-      "name": "Sistemas de Gestão",
-      "description": "Certificação e implementação de normas ISO",
-      "subareas": [
-        "ISO 9001 - Qualidade",
-        "ISO 14001 - Ambiental",
-        "ISO 45001 - Segurança",
-        "ISO 27001 - Segurança da Informação"
-      ]
-    },
     "ambiental": {
       "name": "Estudos Ambientais",
       "description": "Avaliação de impacto e gestão ambiental",
@@ -23,6 +13,7 @@
         "Monitorização Ambiental"
       ]
     },
+    
     "seguranca-saude": {
       "name": "Segurança e Saúde Ocupacional",
       "description": "Proteção do capital humano",
@@ -33,6 +24,17 @@
         "Investigação de Acidentes"
       ]
     },
+    "sistemas-gestao": {
+      "name": "Sistemas de Gestão",
+      "description": "Certificação e implementação de normas ISO",
+      "subareas": [
+        "ISO 9001 - Qualidade",
+        "ISO 14001 - Ambiental",
+        "ISO 45001 - Segurança",
+        "ISO 27001 - Segurança da Informação"
+      ]
+    },
+    
     "formacao": {
       "name": "Formação e Capacitação",
       "description": "Desenvolvimento de competências",
@@ -81,6 +83,56 @@
         "Desenvolvimento de Fornecedores",
         "Responsabilidade Social",
         "Capacitação Comunitária"
+      ]
+    },
+    "responsabilidade-social": {
+      "name": "Responsabilidade Social",
+      "description": "Engajamento comunitário e avaliações de impacto social",
+      "subareas": [
+        "Programas de RSE",
+        "Engajamento Comunitário",
+        "Avaliação de Impacto Social",
+        "Desenvolvimento Sustentável"
+      ]
+    },
+    "gestao-qualidade": {
+      "name": "Gestão da Qualidade",
+      "description": "Certificação ISO e implementação de sistemas de controlo de qualidade",
+      "subareas": [
+        "ISO 9001 - Qualidade",
+        "Controle de Qualidade",
+        "Melhoria Contínua",
+        "Gestão de Processos"
+      ]
+    },
+    "relatorios-sustentabilidade": {
+      "name": "Relatórios de Sustentabilidade",
+      "description": "Reporte ESG e métricas de desempenho sustentável",
+      "subareas": [
+        "Relatórios ESG",
+        "Métricas de Sustentabilidade",
+        "Compliance Ambiental",
+        "Comunicação de Sustentabilidade"
+      ]
+    },
+    "conformidade-industrial": {
+      "name": "Conformidade Industrial",
+      "description": "Conformidade regulatória e padrões de segurança industrial",
+      "subareas": [
+        "Auditorias de Conformidade",
+        "Padrões de Segurança",
+        "Regulamentação Industrial",
+        "Licenciamento"
+      ]
+    },
+    "economia-circular": {
+      "name": "Economia Circular",
+      "description": "Gestão de resíduos e implementação de economia circular",
+      "subareas": [
+        "Gestão de Resíduos",
+        "Reciclagem e Reutilização",
+        "Eficiência de Recursos",
+        "Modelos de Negócio Circulares"
       ]
     }
   },

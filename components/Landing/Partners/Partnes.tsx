@@ -15,6 +15,7 @@ const PartnerSlider = () => {
     { id: 3, name: "Lalgy", image: "/images/LALGY.png" },
     { id: 5, name: "MCNET", image: "/images/MCNET.png" },
     { id: 6, name: "Mio Reabilitação", image: "/images/VIVO.svg" },
+    { id: 7, name: "HITACHI", image: "/images/hitachi.png" },
   ];
 
   // Duplicar a lista para o efeito de loop infinito

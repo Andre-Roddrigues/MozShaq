@@ -130,7 +130,7 @@ export function PaymentModal({ isOpen, onClose, courseId, courseTitle, amount, o
               </p>
               <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-4">
                 <p className="text-sm text-yellow-800 dark:text-yellow-300">
-                  ⏳ O acesso ao curso será liberado em até 24h após a aprovação do pagamento.
+                  O acesso ao curso será liberado em até 24h após a aprovação do pagamento.
                 </p>
               </div>
             </div>
