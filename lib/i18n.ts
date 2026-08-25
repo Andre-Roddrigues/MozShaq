@@ -11,6 +11,7 @@ const resources = {
     footer: require('../public/locales/pt/footer.json'), // ← Adicionado
     hero: require('../public/locales/pt/hero.json'),
     about: require('../public/locales/pt/about.json'),
+    aboutsherq: require('../public/locales/pt/aboutsherq.json'),
     consulting: require('../public/locales/pt/consulting.json'),
     'how-we-act': require('../public/locales/pt/how-we-act.json'),
     services: require('../public/locales/pt/services.json'),
@@ -21,6 +22,7 @@ const resources = {
     footer: require('../public/locales/en/footer.json'), // ← Adicionado
     hero: require('../public/locales/en/hero.json'),
     about: require('../public/locales/en/about.json'),
+    aboutsherq: require('../public/locales/en/aboutsherq.json'),
     consulting: require('../public/locales/en/consulting.json'),
     'how-we-act': require('../public/locales/en/how-we-act.json'),
     services: require('../public/locales/en/services.json'),
