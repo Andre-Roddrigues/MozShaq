@@ -174,7 +174,7 @@ export default function HeroSectionSherq() {
                 </motion.p>
 
                 {/* Lista de Cursos/Áreas */}
-                <motion.div
+                {/* <motion.div
                   className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -188,7 +188,7 @@ export default function HeroSectionSherq() {
                       {course}
                     </span>
                   ))}
-                </motion.div>
+                </motion.div> */}
 
                 {/* CTA Button */}
                 <motion.div
