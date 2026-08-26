@@ -98,13 +98,12 @@ export default function EstudosAmbientaisPage() {
               className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 mb-8"
             >
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                Nossos Serviços Ambientais
+                Estudos e Projectos Ambientais
               </h2>
               <div className="space-y-6 text-gray-600 dark:text-gray-300">
                 <p>
                   Oferecemos uma gama completa de serviços de consultoria ambiental para ajudar organizações 
-                  a operar de forma sustentável e em conformidade com as regulamentações ambientais moçambicanas 
-                  e internacionais.
+                  a operar de forma sustentável e em conformidade com as regulamentação ambiental local e boas práticas internacionais.
                 </p>
                 <p>
                   Nossa equipa de especialistas ambientais combina conhecimento técnico com experiência prática 
