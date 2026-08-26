@@ -20,18 +20,18 @@ export default function EstudosAmbientaisPage() {
       title: "Avaliação de Impacto Ambiental (AIA)",
       description: "Estudos detalhados de impactos ambientais para projetos de diferentes categorias.",
       categories: ["Categoria A+", "Categoria A", "Categoria B", "Categoria C"],
-      icon: FileText
+      icon: Leaf
     },
     {
       title: "Planos de Gestão Ambiental",
       description: "Desenvolvimento de estratégias para minimizar impactos ambientais.",
       categories: ["Monitorização", "Mitigação", "Compensação", "Relatórios"],
-      icon: Leaf
+      icon: FileText
     },
     {
       title: "Auditorias Ambientais",
       description: "Verificação da conformidade ambiental e identificação de oportunidades de melhoria.",
-      categories: ["Conformidade Legal", "Desempenho", "Sistemas", "Sítios"],
+      categories: ["Conformidade Legal", "Desempenho Ambiental", "Sistemas", "Sítios"],
       icon: CheckCircle
     },
     {
@@ -98,7 +98,7 @@ export default function EstudosAmbientaisPage() {
               className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 mb-8"
             >
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                Estudos e Projectos Ambientais
+                Estudos Ambientais e Sociais
               </h2>
               <div className="space-y-6 text-gray-600 dark:text-gray-300">
                 <p>
