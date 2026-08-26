@@ -156,15 +156,14 @@ export default function EstudosAmbientaisPage() {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="font-bold text-gray-900 dark:text-white text-lg">
-                          Reassentamento e Compensação
+                         Planos de Reassentamento 
                         </h3>
                         <span className="px-3 py-1 bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200 rounded-full text-xs font-medium">
                           Safeguards Sociais
                         </span>
                       </div>
                       <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">
-                        Planeamento e implementação de programas de reassentamento involuntário e compensação justa, 
-                        em conformidade com a legislação moçambicana e padrões internacionais (Banco Mundial, IFC).
+                        Planeamento e desenvolvimento e implementação planos de reassentamento involuntário e resultantes das actvidades económicas, garatindo compensação justa, em conformidade com a legislação local e padrões internacionais. (Banco Mundial, IFC).
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {services[4].categories.map((category, idx) => (
