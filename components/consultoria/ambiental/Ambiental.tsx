@@ -107,7 +107,7 @@ export default function EstudosAmbientaisPage() {
                 </p>
                 <p>
                   Nossa equipa de especialistas ambientais combina conhecimento técnico com experiência prática 
-                  em diversos sectores, desde mineraçã, construção,petróleo e gás,energia,portos, agricultura entre outras áreas.
+                  em diversos sectores, desde mineraçã, construção, petróleo e gás, energia, portos,agricultura entre outras áreas.
                 </p>
               </div>
 
