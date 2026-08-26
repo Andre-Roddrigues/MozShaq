@@ -75,7 +75,7 @@ export default function HeroSectionSherq() {
 
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length);
-    }, 9000); // 5 segundos
+    }, 15000); // 5 segundos
 
     return () => clearInterval(interval);
   }, [isAutoPlaying, slides.length]);
