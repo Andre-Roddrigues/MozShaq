@@ -1,0 +1,21 @@
+{
+  "badge": "Project Portfolio",
+  "title": "Our",
+  "titleHighlight": "Projects",
+  "subtitle": "Discover the projects developed by Mozshaq in environmental consulting, sustainable management and community development in Mozambique.",
+  
+  "stats": {
+    "projects": "Projects Completed",
+    "clients": "Clients Served",
+    "locations": "Locations",
+    "satisfaction": "Satisfaction"
+  },
+  
+  "cta": {
+    "badge": "Complete Portfolio",
+    "title": "Explore All Our Projects",
+    "description": "Browse the complete portfolio of projects carried out by Mozshaq in environmental consulting, sustainable management and community development.",
+    "button": "View All Projects",
+    "secondary": "Contact Us"
+  }
+}

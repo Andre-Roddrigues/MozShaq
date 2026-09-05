@@ -1,0 +1,41 @@
+{
+  "title": "About Us",
+  "subtitle": "About Mozshaq",
+  "description": "We are <strong>Mozshaq Consultoria e Serviços</strong>, a genuinely Mozambican company that offers integrated solutions in studies and specialized consulting for the sustainable development of Mozambique.",
+  "description2": "Established in 2013, <strong>MOZSHAQ</strong> has a specialized technical team in its areas of operation, focused on technical assistance and services, providing its clients with local responses with international standards.",
+  "description3": "The experience acquired over more than 12 years of existence and the knowledge accumulated by employees constitute a competitive advantage for the company and contribute to solving the challenges posed by the need to fully satisfy our clients.",
+  "description4": "We strive every day to deliver added value solutions to our clients in any sector of activity, allowing them to stand out in this increasingly competitive market.",
+  
+  "mission": {
+    "title": "Mission",
+    "description": "Optimize organizations through national and international standards to reduce costs, increase productivity and mitigate environmental impacts and health risks, ensuring continuous sustainable development."
+  },
+  
+  "vision": {
+    "title": "Vision",
+    "description": "To become the best and preferred Mozambican company for technical assistance in Studies and Specialized Consulting, Project Management, Training and Outsourcing solutions."
+  },
+  
+  "values": {
+    "title": "Values",
+    "items": {
+      "safety": "Safety & Health",
+      "sustainability": "Sustainability",
+      "responsibility": "Responsibility",
+      "customerFocus": "Customer Focus"
+    }
+  },
+  
+  "team": {
+    "title": "Our Greatest Asset: <span>Our Team</span>",
+    "description": "With about <strong>60% of a young and dynamic team</strong>, MOZSHAQ has a multidisciplinary team, motivated by the common denominator: <span>sustainable development.</span>",
+    "description2": "We prioritize knowledge transfer and are committed to building internal capacity. In all projects, we find an external consultant to add value to our local consultants through the knowledge transfer tool."
+  },
+  
+  "stats": {
+    "experience": "Years of Experience",
+    "youngTeam": "Young Team",
+    "projects": "Completed Projects",
+    "sectors": "Sectors of Operation"
+  }
+}

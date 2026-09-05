@@ -1,0 +1,188 @@
+{
+  "badge": "SHERQ ACADEMY",
+  "title": "Centro de",
+  "titleHighlight": "Formação Profissional",
+  "description": "A SHERQ ACADEMY é um centro de formação profissional licenciado pelo Ministério da Ciência e Tecnologia, Ensino Superior e Técnico-Profissional e acreditado pela Autoridade Nacional de Educação Profissional de Moçambique.",
+  
+  "stats": {
+    "years": "Anos de Experiência",
+    "trained": "Profissionais Formados",
+    "courses": "Cursos Disponíveis",
+    "sectors": "Sectores de Actuação"
+  },
+  
+  "missionTitle": "Formação que Transforma Pessoas e Organizações",
+  "missionText1": "Especializamo-nos no desenvolvimento de competências técnicas e comportamentais, actuando em duas grandes áreas: operação de máquinas e equipamentos e habilidades interpessoais.",
+  "missionText2": "Desenvolvemos formações sob medida para cada organização, analisando as necessidades específicas em conjunto com a empresa para conceber e implementar acções formativas adaptadas à sua estratégia.",
+  "missionText3": "A nossa metodologia garante que cada formação seja planeada como a solução mais adequada para transformar pessoas e potenciar resultados organizacionais.",
+  
+  "mission": {
+    "label": "Missão",
+    "text": "Desenvolver competências profissionais através de formação de qualidade, contribuindo para a valorização dos recursos humanos e o crescimento sustentável das organizações em Moçambique."
+  },
+  
+  "vision": {
+    "label": "Visão",
+    "text": "Ser o centro de formação de referência em Moçambique, reconhecido pela excelência na capacitação profissional e na contribuição para o desenvolvimento socioeconómico do país."
+  },
+  
+  "values": {
+    "label": "Valores",
+    "quality": {
+      "title": "Qualidade & Segurança",
+      "description": "Compromisso com os mais altos padrões de qualidade e segurança"
+    },
+    "sustainability": {
+      "title": "Sustentabilidade",
+      "description": "Promovemos práticas sustentáveis em todas as formações"
+    },
+    "social": {
+      "title": "Responsabilidade Social",
+      "description": "Investimos no desenvolvimento das comunidades locais"
+    },
+    "client": {
+      "title": "Foco no Cliente",
+      "description": "Soluções personalizadas para cada necessidade específica"
+    }
+  },
+  
+  "areas": {
+    "title": "Áreas de",
+    "titleHighlight": "Formação",
+    "subtitle": "Oferecemos uma vasta gama de cursos profissionais organizados em cinco áreas principais",
+    "courses": "cursos",
+    "viewCourses": "Ver cursos",
+    "noCourses": "Nenhum curso disponível nesta categoria"
+  },
+  
+  "categories": {
+    "sso": {
+      "title": "Saúde e Segurança Ocupacional",
+      "description": "Formação em segurança, saúde ocupacional e prevenção de riscos",
+      "courses": [
+        "SSO1 - Conceito básico de SSO e Requisitos legais",
+        "SSO2 - Higiene e segurança ocupacional para técnicos e supervisores",
+        "SSO3 - Segurança em instalações eléctricas e soldadura",
+        "SSO4 - Segurança em Trabalhos em altura",
+        "SSO5 - Plano de Emergência Interno e Simulação de emergência",
+        "SSO6 - Substâncias abusivas",
+        "SSO7 - Representante de Comités de SSO (HSREP)",
+        "SSO8 - Segurança em espaços confinados",
+        "SSO9 - Primeiros socorros nível 1",
+        "SSO10 - Primeiros socorros nível 2",
+        "SSO11 - Prevenção e combate aos incêndios",
+        "SSO12 - Manuseamento e transporte de combustíveis",
+        "SSO13 - Condução defensiva (4x4)",
+        "SSO14 - Investigação de Acidentes",
+        "SSO15 - Método da Análise da Causa do Incidente (MACI)",
+        "SSO16 - Análise da Causa Raiz Apollo",
+        "SSO17 - Especialização internacional em saúde e segurança ocupacional",
+        "SSO18 - Conscientização em Segurança na construção",
+        "SSO19 - Conscientização em Segurança na Mineração"
+      ]
+    },
+    "sg": {
+      "title": "Sistemas de Gestão",
+      "description": "Certificação e implementação de normas ISO e sistemas de gestão",
+      "courses": [
+        "SG1 - Introdução ao Sistema de Gestão Ambiental ISO 14001",
+        "SG2 - Implementação ao Sistema de Gestão Ambiental ISO 14001",
+        "SG3 - Carbon Footprint training",
+        "SG4 - Introdução ao Sistema de Gestão de Qualidade ISO 9001",
+        "SG5 - Implementação do Sistema Gestão de Qualidade ISO 9001",
+        "SG6 - Introdução ao Sistema de Gestão de Saúde e Segurança Ocupacional ISO 45001",
+        "SG7 - Implementação do Sistema Gestão de Saúde e Segurança Ocupacional ISO 45001",
+        "SG8 - Auditoria ao Sistema de Gestão ISO 19011"
+      ]
+    },
+    "oe": {
+      "title": "Operação de Equipamentos",
+      "description": "Formação em operação de máquinas e equipamentos industriais",
+      "courses": [
+        "Montador de andaimes",
+        "Inspector de Andaimes",
+        "Evacuação de Emergência e Simulação de Emergência",
+        "Noções básicas içamento de carga",
+        "Içamento de cargas completo",
+        "RAC's (Requisitos de Actividades Críticas)",
+        "Guindaste pórti",
+        "Grua de Navio",
+        "Grua Torre",
+        "Operação Grua Móvel Hidráulica",
+        "Operação de camião grua",
+        "Operação de grua de lagartas",
+        "Empilhador de Paletes",
+        "Empilhador Elevador",
+        "Operação de Telescópio",
+        "Operação de Retroescavadora",
+        "Operação de Escavadora Hidraúlica",
+        "Operação de Cilindro compactador",
+        "Operação de Tractor com Atrelado",
+        "Plataforma Elevatória Tipo Tesoura",
+        "Operador de equipamento fixo",
+        "Líder do navio",
+        "Operador de equipamentos móveis (Staker Reclaimer)",
+        "Charger Car",
+        "Operação de gruas fixas",
+        "Operação de empilhadora",
+        "Cherry Picker",
+        "Reach Staker",
+        "Front and Loader",
+        "EMPTY Handler",
+        "Operação de bob cat",
+        "Operação de Pá Carregadora",
+        "Operação de Niveladora",
+        "Camião Basculante Articulado (ADT)",
+        "Operação de Buldozer",
+        "Plataforma Elevatória Tipo Lança",
+        "Operador de equipamentos móveis",
+        "Belting"
+      ]
+    },
+    "gr": {
+      "title": "Gestão de Risco",
+      "description": "Formação em identificação, análise e gestão de riscos",
+      "courses": [
+        "GR1 - ISO 31000 Curso de Introdução à gestão de Riscos",
+        "GR2 - ISO 31000 Curso de Implementação da gestão de Riscos",
+        "GR3 - Identificação de Perigos de Análise de Riscos",
+        "GR4 - Formação em HAZOP",
+        "GR5 - ISO 17776 Indústrias de petróleo e gás natural",
+        "GR6 - Identificação de Perigo e Avaliação de Riscos (IPAR/HIRA)",
+        "GR7 - Análise de Riscos BOW TIE"
+      ]
+    },
+    "gs": {
+      "title": "Habilidades Gerais",
+      "description": "Desenvolvimento de competências interpessoais e de gestão",
+      "courses": [
+        "GS1 - Liderança e Gestão",
+        "GS2 - Gestão de Tempo",
+        "GS3 - Gestão integrada de Recursos Humanos",
+        "GS4 - Excel Avançado",
+        "GS5 - Gestão de projectos",
+        "GS6 - Gestão de Contractos e subvenções",
+        "GS7 - Logísticas e cadeia de suprimento",
+        "GS8 - Comportamento organizacional"
+      ]
+    }
+  },
+  
+  "certification": {
+    "title": "Certificação e Acreditação",
+    "text": "Licenciados pelo Ministério da Ciência e Tecnologia, Ensino Superior e Técnico-Profissional (Alvará N° 1091/051/CFP/2019) e acreditados pela Autoridade Nacional de Educação Profissional, em conformidade com o Decreto 28/2017 de 11 de Julho."
+  },
+  
+  "modal": {
+    "search": "Pesquisar cursos...",
+    "coursesFound": "cursos encontrados",
+    "noResults": "Nenhum curso encontrado",
+    "noResultsDescription": "Tente ajustar os termos da sua pesquisa",
+    "of": "de"
+  },
+  
+  "pagination": {
+    "prev": "Anterior",
+    "next": "Próximo"
+  }
+}

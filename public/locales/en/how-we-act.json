@@ -1,0 +1,61 @@
+{
+  "title": "How We Act",
+  "subtitle": "A structured and proven methodology to ensure consistent results in sustainability, safety and environmental management.",
+  
+  "processes": {
+    "diagnostico": {
+      "title": "Initial Diagnosis",
+      "description": "Detailed analysis of your organization's current situation to identify improvement opportunities.",
+      "steps": [
+        "Initial assessment",
+        "Gap identification",
+        "Objective definition"
+      ]
+    },
+    "consultoria": {
+      "title": "Specialized Consulting",
+      "description": "Development of customized solutions with our team of technical experts.",
+      "steps": [
+        "Action plan",
+        "Resource allocation",
+        "Customized methodology"
+      ]
+    },
+    "implementacao": {
+      "title": "Implementation",
+      "description": "Execution of the plan with continuous monitoring and real-time adjustments.",
+      "steps": [
+        "Phased implementation",
+        "KPI monitoring",
+        "Continuous optimization"
+      ]
+    },
+    "certificacao": {
+      "title": "Certification",
+      "description": "Preparation for audits and obtaining internationally recognized certifications.",
+      "steps": [
+        "Internal audit",
+        "Document preparation",
+        "Final certification"
+      ]
+    },
+    "acompanhamento": {
+      "title": "Follow-up",
+      "description": "Ongoing post-implementation support to ensure sustainability of results.",
+      "steps": [
+        "Monitoring",
+        "Periodic reports",
+        "Continuous improvement"
+      ]
+    },
+    "excelencia": {
+      "title": "Continuous Excellence",
+      "description": "Maintaining quality standards and constant pursuit of operational excellence.",
+      "steps": [
+        "Benchmarking",
+        "Innovation",
+        "Best practices"
+      ]
+    }
+  }
+}

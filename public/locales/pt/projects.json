@@ -1,0 +1,21 @@
+{
+  "badge": "Portfólio de Projetos",
+  "title": "Projetos",
+  "titleHighlight": "Realizados",
+  "subtitle": "Conheça os projetos desenvolvidos pela Mozshaq em consultoria ambiental, gestão sustentável e desenvolvimento comunitário em Moçambique.",
+  
+  "stats": {
+    "projects": "Projetos Realizados",
+    "clients": "Clientes Atendidos",
+    "locations": "Localizações",
+    "satisfaction": "Satisfação"
+  },
+  
+  "cta": {
+    "badge": "Portfólio Completo",
+    "title": "Conheça Todos os Nossos Projetos",
+    "description": "Explore o portfólio completo de projetos realizados pela Mozshaq em consultoria ambiental, gestão sustentável e desenvolvimento comunitário.",
+    "button": "Ver Todos os Projetos",
+    "secondary": "Fale Conosco"
+  }
+}

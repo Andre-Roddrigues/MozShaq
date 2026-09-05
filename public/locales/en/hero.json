@@ -1,0 +1,45 @@
+{
+  "title": "MozShaq Consulting & SherqAcademy Training",
+  "subtitle": "Excellence in Consulting, Auditing and Professional Training",
+  "description": "MozShaq offers complete solutions in business consulting and auditing, while SherqAcademy provides specialized training for continuous professional development.",
+  "btnSherq": "SherqAcademy",
+  "btnConsulting": "Consulting",
+  "courses": {
+    "environmental": "Environment",
+    "safety": "Safety",
+    "quality": "Quality",
+    "audits": "Audits",
+    "legislation": "Legislation",
+    "waste": "Waste",
+    "risks": "Risks",
+    "iso": "ISO"
+  },
+  "consulting": {
+    "title": "MozShaq Consulting and Auditing",
+    "subtitle": "Excellence in business solutions",
+    "description": "We offer specialized consulting and auditing services for companies seeking excellence in management, compliance and continuous improvement.",
+    "btnConsulting": "Request Consulting",
+    "courses": {
+      "audits": "Internal Audits",
+      "compliance": "Compliance and Regulation",
+      "management": "Risk Management",
+      "processes": "Process Optimization"
+    }
+  },
+  "academy": {
+    "title": "SherqAcademy Training",
+    "subtitle": "High-level professional development",
+    "description": "Specialized training in Safety, Hygiene, Environment, Quality and much more. Develop your skills with the best professionals.",
+    "btnSherq": "View Courses",
+    "courses": {
+      "environmental": "Environment",
+      "safety": "Safety",
+      "quality": "Quality",
+      "audits": "Audits",
+      "legislation": "Legislation",
+      "waste": "Waste",
+      "risks": "Risks",
+      "iso": "ISO"
+    }
+  }
+}

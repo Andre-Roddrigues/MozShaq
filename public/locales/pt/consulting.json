@@ -1,0 +1,142 @@
+{
+  "title": "Nossas Áreas de Consultoria",
+  "subtitle": "Especialistas em soluções integradas para o desenvolvimento sustentável de Moçambique. Cada área de consultoria é tratada com excelência e padrões internacionais.",
+  
+  "areas": {
+    "ambiental": {
+      "name": "Estudos Ambientais",
+      "description": "Avaliação de impacto e gestão ambiental",
+      "subareas": [
+        "AIA - Avaliação de Impacto Ambiental",
+        "Planos de Gestão Ambiental",
+        "Auditorias Ambientais",
+        "Monitorização Ambiental"
+      ]
+    },
+    
+    "seguranca-saude": {
+      "name": "Segurança e Saúde Ocupacional",
+      "description": "Proteção do capital humano",
+      "subareas": [
+        "Planos de Segurança",
+        "Avaliação de Riscos",
+        "Equipamentos de Proteção",
+        "Investigação de Acidentes"
+      ]
+    },
+    "sistemas-gestao": {
+      "name": "Sistemas de Gestão",
+      "description": "Certificação e implementação de normas ISO",
+      "subareas": [
+        "ISO 9001 - Qualidade",
+        "ISO 14001 - Ambiental",
+        "ISO 45001 - Segurança",
+        "ISO 27001 - Segurança da Informação"
+      ]
+    },
+    
+    "formacao": {
+      "name": "Formação e Capacitação",
+      "description": "Desenvolvimento de competências",
+      "subareas": [
+        "Treino de Operadores",
+        "Segurança no Trabalho",
+        "Gestão de Projetos",
+        "Habilidades Técnicas"
+      ]
+    },
+    "projetos-engenharia": {
+      "name": "Engenharia e Projetos",
+      "description": "Design, supervisão e gestão de projetos",
+      "subareas": [
+        "Estudos de Viabilidade",
+        "Design de Infraestruturas",
+        "Gestão de Projetos",
+        "Supervisão de Obras"
+      ]
+    },
+    "energia-sustentavel": {
+      "name": "Energia Sustentável",
+      "description": "Soluções energéticas renováveis",
+      "subareas": [
+        "Estudos de Viabilidade",
+        "Auditorias Energéticas",
+        "Projectos Renováveis",
+        "Eficiência Energética"
+      ]
+    },
+    "topografia-geotecnia": {
+      "name": "Topografia e Geotecnia",
+      "description": "Estudos de solo e mapeamento",
+      "subareas": [
+        "Levantamentos Topográficos",
+        "Estudos Geotécnicos",
+        "Cartografia e Mapeamento",
+        "Perfis de Solo"
+      ]
+    },
+    "conteudo-local": {
+      "name": "Conteúdo Local e RSC",
+      "description": "Desenvolvimento comunitário e sustentável",
+      "subareas": [
+        "Plano de Conteúdo Local",
+        "Desenvolvimento de Fornecedores",
+        "Responsabilidade Social",
+        "Capacitação Comunitária"
+      ]
+    },
+    "responsabilidade-social": {
+      "name": "Responsabilidade Social",
+      "description": "Engajamento comunitário e avaliações de impacto social",
+      "subareas": [
+        "Programas de RSE",
+        "Engajamento Comunitário",
+        "Avaliação de Impacto Social",
+        "Desenvolvimento Sustentável"
+      ]
+    },
+    "gestao-qualidade": {
+      "name": "Gestão da Qualidade",
+      "description": "Certificação ISO e implementação de sistemas de controlo de qualidade",
+      "subareas": [
+        "ISO 9001 - Qualidade",
+        "Controle de Qualidade",
+        "Melhoria Contínua",
+        "Gestão de Processos"
+      ]
+    },
+    "relatorios-sustentabilidade": {
+      "name": "Relatórios de Sustentabilidade",
+      "description": "Reporte ESG e métricas de desempenho sustentável",
+      "subareas": [
+        "Relatórios ESG",
+        "Métricas de Sustentabilidade",
+        "Compliance Ambiental",
+        "Comunicação de Sustentabilidade"
+      ]
+    },
+    "conformidade-industrial": {
+      "name": "Conformidade Industrial",
+      "description": "Conformidade regulatória e padrões de segurança industrial",
+      "subareas": [
+        "Auditorias de Conformidade",
+        "Padrões de Segurança",
+        "Regulamentação Industrial",
+        "Licenciamento"
+      ]
+    },
+    "economia-circular": {
+      "name": "Economia Circular",
+      "description": "Gestão de resíduos e implementação de economia circular",
+      "subareas": [
+        "Gestão de Resíduos",
+        "Reciclagem e Reutilização",
+        "Eficiência de Recursos",
+        "Modelos de Negócio Circulares"
+      ]
+    }
+  },
+  
+  "cta": "Saiba mais",
+  "more": "mais..."
+}

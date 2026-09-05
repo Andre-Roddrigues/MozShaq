@@ -1,0 +1,61 @@
+{
+  "title": "Como Actuamos",
+  "subtitle": "Uma metodologia estruturada e comprovada para garantir resultados consistentes em sustentabilidade, segurança e gestão ambiental.",
+  
+  "processes": {
+    "diagnostico": {
+      "title": "Diagnóstico Inicial",
+      "description": "Análise detalhada da situação atual da sua organização para identificar oportunidades de melhoria.",
+      "steps": [
+        "Avaliação inicial",
+        "Identificação de gaps",
+        "Definição de objetivos"
+      ]
+    },
+    "consultoria": {
+      "title": "Consultoria Especializada",
+      "description": "Desenvolvimento de soluções personalizadas com nossa equipa de especialistas técnicos.",
+      "steps": [
+        "Plano de ação",
+        "Alocação de recursos",
+        "Metodologia customizada"
+      ]
+    },
+    "implementacao": {
+      "title": "Implementação",
+      "description": "Execução do plano com monitorização contínua e ajustes em tempo real.",
+      "steps": [
+        "Implementação faseada",
+        "Monitorização KPIs",
+        "Otimização contínua"
+      ]
+    },
+    "certificacao": {
+      "title": "Certificação",
+      "description": "Preparação para auditorias e obtenção de certificações reconhecidas internacionalmente.",
+      "steps": [
+        "Auditoria interna",
+        "Preparação documental",
+        "Certificação final"
+      ]
+    },
+    "acompanhamento": {
+      "title": "Acompanhamento",
+      "description": "Suporte contínuo pós-implementação para garantir sustentabilidade dos resultados.",
+      "steps": [
+        "Monitorização",
+        "Relatórios periódicos",
+        "Melhoria contínua"
+      ]
+    },
+    "excelencia": {
+      "title": "Excelência Contínua",
+      "description": "Manutenção dos padrões de qualidade e busca constante pela excelência operacional.",
+      "steps": [
+        "Benchmarking",
+        "Inovação",
+        "Melhores práticas"
+      ]
+    }
+  }
+}

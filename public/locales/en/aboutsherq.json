@@ -1,0 +1,188 @@
+{
+  "badge": "SHERQ ACADEMY",
+  "title": "Professional",
+  "titleHighlight": "Training Center",
+  "description": "The SHERQ ACADEMY is a professional training center licensed by the Ministry of Science and Technology, Higher Education and Technical-Professional and accredited by the National Authority for Professional Education of Mozambique.",
+  
+  "stats": {
+    "years": "Years of Experience",
+    "trained": "Professionals Trained",
+    "courses": "Courses Available",
+    "sectors": "Sectors of Activity"
+  },
+  
+  "missionTitle": "Training that Transforms People and Organizations",
+  "missionText1": "We specialize in the development of technical and behavioral skills, operating in two main areas: machine and equipment operation and interpersonal skills.",
+  "missionText2": "We develop tailor-made training for each organization, analyzing specific needs together with the company to design and implement training actions adapted to their strategy.",
+  "missionText3": "Our methodology ensures that each training is planned as the most suitable solution to transform people and enhance organizational results.",
+  
+  "mission": {
+    "label": "Mission",
+    "text": "To develop professional skills through quality training, contributing to the valorization of human resources and the sustainable growth of organizations in Mozambique."
+  },
+  
+  "vision": {
+    "label": "Vision",
+    "text": "To be the reference training center in Mozambique, recognized for excellence in professional training and contribution to the country's socioeconomic development."
+  },
+  
+  "values": {
+    "label": "Values",
+    "quality": {
+      "title": "Quality & Safety",
+      "description": "Commitment to the highest standards of quality and safety"
+    },
+    "sustainability": {
+      "title": "Sustainability",
+      "description": "We promote sustainable practices in all training"
+    },
+    "social": {
+      "title": "Social Responsibility",
+      "description": "We invest in the development of local communities"
+    },
+    "client": {
+      "title": "Client Focus",
+      "description": "Customized solutions for each specific need"
+    }
+  },
+  
+  "areas": {
+    "title": "Training",
+    "titleHighlight": "Areas",
+    "subtitle": "We offer a wide range of professional courses organized into five main areas",
+    "courses": "courses",
+    "viewCourses": "View courses",
+    "noCourses": "No courses available in this category"
+  },
+  
+  "categories": {
+    "sso": {
+      "title": "Occupational Health and Safety",
+      "description": "Training in safety, occupational health and risk prevention",
+      "courses": [
+        "SSO1 - General safety & legal requirements",
+        "SSO2 - Occupational Health and Safety for technicians and supervisors",
+        "SSO3 - Electrical installations and welding safety",
+        "SSO4 - Safety in working at height",
+        "SSO5 - Company Emergency Plan and Drills",
+        "SSO6 - Abusive Substances",
+        "SSO7 - OHS Committee Reps (HSREP)",
+        "SSO8 - Safety in Confined Spaces operations",
+        "SSO9 - First Aid (Level 1)",
+        "SSO10 - First Aid (Level 2)",
+        "SSO11 - Fire prevention and firefighting",
+        "SSO12 - Fuel Transportation and handling",
+        "SSO13 - Defensive driving (4x4)",
+        "SSO14 - Accident investigation",
+        "SSO15 - Incident Cause Analysis Method (ICAM)",
+        "SSO16 - Apollo Root Cause Analysis",
+        "SSO17 - International specialization in occupational health and safety",
+        "SSO18 - Construction safety awareness",
+        "SSO19 - Mining safety awareness"
+      ]
+    },
+    "sg": {
+      "title": "Management Systems",
+      "description": "Certification and implementation of ISO standards and management systems",
+      "courses": [
+        "SG1 - ISO 14001 Introduction Course",
+        "SG2 - ISO 14001 Environmental Management Implementation Course",
+        "SG3 - Carbon Footprint training",
+        "SG4 - ISO 9001 Quality Management System Introduction Course",
+        "SG5 - ISO 9001 Quality Management System Implementation Course",
+        "SG6 - ISO 45001 Occupational Health and Safety Management System Introduction course",
+        "SG7 - ISO 45001 Occupational Health and Safety Implementation System Introduction course",
+        "SG8 - ISO 19011 Management System Audit"
+      ]
+    },
+    "oe": {
+      "title": "Equipment Operation",
+      "description": "Training in machine and industrial equipment operation",
+      "courses": [
+        "Scaffolding training",
+        "Scaffolding Inspector training",
+        "Emergency Evacuation Drills",
+        "Basic Rigging",
+        "Rigging Study",
+        "RAC's (Critical Activities Requirements)",
+        "Gantry Crane",
+        "Ship Crane",
+        "Tower Crane",
+        "Hydraulic Mobile Crane Operation",
+        "Truck Mounted Crane Operation",
+        "Crawler crane operation",
+        "Pallet Truck",
+        "Order Picker",
+        "Telescopic Handler Operation",
+        "Tractor Loader Backhoe Operation - TLB",
+        "Hydraulic Excavator Operation",
+        "Compacter Cylinder Operation",
+        "Truck & Trailer Operation",
+        "Aerial Platform - Scissor Lift",
+        "Fixed Equipment Operator",
+        "Ship Leader",
+        "Staker Reclaimer Operator",
+        "Charger Car",
+        "OH Crane operation",
+        "Fork lift operation",
+        "Cherry Picker",
+        "Reach Staker",
+        "Front and Loader",
+        "EMPTY Handler",
+        "Bob Cat Operation",
+        "Front End Loader Operation",
+        "Grader Operation",
+        "ADT - Articulated Dump Truck",
+        "Bulldozer Operation",
+        "Aerial Platform - Cherry Picker",
+        "Mobile Equipment Operator",
+        "Belting"
+      ]
+    },
+    "gr": {
+      "title": "Risk Management",
+      "description": "Training in risk identification, analysis and management",
+      "courses": [
+        "GR1 - ISO 31000 Risk Management introduction course",
+        "GR2 - ISO 31000 Risk Management implementation course",
+        "GR3 - Hazards Identification and Risk Assessment",
+        "GR4 - Hazard Operability training (HAZOP)",
+        "GR5 - ISO 17776 Petroleum and natural gas industries",
+        "GR6 - Hazard Identification and Risk Assessment (HIRA)",
+        "GR7 - BOW TIE Risk Assessment Methodology"
+      ]
+    },
+    "gs": {
+      "title": "General Skills",
+      "description": "Development of interpersonal and management skills",
+      "courses": [
+        "GS1 - Leadership and Management",
+        "GS2 - Time management",
+        "GS3 - Integrated Human Resources Management",
+        "GS4 - Advanced Excel",
+        "GS5 - Project Management",
+        "GS6 - Contracts and Grants Management",
+        "GS7 - Logistics and Supply Chain",
+        "GS8 - Organizational Behavior"
+      ]
+    }
+  },
+  
+  "certification": {
+    "title": "Certification and Accreditation",
+    "text": "Licensed by the Ministry of Science and Technology, Higher Education and Technical-Professional (License N° 1091/051/CFP/2019) and accredited by the National Authority for Professional Education, in compliance with Decree 28/2017 of 11 July."
+  },
+  
+  "modal": {
+    "search": "Search courses...",
+    "coursesFound": "courses found",
+    "noResults": "No courses found",
+    "noResultsDescription": "Try adjusting your search terms",
+    "of": "of"
+  },
+  
+  "pagination": {
+    "prev": "Previous",
+    "next": "Next"
+  }
+}
